@@ -9,328 +9,911 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+:root {
+    --bg:#f5f1e9;
+    --paper:#eee7dc;
+    --brown:#514538;
+    --muted:#938476;
+    --accent:#a18a70;
+    --green:#78866b;
+    --pink:#c58e91;
+    --line:#ded4c6;
+}
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+html {scroll-behavior:smooth;}
 
 body {
-    background: #f5f1e9;
-    color: #514538;
-    font-family: 'DM Sans', sans-serif;
+    background:var(--bg);
+    color:var(--brown);
+    font-family:'DM Sans',sans-serif;
+    overflow-x:hidden;
 }
 
-/* Navigation */
+button {font-family:inherit;}
+
+a {text-decoration:none;color:inherit;}
+
+/* NAVIGATION */
 
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 28px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:26px 8%;
+    position:relative;
+    z-index:10;
+    border-bottom:1px solid rgba(161,138,112,.15);
 }
 
 .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 27px;
-    letter-spacing: 1px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:30px;
 }
 
-nav a {
-    text-decoration: none;
-    color: #786b5e;
-    font-size: 11px;
-    letter-spacing: 2px;
-    margin-left: 25px;
+.nav-links {
+    display:flex;
+    gap:30px;
 }
 
-/* Hero */
+.nav-links a {
+    font-size:10px;
+    letter-spacing:2px;
+    color:var(--muted);
+    transition:.3s;
+}
+
+.nav-links a:hover {color:var(--brown);}
+
+/* HERO */
 
 .hero {
-    min-height: 82vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 50px 20px;
+    min-height:85vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    padding:80px 20px;
+    overflow:hidden;
 }
 
 .eyebrow {
-    text-transform: uppercase;
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: #a18a70;
-    margin-bottom: 35px;
+    font-size:10px;
+    letter-spacing:5px;
+    color:var(--accent);
+    margin-bottom:35px;
+    animation:fadeUp 1.2s both;
 }
 
 h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(65px, 11vw, 115px);
-    line-height: 0.95;
-    font-weight: 300;
+    font-family:'Cormorant Garamond',serif;
+    font-weight:300;
+    font-size:clamp(75px,12vw,135px);
+    line-height:.85;
+    animation:fadeUp 1.5s .2s both;
 }
 
-.tulip {
-    margin-top: 18px;
-    color: #a18a70;
-    font-size: 34px;
-    opacity: 0.85;
-    animation: fadeUp 2s ease both;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+h1 em {
+    color:#987e66;
+    font-weight:300;
 }
 
 .subtitle {
-    margin-top: 35px;
-    font-size: 12px;
-    line-height: 2.2;
-    color: #8e8072;
-    letter-spacing: 1px;
+    margin-top:32px;
+    font-size:12px;
+    line-height:2.3;
+    letter-spacing:1px;
+    color:var(--muted);
+    animation:fadeUp 1.5s .5s both;
 }
 
 .button {
-    display: inline-block;
-    margin-top: 40px;
-    padding: 16px 35px;
-    border: 1px solid #a18a70;
-    text-decoration: none;
-    color: #705c49;
-    font-size: 10px;
-    letter-spacing: 2px;
-    transition: 0.3s;
+    display:inline-block;
+    padding:16px 35px;
+    margin-top:38px;
+    border:1px solid var(--accent);
+    background:transparent;
+    color:var(--brown);
+    font-size:10px;
+    letter-spacing:2px;
+    cursor:pointer;
+    transition:.4s;
 }
 
 .button:hover {
-    background: #705c49;
-    color: #fff;
+    background:var(--brown);
+    color:white;
+    transform:translateY(-4px);
 }
 
-/* Sections */
+/* BOTANICAL FLOWERS */
+
+.flower-decoration {
+    position:absolute;
+    width:130px;
+    opacity:.75;
+    pointer-events:none;
+}
+
+.flower-left {
+    left:5%;
+    bottom:12%;
+    transform:rotate(-15deg);
+    animation:sway 5s ease-in-out infinite;
+}
+
+.flower-right {
+    right:5%;
+    top:12%;
+    transform:rotate(15deg);
+    animation:sway 6s ease-in-out infinite reverse;
+}
+
+.botanical {
+    width:100%;
+    height:auto;
+}
+
+@keyframes sway {
+    0%,100% {transform:rotate(-8deg);}
+    50% {transform:rotate(8deg);}
+}
+
+/* KITTEN */
+
+.kitten {
+    width:145px;
+    margin-top:35px;
+    cursor:pointer;
+    animation:catFloat 4s ease-in-out infinite;
+    transition:.3s;
+}
+
+.kitten:hover {
+    transform:scale(1.08);
+}
+
+.cat-tail {
+    transform-origin:75px 125px;
+    animation:tail 2s ease-in-out infinite;
+}
+
+.cat-eyes {
+    transition:.2s;
+}
+
+.kitten.sleeping .cat-eyes {
+    opacity:0;
+}
+
+.cat-awake {
+    display:none;
+}
+
+.kitten.awake .cat-awake {
+    display:block;
+}
+
+.kitten.awake .cat-sleep {
+    display:none;
+}
+
+@keyframes catFloat {
+    0%,100% {transform:translateY(0);}
+    50% {transform:translateY(-9px);}
+}
+
+@keyframes tail {
+    0%,100% {transform:rotate(-5deg);}
+    50% {transform:rotate(8deg);}
+}
+
+.cat-hint {
+    font-size:9px;
+    letter-spacing:2px;
+    color:var(--muted);
+    margin-top:8px;
+}
+
+/* FALLING PETALS */
+
+.petal {
+    position:fixed;
+    top:-30px;
+    width:11px;
+    height:16px;
+    background:#d7a5a0;
+    border-radius:100% 0 100% 0;
+    pointer-events:none;
+    z-index:5;
+    opacity:.55;
+    animation:fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform:translateY(110vh) rotate(650deg);
+        opacity:0;
+    }
+}
+
+/* CONTENT SECTIONS */
 
 section.content {
-    padding: 110px 20px;
-    text-align: center;
+    padding:115px 20px;
+    text-align:center;
+    position:relative;
 }
 
 .section-label {
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: #a18a70;
-    text-transform: uppercase;
-    margin-bottom: 25px;
+    font-size:10px;
+    letter-spacing:4px;
+    color:var(--accent);
+    margin-bottom:24px;
 }
 
 h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
-    font-weight: 400;
-    margin-bottom: 25px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(42px,6vw,65px);
+    font-weight:400;
+    margin-bottom:25px;
 }
 
 .description {
-    max-width: 480px;
-    margin: auto;
-    font-size: 13px;
-    line-height: 2.3;
-    color: #897b6e;
+    max-width:480px;
+    margin:auto;
+    color:var(--muted);
+    font-size:13px;
+    line-height:2.3;
 }
 
-/* Memory cards */
+/* MEMORY CARDS */
 
 .memories {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    margin-top: 55px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+    margin-top:55px;
 }
 
 .memory-card {
-    width: 230px;
-    padding: 35px 20px;
-    border: 1px solid #ded4c6;
-    transition: 0.3s;
+    width:240px;
+    min-height:175px;
+    padding:35px 20px;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--brown);
+    cursor:pointer;
+    transition:.4s;
 }
 
 .memory-card:hover {
-    transform: translateY(-6px);
+    background:var(--paper);
+    transform:translateY(-8px);
 }
 
 .memory-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 27px;
-    font-weight: 400;
-    margin-bottom: 12px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    font-weight:400;
+    margin-bottom:12px;
 }
 
 .memory-card p {
-    font-size: 11px;
-    color: #938476;
-    line-height: 1.8;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.8;
 }
 
-/* Footer */
+/* LITTLE ANIMALS */
+
+.animal-section {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:55px;
+    margin-top:60px;
+}
+
+.animal {
+    width:125px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.animal:hover {
+    transform:translateY(-10px) rotate(-3deg);
+}
+
+.animal svg {
+    width:100%;
+}
+
+.animal p {
+    margin-top:12px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px;
+}
+
+/* SURPRISE */
+
+.surprise-box {
+    display:none;
+    max-width:470px;
+    margin:35px auto;
+    padding:35px;
+    border:1px solid var(--line);
+    font-family:'Cormorant Garamond',serif;
+    font-size:25px;
+    line-height:1.6;
+    animation:fadeUp .8s both;
+}
+
+.surprise-box.show {display:block;}
+
+/* MODAL */
+
+.modal {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(48,39,31,.65);
+    z-index:100;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal.show {display:flex;}
+
+.modal-content {
+    background:var(--bg);
+    padding:50px 35px;
+    max-width:430px;
+    width:100%;
+    text-align:center;
+    position:relative;
+    animation:fadeUp .5s both;
+}
+
+.modal-content h2 {font-size:42px;}
+
+.modal-content p {
+    font-family:'Cormorant Garamond',serif;
+    font-size:23px;
+    line-height:1.6;
+    color:var(--muted);
+}
+
+.close {
+    position:absolute;
+    top:12px;
+    right:18px;
+    background:none;
+    border:none;
+    font-size:25px;
+    cursor:pointer;
+    color:var(--brown);
+}
+
+/* REVEAL ANIMATIONS */
+
+.reveal {
+    opacity:0;
+    transform:translateY(35px);
+    transition:opacity 1s,transform 1s;
+}
+
+.reveal.visible {
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* FOOTER */
 
 footer {
-    padding: 45px 20px;
-    text-align: center;
-    border-top: 1px solid #e4dbcf;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: #a18a70;
+    border-top:1px solid var(--line);
+    text-align:center;
+    padding:45px 20px;
+    color:var(--accent);
+    font-size:10px;
+    letter-spacing:3px;
 }
 
-/* Mobile */
+/* BACK TO TOP */
 
-@media (max-width: 600px) {
+.top-button {
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:44px;
+    height:44px;
+    border:1px solid var(--accent);
+    background:var(--bg);
+    color:var(--brown);
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:20;
+}
 
-    nav {
-        padding: 22px 6%;
+.top-button.show {
+    opacity:1;
+    pointer-events:auto;
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+    nav {padding:20px 5%;}
+
+    .logo {font-size:24px;}
+
+    .nav-links {gap:12px;}
+
+    .nav-links a {
+        font-size:8px;
+        letter-spacing:1px;
     }
 
-    nav a {
-        margin-left: 12px;
-        font-size: 9px;
-    }
+    .hero {min-height:75vh;}
 
-    .logo {
-        font-size: 23px;
-    }
+    .flower-decoration {width:85px;}
 
-    .hero {
-        min-height: 75vh;
-    }
-
-    h2 {
-        font-size: 42px;
-    }
-
-    section.content {
-        padding: 80px 20px;
-    }
+    section.content {padding:85px 20px;}
 
     .memory-card {
-        width: 100%;
-        max-width: 300px;
+        width:100%;
+        max-width:320px;
     }
 
+    .animal-section {gap:25px;}
+
+    .animal {width:100px;}
 }
 
+@media(prefers-reduced-motion:reduce) {
+    *,*::before,*::after {
+        animation:none!important;
+        transition:none!important;
+        scroll-behavior:auto!important;
+    }
+
+    .reveal {
+        opacity:1;
+        transform:none;
+    }
+}
 </style>
 </head>
 
 <body>
 
+<!-- NAVIGATION -->
+
 <nav>
     <div class="logo">Kittenkeeps.</div>
 
-    <div>
+    <div class="nav-links">
         <a href="#story">OUR STORY</a>
         <a href="#memories">MEMORIES</a>
+        <a href="#little-world">LITTLE WORLD</a>
     </div>
 </nav>
 
-<!-- Welcome -->
+<!-- HERO -->
 
-<div class="hero">
+<header class="hero">
 
-<div class="eyebrow">
-    MADE WITH LOVE, FOR TANHA
+<!-- Botanical illustration left -->
+<div class="flower-decoration flower-left">
+<svg class="botanical" viewBox="0 0 120 220" fill="none">
+<path d="M60 215 Q40 120 60 40" stroke="#78866b" stroke-width="2"/>
+<path d="M57 155 Q15 120 10 155 Q35 180 57 155Z" fill="#849477"/>
+<path d="M59 115 Q100 75 108 110 Q90 140 59 115Z" fill="#849477"/>
+<path d="M60 42 Q25 25 36 0 Q57 10 60 42Z" fill="#c58e91"/>
+<path d="M60 42 Q83 4 100 22 Q91 45 60 42Z" fill="#d5a3a0"/>
+<path d="M60 42 Q45 75 28 53 Q35 35 60 42Z" fill="#d5a3a0"/>
+<path d="M60 42 Q70 75 90 58 Q86 35 60 42Z" fill="#c58e91"/>
+<circle cx="60" cy="43" r="5" fill="#b38a57"/>
+</svg>
 </div>
 
-<h1>
-    For my<br>
-    <em>Tanha.</em>
-</h1>
-
-<div class="tulip">
-    ❀
+<!-- Botanical illustration right -->
+<div class="flower-decoration flower-right">
+<svg class="botanical" viewBox="0 0 120 220" fill="none">
+<path d="M60 215 Q75 130 55 45" stroke="#78866b" stroke-width="2"/>
+<path d="M63 155 Q100 125 110 155 Q85 180 63 155Z" fill="#849477"/>
+<path d="M57 125 Q15 95 10 130 Q32 155 57 125Z" fill="#849477"/>
+<path d="M55 47 Q22 10 42 0 Q61 10 55 47Z" fill="#d5a3a0"/>
+<path d="M55 47 Q65 4 90 20 Q84 45 55 47Z" fill="#c58e91"/>
+<path d="M55 47 Q30 70 20 50 Q30 30 55 47Z" fill="#c58e91"/>
+<path d="M55 47 Q78 70 92 52 Q82 30 55 47Z" fill="#d5a3a0"/>
+<circle cx="55" cy="47" r="5" fill="#b38a57"/>
+</svg>
 </div>
+
+<div class="eyebrow">A LITTLE WORLD, MADE FOR TANHA</div>
+
+<h1>For my<br><em>Tanha.</em></h1>
+
+<!-- Sleeping kitten illustration -->
+<div class="kitten sleeping" id="mainKitten" title="Click me!">
+
+<svg viewBox="0 0 180 150" fill="none">
+
+<!-- Tail -->
+<path class="cat-tail" d="M125 115 Q165 130 155 90 Q150 75 138 90"
+stroke="#a88e75" stroke-width="13" stroke-linecap="round"/>
+
+<!-- Body -->
+<ellipse cx="88" cy="112" rx="55" ry="29" fill="#c8b29a"/>
+
+<!-- Head -->
+<circle cx="82" cy="77" r="38" fill="#d6c3ac"/>
+
+<!-- Ears -->
+<path d="M51 54 L48 17 L76 40Z" fill="#d6c3ac"/>
+<path d="M91 40 L117 16 L116 58Z" fill="#d6c3ac"/>
+<path d="M55 45 L54 27 L69 43Z" fill="#bd8984"/>
+<path d="M100 43 L112 27 L110 49Z" fill="#bd8984"/>
+
+<!-- Face -->
+<g class="cat-sleep">
+<path d="M64 76 Q72 84 80 76" stroke="#625044" stroke-width="2" stroke-linecap="round"/>
+<path d="M88 76 Q97 84 105 76" stroke="#625044" stroke-width="2" stroke-linecap="round"/>
+</g>
+
+<g class="cat-awake">
+<ellipse cx="72" cy="76" rx="4" ry="6" fill="#514538"/>
+<ellipse cx="98" cy="76" rx="4" ry="6" fill="#514538"/>
+</g>
+
+<path d="M80 87 Q84 92 88 87" stroke="#a46e6e" stroke-width="2" fill="none"/>
+<path d="M84 91 Q78 99 72 93" stroke="#625044" stroke-width="1.5" fill="none"/>
+<path d="M84 91 Q90 99 96 93" stroke="#625044" stroke-width="1.5" fill="none"/>
+
+<!-- Whiskers -->
+<path d="M57 87 L30 82 M58 94 L33 98 M108 87 L133 82 M108 94 L135 98"
+stroke="#8b7663" stroke-width="1"/>
+
+</svg>
+</div>
+
+<div class="cat-hint">Psst... tap the kitten</div>
 
 <p class="subtitle">
-    Some things deserve a place of their own.<br>
-    This little place is one of them.<br>
-    I love you.
+Some things deserve a place of their own.<br>
+This little place is one of them.<br>
+I love you.
 </p>
 
-    <a href="#story" class="button">
-        COME INSIDE →
-    </a>
+<a href="#story" class="button">COME INSIDE →</a>
 
-</div>
+</header>
 
-<!-- Our Story -->
+<!-- OUR STORY -->
 
-<section class="content" id="story">
+<section class="content reveal" id="story">
 
-    <div class="section-label">A little introduction</div>
+<div class="section-label">A LITTLE INTRODUCTION</div>
 
-    <h2>A place for us.</h2>
+<h2>A place for us.</h2>
 
-    <p class="description">
-        Among all the places in this world,
-        I wanted to create one that feels a little
-        more like home.
+<p class="description">
+Among all the places in this world,
+I wanted to create one that feels a little
+more like home.
 
-        A place for memories, little moments,
-        photographs and everything that words
-        sometimes cannot explain.
-    </p>
+A place for memories, little moments,
+photographs and everything that words
+sometimes cannot explain.
+</p>
 
 </section>
 
-<!-- Memories -->
+<!-- MEMORIES -->
 
-<section class="content" id="memories">
+<section class="content reveal" id="memories">
 
-    <div class="section-label">Collected moments</div>
+<div class="section-label">COLLECTED MOMENTS</div>
 
-    <h2>Little pieces of us.</h2>
+<h2>Little pieces of us.</h2>
 
-    <p class="description">
-        A thousand little things, worth remembering.
-    </p>
+<p class="description">
+A thousand little things, worth remembering.
+</p>
 
-    <div class="memories">
+<div class="memories">
 
-        <div class="memory-card">
-            <h3>Our beginning</h3>
-            <p>Where our story started.</p>
-        </div>
+<button class="memory-card"
+onclick="openMemory('Our beginning','May 24, 2024. The day our story began. A little date that became a big part of my life.')">
 
-        <div class="memory-card">
-            <h3>Little moments</h3>
-            <p>The ordinary days that became special.</p>
-        </div>
+<h3>Our beginning</h3>
+<p>Where our story started.</p>
 
-        <div class="memory-card">
-            <h3>YOURS FOREVER</h3>
-            <p>Things I never want to forget.</p>
-        </div>
+</button>
 
-    </div>
+<button class="memory-card"
+onclick="openMemory('Little moments','The ordinary days, the little conversations, the hugs and everything that made them special.')">
+
+<h3>Little moments</h3>
+<p>The ordinary days that became special.</p>
+
+</button>
+
+<button class="memory-card"
+onclick="openMemory('Yours forever','Some memories never need a photograph. They stay somewhere inside us.')">
+
+<h3>Yours forever</h3>
+<p>Things I never want to forget.</p>
+
+</button>
+
+</div>
+
+</section>
+
+<!-- LITTLE ANIMAL WORLD -->
+
+<section class="content reveal" id="little-world">
+
+<div class="section-label">OUR LITTLE FRIENDS</div>
+
+<h2>A garden of little things.</h2>
+
+<p class="description">
+A few little visitors live in this corner.
+They are quite fond of you.
+</p>
+
+<div class="animal-section">
+
+<!-- Dog -->
+<div class="animal" onclick="openMemory('A little dog','A tiny visitor, bringing a little happiness wherever it goes.')">
+
+<svg viewBox="0 0 150 135" fill="none">
+
+<ellipse cx="75" cy="108" rx="43" ry="19" fill="#c69b72"/>
+
+<circle cx="75" cy="65" r="39" fill="#d9b18b"/>
+
+<path d="M43 43 Q8 25 25 83 Q40 103 52 80Z" fill="#a77a57"/>
+
+<path d="M107 43 Q142 25 125 83 Q110 103 98 80Z" fill="#a77a57"/>
+
+<circle cx="62" cy="64" r="4" fill="#514538"/>
+<circle cx="88" cy="64" r="4" fill="#514538"/>
+
+<ellipse cx="75" cy="81" rx="12" ry="9" fill="#f0ddc7"/>
+<ellipse cx="75" cy="77" rx="5" ry="4" fill="#514538"/>
+
+<path d="M75 82 Q68 93 60 85 M75 82 Q82 93 90 85"
+stroke="#514538" stroke-width="2" fill="none"/>
+
+</svg>
+
+<p>A little dog</p>
+</div>
+
+<!-- Capybara -->
+<div class="animal" onclick="openMemory('The capybara','The calmest little visitor in the whole garden. Absolutely unbothered by everything.')">
+
+<svg viewBox="0 0 150 135" fill="none">
+
+<ellipse cx="75" cy="103" rx="48" ry="23" fill="#aa8060"/>
+
+<ellipse cx="76" cy="70" rx="42" ry="34" fill="#b78d6d"/>
+
+<ellipse cx="46" cy="55" rx="12" ry="15" fill="#b78d6d"/>
+<ellipse cx="105" cy="55" rx="12" ry="15" fill="#b78d6d"/>
+
+<ellipse cx="76" cy="83" rx="27" ry="18" fill="#c8a184"/>
+
+<circle cx="62" cy="65" r="4" fill="#42372f"/>
+<circle cx="90" cy="65" r="4" fill="#42372f"/>
+
+<ellipse cx="76" cy="80" rx="5" ry="4" fill="#514538"/>
+
+<path d="M69 89 Q76 94 83 89" stroke="#514538" stroke-width="1.5" fill="none"/>
+
+</svg>
+
+<p>Mr. Capybara</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- SURPRISE -->
+
+<section class="content reveal" id="surprise">
+
+<div class="section-label">A LITTLE SOMETHING</div>
+
+<h2>Just for you.</h2>
+
+<p class="description">
+There is something waiting for you.
+A little message, hidden in this garden.
+</p>
+
+<button class="button" onclick="revealSurprise()">
+OPEN YOUR SURPRISE ✿
+</button>
+
+<div class="surprise-box" id="surpriseBox">
+
+If I could keep one little corner
+of this enormous world just for us,
+it would look something like this.
+
+<br><br>
+
+And it would always have you in it.
+
+<br><br>
+
+— Yours.
+
+</div>
 
 </section>
 
 <footer>
-    MADE WITH LOVE · JUST FOR YOU MY BABY
+MADE WITH LOVE · JUST FOR YOU, MY BABY
 </footer>
+
+<button class="top-button" id="topButton"
+onclick="window.scrollTo({top:0,behavior:'smooth'})">
+↑
+</button>
+
+<!-- MEMORY MODAL -->
+
+<div class="modal" id="memoryModal" onclick="closeMemory(event)">
+
+<div class="modal-content">
+
+<button class="close" onclick="closeMemory()">×</button>
+
+<div class="section-label">A LITTLE MEMORY</div>
+
+<h2 id="modalTitle">Our beginning</h2>
+
+<p id="modalText"></p>
+
+</div>
+
+</div>
+
+<script>
+
+/* KITTEN INTERACTION */
+
+const kitten = document.getElementById('mainKitten');
+
+kitten.addEventListener('click', () => {
+
+kitten.classList.toggle('awake');
+
+});
+
+/* FALLING PETALS */
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!reducedMotion) {
+
+setInterval(() => {
+
+const petal = document.createElement('div');
+
+petal.className = 'petal';
+
+petal.style.left = Math.random() * 100 + 'vw';
+
+petal.style.animationDuration = (7 + Math.random() * 6) + 's';
+
+petal.style.opacity = Math.random() * .5 + .2;
+
+document.body.appendChild(petal);
+
+setTimeout(() => petal.remove(), 14000);
+
+}, 1000);
+
+}
+
+/* SCROLL REVEAL */
+
+const observer = new IntersectionObserver(entries => {
+
+entries.forEach(entry => {
+
+if (entry.isIntersecting) {
+
+entry.target.classList.add('visible');
+
+observer.unobserve(entry.target);
+
+}
+
+});
+
+}, {threshold:.15});
+
+document.querySelectorAll('.reveal').forEach(el => {
+
+observer.observe(el);
+
+});
+
+/* MEMORY MODAL */
+
+function openMemory(title,text) {
+
+document.getElementById('modalTitle').textContent = title;
+
+document.getElementById('modalText').textContent = text;
+
+document.getElementById('memoryModal').classList.add('show');
+
+}
+
+function closeMemory(event) {
+
+if (!event || event.target.id === 'memoryModal' ||
+event.target.classList.contains('close')) {
+
+document.getElementById('memoryModal').classList.remove('show');
+
+}
+
+}
+
+/* SURPRISE */
+
+function revealSurprise() {
+
+document.getElementById('surpriseBox').classList.toggle('show');
+
+}
+
+/* BACK TO TOP */
+
+const topButton = document.getElementById('topButton');
+
+window.addEventListener('scroll', () => {
+
+topButton.classList.toggle('show',window.scrollY > 400);
+
+});
+
+/* ESCAPE KEY */
+
+document.addEventListener('keydown', event => {
+
+if (event.key === 'Escape') {
+
+document.getElementById('memoryModal').classList.remove('show');
+
+}
+
+});
+
+</script>
 
 </body>
 </html>
