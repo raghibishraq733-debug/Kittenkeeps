@@ -1,14 +1,16 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kittenkeeps — A Little World</title>
+<title>Kittenkeeps — A Little World for Tanha</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+
 :root {
     --bg:#f5f1e9;
     --paper:#eee7dc;
@@ -37,7 +39,16 @@ body {
 
 button {font-family:inherit;}
 
-a {text-decoration:none;color:inherit;}
+button:focus-visible,
+a:focus-visible {
+    outline:2px solid var(--green);
+    outline-offset:4px;
+}
+
+a {
+    color:inherit;
+    text-decoration:none;
+}
 
 /* NAVIGATION */
 
@@ -45,10 +56,11 @@ nav {
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:26px 8%;
+    padding:25px 7%;
+    border-bottom:1px solid var(--line);
+    background:rgba(245,241,233,.95);
     position:relative;
-    z-index:10;
-    border-bottom:1px solid rgba(161,138,112,.15);
+    z-index:20;
 }
 
 .logo {
@@ -58,17 +70,39 @@ nav {
 
 .nav-links {
     display:flex;
-    gap:30px;
+    gap:24px;
 }
 
 .nav-links a {
-    font-size:10px;
+    font-size:9px;
     letter-spacing:2px;
     color:var(--muted);
     transition:.3s;
 }
 
 .nav-links a:hover {color:var(--brown);}
+
+/* SOUND BUTTON */
+
+.sound-button {
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:50;
+    background:var(--brown);
+    color:white;
+    border:0;
+    padding:14px 19px;
+    font-size:10px;
+    letter-spacing:1px;
+    cursor:pointer;
+    border-radius:30px;
+    box-shadow:0 5px 20px #51453820;
+}
+
+.sound-button:hover {
+    background:var(--green);
+}
 
 /* HERO */
 
@@ -94,30 +128,28 @@ nav {
 
 h1 {
     font-family:'Cormorant Garamond',serif;
+    font-size:clamp(75px,12vw,130px);
     font-weight:300;
-    font-size:clamp(75px,12vw,135px);
     line-height:.85;
-    animation:fadeUp 1.5s .2s both;
+    animation:fadeUp 1.4s both;
 }
 
 h1 em {
     color:#987e66;
-    font-weight:300;
 }
 
 .subtitle {
     margin-top:32px;
+    color:var(--muted);
     font-size:12px;
     line-height:2.3;
     letter-spacing:1px;
-    color:var(--muted);
-    animation:fadeUp 1.5s .5s both;
 }
 
 .button {
     display:inline-block;
-    padding:16px 35px;
-    margin-top:38px;
+    padding:16px 34px;
+    margin-top:35px;
     border:1px solid var(--accent);
     background:transparent;
     color:var(--brown);
@@ -133,32 +165,44 @@ h1 em {
     transform:translateY(-4px);
 }
 
-/* BOTANICAL FLOWERS */
-
-.flower-decoration {
+.hero-flower {
     position:absolute;
-    width:130px;
-    opacity:.75;
+    font-size:110px;
+    opacity:.13;
+    color:var(--green);
+    animation:sway 6s infinite ease-in-out;
     pointer-events:none;
 }
 
-.flower-left {
-    left:5%;
-    bottom:12%;
-    transform:rotate(-15deg);
-    animation:sway 5s ease-in-out infinite;
+.hero-flower.one {
+    left:7%;
+    bottom:15%;
 }
 
-.flower-right {
-    right:5%;
-    top:12%;
-    transform:rotate(15deg);
-    animation:sway 6s ease-in-out infinite reverse;
+.hero-flower.two {
+    right:7%;
+    top:15%;
+    animation-delay:2s;
 }
+
+/* BOTANICAL SVG FLOWERS */
 
 .botanical {
-    width:100%;
-    height:auto;
+    width:100px;
+    position:absolute;
+    opacity:.7;
+    pointer-events:none;
+    animation:sway 5s infinite ease-in-out;
+}
+
+.botanical.left {
+    left:2%;
+    top:15%;
+}
+
+.botanical.right {
+    right:2%;
+    bottom:10%;
 }
 
 @keyframes sway {
@@ -166,88 +210,10 @@ h1 em {
     50% {transform:rotate(8deg);}
 }
 
-/* KITTEN */
-
-.kitten {
-    width:145px;
-    margin-top:35px;
-    cursor:pointer;
-    animation:catFloat 4s ease-in-out infinite;
-    transition:.3s;
-}
-
-.kitten:hover {
-    transform:scale(1.08);
-}
-
-.cat-tail {
-    transform-origin:75px 125px;
-    animation:tail 2s ease-in-out infinite;
-}
-
-.cat-eyes {
-    transition:.2s;
-}
-
-.kitten.sleeping .cat-eyes {
-    opacity:0;
-}
-
-.cat-awake {
-    display:none;
-}
-
-.kitten.awake .cat-awake {
-    display:block;
-}
-
-.kitten.awake .cat-sleep {
-    display:none;
-}
-
-@keyframes catFloat {
-    0%,100% {transform:translateY(0);}
-    50% {transform:translateY(-9px);}
-}
-
-@keyframes tail {
-    0%,100% {transform:rotate(-5deg);}
-    50% {transform:rotate(8deg);}
-}
-
-.cat-hint {
-    font-size:9px;
-    letter-spacing:2px;
-    color:var(--muted);
-    margin-top:8px;
-}
-
-/* FALLING PETALS */
-
-.petal {
-    position:fixed;
-    top:-30px;
-    width:11px;
-    height:16px;
-    background:#d7a5a0;
-    border-radius:100% 0 100% 0;
-    pointer-events:none;
-    z-index:5;
-    opacity:.55;
-    animation:fall linear forwards;
-}
-
-@keyframes fall {
-    to {
-        transform:translateY(110vh) rotate(650deg);
-        opacity:0;
-    }
-}
-
-/* CONTENT SECTIONS */
+/* SECTIONS */
 
 section.content {
-    padding:115px 20px;
+    padding:110px 20px;
     text-align:center;
     position:relative;
 }
@@ -256,109 +222,288 @@ section.content {
     font-size:10px;
     letter-spacing:4px;
     color:var(--accent);
-    margin-bottom:24px;
+    margin-bottom:22px;
 }
 
 h2 {
     font-family:'Cormorant Garamond',serif;
     font-size:clamp(42px,6vw,65px);
     font-weight:400;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
 .description {
-    max-width:480px;
+    max-width:490px;
     margin:auto;
-    color:var(--muted);
     font-size:13px;
     line-height:2.3;
+    color:var(--muted);
 }
 
-/* MEMORY CARDS */
+/* ANIMAL WORLD */
+
+.animal-world {
+    background:#eee9df;
+    padding:100px 20px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.world-heading {
+    margin-bottom:15px;
+}
+
+.world-intro {
+    color:var(--muted);
+    font-size:12px;
+    line-height:2;
+    max-width:440px;
+    margin:auto;
+}
+
+/* ANIMAL GRID */
+
+.animal-grid {
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    max-width:1100px;
+    margin:65px auto 0;
+    gap:20px;
+}
+
+.animal-card {
+    border:1px solid #ded4c6;
+    background:#f5f1e9;
+    padding:22px 12px;
+    min-width:0;
+    cursor:pointer;
+    transition:.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.animal-card:hover {
+    transform:translateY(-8px);
+    background:#faf7f0;
+    box-shadow:0 15px 30px #51453810;
+}
+
+.animal-card:active {
+    transform:scale(.97);
+}
+
+.animal-picture {
+    width:100%;
+    max-width:145px;
+    height:125px;
+    margin:auto;
+    display:block;
+    overflow:visible;
+}
+
+.animal-card h3 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:23px;
+    font-weight:400;
+    margin-top:8px;
+}
+
+.animal-card p {
+    font-size:9px;
+    color:var(--muted);
+    letter-spacing:1px;
+    margin-top:6px;
+}
+
+.animal-card .tap {
+    font-size:9px;
+    color:var(--accent);
+    margin-top:12px;
+}
+
+/* ANIMAL MOVEMENTS */
+
+.float {
+    animation:float 3s ease-in-out infinite;
+    transform-origin:center;
+}
+
+.float.delay1 {animation-delay:.5s;}
+.float.delay2 {animation-delay:1s;}
+.float.delay3 {animation-delay:1.5s;}
+
+@keyframes float {
+    0%,100% {transform:translateY(0);}
+    50% {transform:translateY(-8px);}
+}
+
+.tail {
+    transform-box:fill-box;
+    transform-origin:10% 50%;
+    animation:wag .8s infinite ease-in-out;
+}
+
+@keyframes wag {
+    0%,100% {transform:rotate(-15deg);}
+    50% {transform:rotate(18deg);}
+}
+
+.blink {
+    animation:blink 4s infinite;
+    transform-box:fill-box;
+    transform-origin:center;
+}
+
+@keyframes blink {
+    0%,94%,100% {transform:scaleY(1);}
+    96% {transform:scaleY(.12);}
+}
+
+.swim {
+    animation:swim 3s ease-in-out infinite;
+}
+
+@keyframes swim {
+    0%,100% {transform:translateX(-5px) rotate(-2deg);}
+    50% {transform:translateX(6px) rotate(3deg);}
+}
+
+.walk {
+    animation:walk 2s ease-in-out infinite;
+}
+
+@keyframes walk {
+    0%,100% {transform:translateY(0);}
+    50% {transform:translateY(-5px);}
+}
+
+/* ANIMAL GREETING */
+
+.greeting-area {
+    max-width:500px;
+    margin:40px auto 0;
+    min-height:75px;
+    padding:20px;
+    border-top:1px solid var(--line);
+    color:var(--brown);
+    font-family:'Cormorant Garamond',serif;
+    font-size:24px;
+    line-height:1.5;
+}
+
+.greeting-area small {
+    display:block;
+    font-family:'DM Sans',sans-serif;
+    font-size:9px;
+    color:var(--muted);
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+/* FLOWER GARDEN */
+
+.garden {
+    padding:110px 20px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.flower-row {
+    display:flex;
+    justify-content:center;
+    align-items:end;
+    flex-wrap:wrap;
+    gap:35px;
+    margin-top:55px;
+}
+
+.flower-item {
+    width:105px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.flower-item:hover {
+    transform:translateY(-8px);
+}
+
+.flower-item svg {
+    width:100%;
+    overflow:visible;
+}
+
+.flower-item p {
+    font-family:'Cormorant Garamond',serif;
+    font-size:19px;
+    margin-top:10px;
+}
+
+.flower-head {
+    transform-origin:50% 100%;
+    animation:flowerSway 4s ease-in-out infinite;
+}
+
+@keyframes flowerSway {
+    0%,100% {transform:rotate(-5deg);}
+    50% {transform:rotate(5deg);}
+}
+
+/* MEMORIES */
 
 .memories {
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
-    gap:25px;
-    margin-top:55px;
+    gap:22px;
+    margin-top:50px;
 }
 
 .memory-card {
     width:240px;
-    min-height:175px;
     padding:35px 20px;
-    background:transparent;
     border:1px solid var(--line);
-    color:var(--brown);
+    background:transparent;
     cursor:pointer;
     transition:.4s;
+    color:var(--brown);
 }
 
 .memory-card:hover {
+    transform:translateY(-7px);
     background:var(--paper);
-    transform:translateY(-8px);
 }
 
 .memory-card h3 {
     font-family:'Cormorant Garamond',serif;
-    font-size:28px;
+    font-size:27px;
     font-weight:400;
-    margin-bottom:12px;
 }
 
 .memory-card p {
-    color:var(--muted);
     font-size:11px;
-    line-height:1.8;
-}
-
-/* LITTLE ANIMALS */
-
-.animal-section {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:55px;
-    margin-top:60px;
-}
-
-.animal {
-    width:125px;
-    cursor:pointer;
-    transition:.4s;
-}
-
-.animal:hover {
-    transform:translateY(-10px) rotate(-3deg);
-}
-
-.animal svg {
-    width:100%;
-}
-
-.animal p {
+    color:var(--muted);
     margin-top:12px;
-    font-family:'Cormorant Garamond',serif;
-    font-size:20px;
 }
 
 /* SURPRISE */
 
 .surprise-box {
     display:none;
-    max-width:470px;
+    max-width:450px;
     margin:35px auto;
     padding:35px;
     border:1px solid var(--line);
     font-family:'Cormorant Garamond',serif;
     font-size:25px;
-    line-height:1.6;
+    line-height:1.7;
     animation:fadeUp .8s both;
 }
 
-.surprise-box.show {display:block;}
+.surprise-box.show {
+    display:block;
+}
 
 /* MODAL */
 
@@ -366,7 +511,7 @@ h2 {
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(48,39,31,.65);
+    background:#33291fbf;
     z-index:100;
     justify-content:center;
     align-items:center;
@@ -376,41 +521,75 @@ h2 {
 .modal.show {display:flex;}
 
 .modal-content {
-    background:var(--bg);
-    padding:50px 35px;
     max-width:430px;
     width:100%;
+    background:var(--bg);
+    padding:45px 30px;
     text-align:center;
     position:relative;
     animation:fadeUp .5s both;
 }
 
-.modal-content h2 {font-size:42px;}
+.modal-content h2 {
+    font-size:42px;
+}
 
 .modal-content p {
     font-family:'Cormorant Garamond',serif;
     font-size:23px;
-    line-height:1.6;
+    line-height:1.7;
     color:var(--muted);
 }
 
 .close {
     position:absolute;
     top:12px;
-    right:18px;
+    right:17px;
+    border:0;
     background:none;
-    border:none;
-    font-size:25px;
+    font-size:26px;
     cursor:pointer;
-    color:var(--brown);
 }
 
-/* REVEAL ANIMATIONS */
+/* PETALS */
+
+.petal {
+    position:fixed;
+    top:-30px;
+    width:12px;
+    height:17px;
+    background:#d7a5a0;
+    border-radius:100% 0 100% 0;
+    opacity:.5;
+    z-index:2;
+    pointer-events:none;
+    animation:fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform:translateY(110vh) rotate(700deg);
+        opacity:0;
+    }
+}
+
+/* FOOTER */
+
+footer {
+    border-top:1px solid var(--line);
+    padding:50px 20px;
+    text-align:center;
+    color:var(--accent);
+    font-size:10px;
+    letter-spacing:3px;
+}
+
+/* REVEAL */
 
 .reveal {
     opacity:0;
     transform:translateY(35px);
-    transition:opacity 1s,transform 1s;
+    transition:opacity .9s,transform .9s;
 }
 
 .reveal.visible {
@@ -418,33 +597,22 @@ h2 {
     transform:translateY(0);
 }
 
-/* FOOTER */
-
-footer {
-    border-top:1px solid var(--line);
-    text-align:center;
-    padding:45px 20px;
-    color:var(--accent);
-    font-size:10px;
-    letter-spacing:3px;
-}
-
-/* BACK TO TOP */
+/* TOP BUTTON */
 
 .top-button {
     position:fixed;
-    right:25px;
-    bottom:25px;
-    width:44px;
-    height:44px;
-    border:1px solid var(--accent);
+    bottom:80px;
+    right:20px;
+    width:42px;
+    height:42px;
     background:var(--bg);
+    border:1px solid var(--accent);
     color:var(--brown);
     cursor:pointer;
     opacity:0;
     pointer-events:none;
     transition:.3s;
-    z-index:20;
+    z-index:40;
 }
 
 .top-button.show {
@@ -454,8 +622,17 @@ footer {
 
 /* MOBILE */
 
-@media(max-width:600px) {
-    nav {padding:20px 5%;}
+@media(max-width:800px) {
+    .animal-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        max-width:520px;
+    }
+}
+
+@media(max-width:480px) {
+    nav {
+        padding:20px 5%;
+    }
 
     .logo {font-size:24px;}
 
@@ -468,18 +645,17 @@ footer {
 
     .hero {min-height:75vh;}
 
-    .flower-decoration {width:85px;}
-
     section.content {padding:85px 20px;}
 
-    .memory-card {
-        width:100%;
-        max-width:320px;
-    }
+    .animal-grid {gap:12px;}
 
-    .animal-section {gap:25px;}
+    .animal-card {padding:15px 8px;}
 
-    .animal {width:100px;}
+    .animal-picture {height:105px;}
+
+    .animal-card h3 {font-size:20px;}
+
+    .flower-item {width:85px;}
 }
 
 @media(prefers-reduced-motion:reduce) {
@@ -494,103 +670,256 @@ footer {
         transform:none;
     }
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- SVG ANIMAL COLLECTION -->
+
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
+
+<defs>
+
+<!-- CAT -->
+
+<symbol id="cat" viewBox="0 0 160 140">
+
+<g class="float">
+
+<path class="tail" d="M115 105 Q155 115 145 75 Q140 60 130 75"
+stroke="#b9997b" stroke-width="13" fill="none" stroke-linecap="round"/>
+
+<ellipse cx="83" cy="108" rx="47" ry="25" fill="#cbb59e"/>
+
+<circle cx="78" cy="67" r="39" fill="#d7c2aa"/>
+
+<path d="M47 45 L43 7 L72 34Z" fill="#d7c2aa"/>
+<path d="M91 34 L120 7 L112 49Z" fill="#d7c2aa"/>
+
+<path d="M51 36 L48 17 L65 35Z" fill="#bd8984"/>
+<path d="M99 36 L114 17 L108 39Z" fill="#bd8984"/>
+
+<g class="blink">
+<ellipse cx="64" cy="67" rx="4" ry="6" fill="#514538"/>
+<ellipse cx="94" cy="67" rx="4" ry="6" fill="#514538"/>
+</g>
+
+<path d="M75 80 Q80 85 85 80" stroke="#a46e6e" stroke-width="2" fill="none"/>
+<path d="M80 85 Q70 96 64 88 M80 85 Q90 96 96 88"
+stroke="#625044" stroke-width="1.5" fill="none"/>
+
+<path d="M47 79 L22 73 M47 88 L23 91 M111 79 L136 73 M111 88 L136 91"
+stroke="#8b7663" stroke-width="1.3"/>
+
+</g>
+</symbol>
+
+<!-- WHITE CAT -->
+
+<symbol id="whitecat" viewBox="0 0 160 140">
+
+<g class="float delay1">
+
+<path class="tail" d="M115 108 Q150 110 145 77"
+stroke="#e6dfd2" stroke-width="13" fill="none" stroke-linecap="round"/>
+
+<ellipse cx="82" cy="108" rx="47" ry="25" fill="#eee8dd"/>
+<circle cx="78" cy="67" r="39" fill="#f2eee5"/>
+
+<path d="M47 44 L43 7 L72 34Z" fill="#eee8dd"/>
+<path d="M91 34 L120 7 L112 49Z" fill="#eee8dd"/>
+
+<path d="M51 36 L48 17 L65 35Z" fill="#dba5a3"/>
+<path d="M99 36 L114 17 L108 39Z" fill="#dba5a3"/>
+
+<g class="blink">
+<ellipse cx="64" cy="67" rx="4" ry="6" fill="#78866b"/>
+<ellipse cx="94" cy="67" rx="4" ry="6" fill="#78866b"/>
+</g>
+
+<path d="M75 80 Q80 85 85 80" stroke="#a46e6e" stroke-width="2" fill="none"/>
+
+</g>
+</symbol>
+
+<!-- ORANGE CAT -->
+
+<symbol id="orangecat" viewBox="0 0 160 140">
+
+<g class="float delay2">
+
+<path class="tail" d="M115 108 Q155 110 145 75"
+stroke="#c88d54" stroke-width="13" fill="none" stroke-linecap="round"/>
+
+<ellipse cx="82" cy="108" rx="47" ry="25" fill="#d9a56d"/>
+<circle cx="78" cy="67" r="39" fill="#e6b77f"/>
+
+<path d="M47 44 L43 7 L72 34Z" fill="#e6b77f"/>
+<path d="M91 34 L120 7 L112 49Z" fill="#e6b77f"/>
+
+<path d="M51 36 L48 17 L65 35Z" fill="#bd8984"/>
+<path d="M99 36 L114 17 L108 39Z" fill="#bd8984"/>
+
+<g class="blink">
+<ellipse cx="64" cy="67" rx="4" ry="6" fill="#514538"/>
+<ellipse cx="94" cy="67" rx="4" ry="6" fill="#514538"/>
+</g>
+
+<path d="M75 80 Q80 85 85 80" stroke="#a46e6e" stroke-width="2" fill="none"/>
+
+</g>
+</symbol>
+
+<!-- DOG -->
+
+<symbol id="dog" viewBox="0 0 160 140">
+
+<g class="float delay1">
+
+<path class="tail" d="M116 103 Q150 90 143 70"
+stroke="#a77a57" stroke-width="12" fill="none" stroke-linecap="round"/>
+
+<ellipse cx="80" cy="107" rx="45" ry="25" fill="#c69b72"/>
+
+<circle cx="80" cy="65" r="38" fill="#d9b18b"/>
+
+<path d="M48 43 Q10 25 25 82 Q40 103 55 79Z" fill="#a77a57"/>
+<path d="M112 43 Q150 25 135 82 Q120 103 105 79Z" fill="#a77a57"/>
+
+<g class="blink">
+<circle cx="65" cy="64" r="4" fill="#514538"/>
+<circle cx="95" cy="64" r="4" fill="#514538"/>
+</g>
+
+<ellipse cx="80" cy="83" rx="18" ry="13" fill="#f0ddc7"/>
+<ellipse cx="80" cy="79" rx="6" ry="5" fill="#514538"/>
+
+<path d="M80 84 Q70 96 64 87 M80 84 Q90 96 96 87"
+stroke="#514538" stroke-width="2" fill="none"/>
+
+</g>
+</symbol>
+
+<!-- CAPYBARA -->
+
+<symbol id="capy" viewBox="0 0 160 140">
+
+<g class="float delay3">
+
+<ellipse cx="80" cy="102" rx="52" ry="29" fill="#a77d5d"/>
+
+<ellipse cx="80" cy="70" rx="43" ry="34" fill="#b78d6d"/>
+
+<ellipse cx="45" cy="48" rx="11" ry="14" fill="#b78d6d"/>
+<ellipse cx="113" cy="48" rx="11" ry="14" fill="#b78d6d"/>
+
+<ellipse cx="80" cy="85" rx="29" ry="18" fill="#c8a184"/>
+
+<g class="blink">
+<circle cx="64" cy="65" r="4" fill="#42372f"/>
+<circle cx="96" cy="65" r="4" fill="#42372f"/>
+</g>
+
+<ellipse cx="80" cy="82" rx="6" ry="5" fill="#514538"/>
+
+<path d="M72 90 Q80 95 88 90" stroke="#514538" stroke-width="1.5" fill="none"/>
+
+</g>
+</symbol>
+
+<!-- SEAL -->
+
+<symbol id="seal" viewBox="0 0 160 140">
+
+<g class="swim">
+
+<ellipse cx="80" cy="82" rx="51" ry="33" fill="#aaaeb0"/>
+
+<ellipse cx="80" cy="61" rx="36" ry="32" fill="#c4c7c5"/>
+
+<path d="M53 104 Q25 128 15 106 Q29 95 53 104Z" fill="#a5a9a9"/>
+<path d="M107 104 Q135 128 145 106 Q131 95 107 104Z" fill="#a5a9a9"/>
+
+<g class="blink">
+<circle cx="65" cy="58" r="3.5" fill="#514538"/>
+<circle cx="95" cy="58" r="3.5" fill="#514538"/>
+</g>
+
+<ellipse cx="80" cy="75" rx="13" ry="10" fill="#e2ddd5"/>
+
+<circle cx="75" cy="72" r="3" fill="#514538"/>
+<circle cx="85" cy="72" r="3" fill="#514538"/>
+
+<path d="M80 79 Q72 90 65 82 M80 79 Q88 90 95 82"
+stroke="#514538" stroke-width="1.5" fill="none"/>
+
+<path d="M63 81 L45 77 M63 87 L45 90 M97 81 L115 77 M97 87 L115 90"
+stroke="#7f8584" stroke-width="1"/>
+
+</g>
+</symbol>
+
+<!-- SEA OTTER -->
+
+<symbol id="otter" viewBox="0 0 160 140">
+
+<g class="float delay2">
+
+<ellipse cx="80" cy="96" rx="38" ry="28" fill="#a77d5d"/>
+
+<circle cx="80" cy="55" r="35" fill="#a77d5d"/>
+
+<circle cx="51" cy="33" r="12" fill="#a77d5d"/>
+<circle cx="109" cy="33" r="12" fill="#a77d5d"/>
+
+<circle cx="51" cy="33" r="6" fill="#d8b49a"/>
+<circle cx="109" cy="33" r="6" fill="#d8b49a"/>
+
+<ellipse cx="80" cy="69" rx="25" ry="19" fill="#e1c3a5"/>
+
+<g class="blink">
+<circle cx="65" cy="51" r="4" fill="#42372f"/>
+<circle cx="95" cy="51" r="4" fill="#42372f"/>
+</g>
+
+<ellipse cx="80" cy="66" rx="6" ry="4" fill="#514538"/>
+
+<path d="M80 70 Q72 79 66 74 M80 70 Q88 79 94 74"
+stroke="#514538" stroke-width="1.5" fill="none"/>
+
+</g>
+</symbol>
+
+</defs>
+</svg>
+
 <!-- NAVIGATION -->
 
 <nav>
-    <div class="logo">Kittenkeeps.</div>
 
-    <div class="nav-links">
-        <a href="#story">OUR STORY</a>
-        <a href="#memories">MEMORIES</a>
-        <a href="#little-world">LITTLE WORLD</a>
-    </div>
+<div class="logo">Kittenkeeps.</div>
+
+<div class="nav-links">
+<a href="#story">OUR STORY</a>
+<a href="#animals">ANIMALS</a>
+<a href="#garden">GARDEN</a>
+<a href="#memories">MEMORIES</a>
+</div>
+
 </nav>
 
 <!-- HERO -->
 
 <header class="hero">
 
-<!-- Botanical illustration left -->
-<div class="flower-decoration flower-left">
-<svg class="botanical" viewBox="0 0 120 220" fill="none">
-<path d="M60 215 Q40 120 60 40" stroke="#78866b" stroke-width="2"/>
-<path d="M57 155 Q15 120 10 155 Q35 180 57 155Z" fill="#849477"/>
-<path d="M59 115 Q100 75 108 110 Q90 140 59 115Z" fill="#849477"/>
-<path d="M60 42 Q25 25 36 0 Q57 10 60 42Z" fill="#c58e91"/>
-<path d="M60 42 Q83 4 100 22 Q91 45 60 42Z" fill="#d5a3a0"/>
-<path d="M60 42 Q45 75 28 53 Q35 35 60 42Z" fill="#d5a3a0"/>
-<path d="M60 42 Q70 75 90 58 Q86 35 60 42Z" fill="#c58e91"/>
-<circle cx="60" cy="43" r="5" fill="#b38a57"/>
-</svg>
-</div>
-
-<!-- Botanical illustration right -->
-<div class="flower-decoration flower-right">
-<svg class="botanical" viewBox="0 0 120 220" fill="none">
-<path d="M60 215 Q75 130 55 45" stroke="#78866b" stroke-width="2"/>
-<path d="M63 155 Q100 125 110 155 Q85 180 63 155Z" fill="#849477"/>
-<path d="M57 125 Q15 95 10 130 Q32 155 57 125Z" fill="#849477"/>
-<path d="M55 47 Q22 10 42 0 Q61 10 55 47Z" fill="#d5a3a0"/>
-<path d="M55 47 Q65 4 90 20 Q84 45 55 47Z" fill="#c58e91"/>
-<path d="M55 47 Q30 70 20 50 Q30 30 55 47Z" fill="#c58e91"/>
-<path d="M55 47 Q78 70 92 52 Q82 30 55 47Z" fill="#d5a3a0"/>
-<circle cx="55" cy="47" r="5" fill="#b38a57"/>
-</svg>
-</div>
+<div class="hero-flower one">✿</div>
+<div class="hero-flower two">❀</div>
 
 <div class="eyebrow">A LITTLE WORLD, MADE FOR TANHA</div>
 
 <h1>For my<br><em>Tanha.</em></h1>
-
-<!-- Sleeping kitten illustration -->
-<div class="kitten sleeping" id="mainKitten" title="Click me!">
-
-<svg viewBox="0 0 180 150" fill="none">
-
-<!-- Tail -->
-<path class="cat-tail" d="M125 115 Q165 130 155 90 Q150 75 138 90"
-stroke="#a88e75" stroke-width="13" stroke-linecap="round"/>
-
-<!-- Body -->
-<ellipse cx="88" cy="112" rx="55" ry="29" fill="#c8b29a"/>
-
-<!-- Head -->
-<circle cx="82" cy="77" r="38" fill="#d6c3ac"/>
-
-<!-- Ears -->
-<path d="M51 54 L48 17 L76 40Z" fill="#d6c3ac"/>
-<path d="M91 40 L117 16 L116 58Z" fill="#d6c3ac"/>
-<path d="M55 45 L54 27 L69 43Z" fill="#bd8984"/>
-<path d="M100 43 L112 27 L110 49Z" fill="#bd8984"/>
-
-<!-- Face -->
-<g class="cat-sleep">
-<path d="M64 76 Q72 84 80 76" stroke="#625044" stroke-width="2" stroke-linecap="round"/>
-<path d="M88 76 Q97 84 105 76" stroke="#625044" stroke-width="2" stroke-linecap="round"/>
-</g>
-
-<g class="cat-awake">
-<ellipse cx="72" cy="76" rx="4" ry="6" fill="#514538"/>
-<ellipse cx="98" cy="76" rx="4" ry="6" fill="#514538"/>
-</g>
-
-<path d="M80 87 Q84 92 88 87" stroke="#a46e6e" stroke-width="2" fill="none"/>
-<path d="M84 91 Q78 99 72 93" stroke="#625044" stroke-width="1.5" fill="none"/>
-<path d="M84 91 Q90 99 96 93" stroke="#625044" stroke-width="1.5" fill="none"/>
-
-<!-- Whiskers -->
-<path d="M57 87 L30 82 M58 94 L33 98 M108 87 L133 82 M108 94 L135 98"
-stroke="#8b7663" stroke-width="1"/>
-
-</svg>
-</div>
-
-<div class="cat-hint">Psst... tap the kitten</div>
 
 <p class="subtitle">
 Some things deserve a place of their own.<br>
@@ -602,7 +931,7 @@ I love you.
 
 </header>
 
-<!-- OUR STORY -->
+<!-- STORY -->
 
 <section class="content reveal" id="story">
 
@@ -622,6 +951,199 @@ sometimes cannot explain.
 
 </section>
 
+<!-- ANIMAL WORLD -->
+
+<section class="animal-world reveal" id="animals">
+
+<div class="section-label">MEET OUR LITTLE FRIENDS</div>
+
+<h2 class="world-heading">Welcome to their world.</h2>
+
+<p class="world-intro">
+They have been waiting to meet you.
+Every little friend has something to say.
+Tap any of them.
+</p>
+
+<div class="animal-grid">
+
+<!-- CATS -->
+
+<button class="animal-card" data-animal="cat" data-name="Mochi" data-greeting="Hi Tanha! I'm Mochi. Can I stay here forever?">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#cat"/></svg>
+<h3>Mochi</h3>
+<p>THE SLEEPY KITTEN</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<button class="animal-card" data-animal="cat" data-name="Snowy" data-greeting="Hello Tanha! Sending you a tiny kitty hug!">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#whitecat"/></svg>
+<h3>Snowy</h3>
+<p>THE LITTLE CLOUD</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<button class="animal-card" data-animal="cat" data-name="Pumpkin" data-greeting="Meow! Hi Tanha! I brought you a flower.">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#orangecat"/></svg>
+<h3>Pumpkin</h3>
+<p>THE LITTLE TROUBLEMAKER</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<button class="animal-card" data-animal="cat" data-name="Miso" data-greeting="Psst! Tanha, you're my favourite human.">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#cat"/></svg>
+<h3>Miso</h3>
+<p>THE CURIOUS ONE</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<!-- DOGS -->
+
+<button class="animal-card" data-animal="dog" data-name="Biscuit" data-greeting="Woof woof! Hello Tanha! I'm so happy to see you!">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#dog"/></svg>
+<h3>Biscuit</h3>
+<p>THE HAPPY PUPPY</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<button class="animal-card" data-animal="dog" data-name="Teddy" data-greeting="Hi Tanha! Can I have a little belly rub?">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#dog"/></svg>
+<h3>Teddy</h3>
+<p>THE CUDDLY ONE</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<!-- CAPYBARAS -->
+
+<button class="animal-card" data-animal="capy" data-name="Coco" data-greeting="Hello Tanha. I'm Coco. Don't worry, everything is okay.">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#capy"/></svg>
+<h3>Coco</h3>
+<p>THE CALM CAPYBARA</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<button class="animal-card" data-animal="capy" data-name="Mochaccino" data-greeting="Hi Tanha! Let's just relax and enjoy the flowers.">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#capy"/></svg>
+<h3>Mochaccino</h3>
+<p>THE RELAXED ONE</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<!-- SEALS -->
+
+<button class="animal-card" data-animal="seal" data-name="Pebble" data-greeting="Hello Tanha! Sending you a little ocean kiss!">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#seal"/></svg>
+<h3>Pebble</h3>
+<p>THE LITTLE SEAL</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<button class="animal-card" data-animal="seal" data-name="Bubbles" data-greeting="Hi Tanha! Splash splash! I hope you're having a lovely day!">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#seal"/></svg>
+<h3>Bubbles</h3>
+<p>THE OCEAN BABY</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<!-- OTTERS -->
+
+<button class="animal-card" data-animal="otter" data-name="Oliver" data-greeting="Hi Tanha! I brought you a little seashell!">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#otter"/></svg>
+<h3>Oliver</h3>
+<p>THE SEA OTTER</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+<button class="animal-card" data-animal="otter" data-name="Olive" data-greeting="Hello Tanha! Let's float together and watch the clouds.">
+<svg class="animal-picture" viewBox="0 0 160 140"><use href="#otter"/></svg>
+<h3>Olive</h3>
+<p>THE LITTLE FLOATING OTTER</p>
+<div class="tap">TAP TO SAY HI</div>
+</button>
+
+</div>
+
+<div class="greeting-area" id="greeting" aria-live="polite">
+<small>THE LITTLE FRIENDS ARE WAITING</small>
+Choose an animal to meet.
+</div>
+
+</section>
+
+<!-- GARDEN -->
+
+<section class="garden reveal" id="garden">
+
+<div class="section-label">A LITTLE BOTANICAL CORNER</div>
+
+<h2>The flower garden.</h2>
+
+<p class="description">
+A few flowers for someone who makes
+ordinary things feel beautiful.
+</p>
+
+<div class="flower-row">
+
+<div class="flower-item" onclick="flowerGreeting('A tulip for you, Tanha. A little reminder that beautiful things bloom in their own time.')">
+
+<svg viewBox="0 0 100 150">
+<path d="M50 65 Q40 110 50 145" stroke="#78866b" stroke-width="3" fill="none"/>
+<path d="M49 112 Q10 90 20 120 Q38 135 49 112Z" fill="#849477"/>
+<g class="flower-head">
+<path d="M50 70 Q20 45 30 18 Q43 20 50 43 Q57 20 70 18 Q80 45 50 70Z" fill="#c58e91"/>
+<path d="M50 70 Q36 40 50 12 Q65 40 50 70Z" fill="#d8a4a1"/>
+</g>
+</svg>
+
+<p>Tulip</p>
+</div>
+
+<div class="flower-item" onclick="flowerGreeting('A little wildflower, because the loveliest things are sometimes beautifully unexpected.')">
+
+<svg viewBox="0 0 100 150">
+<path d="M50 65 L50 145" stroke="#78866b" stroke-width="3"/>
+<path d="M50 115 Q80 90 85 120 Q68 135 50 115Z" fill="#849477"/>
+<g class="flower-head">
+<circle cx="50" cy="40" r="12" fill="#d8b879"/>
+<g fill="#d8a4a1">
+<ellipse cx="50" cy="20" rx="9" ry="16"/>
+<ellipse cx="50" cy="60" rx="9" ry="16"/>
+<ellipse cx="30" cy="40" rx="16" ry="9"/>
+<ellipse cx="70" cy="40" rx="16" ry="9"/>
+</g>
+<circle cx="50" cy="40" r="8" fill="#d8b879"/>
+</g>
+</svg>
+
+<p>Wildflower</p>
+</div>
+
+<div class="flower-item" onclick="flowerGreeting('A tiny daisy for my favourite person. Keep blooming, little one.')">
+
+<svg viewBox="0 0 100 150">
+<path d="M50 65 L50 145" stroke="#78866b" stroke-width="3"/>
+<path d="M50 115 Q15 95 20 125 Q38 138 50 115Z" fill="#849477"/>
+<g class="flower-head">
+<g fill="#f0e9d9">
+<ellipse cx="50" cy="20" rx="8" ry="17"/>
+<ellipse cx="50" cy="60" rx="8" ry="17"/>
+<ellipse cx="30" cy="40" rx="17" ry="8"/>
+<ellipse cx="70" cy="40" rx="17" ry="8"/>
+<ellipse cx="36" cy="26" rx="8" ry="15" transform="rotate(-45 36 26)"/>
+<ellipse cx="64" cy="26" rx="8" ry="15" transform="rotate(45 64 26)"/>
+</g>
+<circle cx="50" cy="40" r="10" fill="#d8b879"/>
+</g>
+</svg>
+
+<p>Daisy</p>
+</div>
+
+</div>
+
+</section>
+
 <!-- MEMORIES -->
 
 <section class="content reveal" id="memories">
@@ -636,101 +1158,20 @@ A thousand little things, worth remembering.
 
 <div class="memories">
 
-<button class="memory-card"
-onclick="openMemory('Our beginning','May 24, 2024. The day our story began. A little date that became a big part of my life.')">
-
+<button class="memory-card" onclick="openMemory('Our beginning','May 24, 2024. The day our story began. A little date that became a big part of my life.')">
 <h3>Our beginning</h3>
 <p>Where our story started.</p>
-
 </button>
 
-<button class="memory-card"
-onclick="openMemory('Little moments','The ordinary days, the little conversations, the hugs and everything that made them special.')">
-
+<button class="memory-card" onclick="openMemory('Little moments','The ordinary days, the conversations, the hugs and everything that made them special.')">
 <h3>Little moments</h3>
 <p>The ordinary days that became special.</p>
-
 </button>
 
-<button class="memory-card"
-onclick="openMemory('Yours forever','Some memories never need a photograph. They stay somewhere inside us.')">
-
+<button class="memory-card" onclick="openMemory('Yours forever','Some memories never need a photograph. They stay somewhere inside us.')">
 <h3>Yours forever</h3>
 <p>Things I never want to forget.</p>
-
 </button>
-
-</div>
-
-</section>
-
-<!-- LITTLE ANIMAL WORLD -->
-
-<section class="content reveal" id="little-world">
-
-<div class="section-label">OUR LITTLE FRIENDS</div>
-
-<h2>A garden of little things.</h2>
-
-<p class="description">
-A few little visitors live in this corner.
-They are quite fond of you.
-</p>
-
-<div class="animal-section">
-
-<!-- Dog -->
-<div class="animal" onclick="openMemory('A little dog','A tiny visitor, bringing a little happiness wherever it goes.')">
-
-<svg viewBox="0 0 150 135" fill="none">
-
-<ellipse cx="75" cy="108" rx="43" ry="19" fill="#c69b72"/>
-
-<circle cx="75" cy="65" r="39" fill="#d9b18b"/>
-
-<path d="M43 43 Q8 25 25 83 Q40 103 52 80Z" fill="#a77a57"/>
-
-<path d="M107 43 Q142 25 125 83 Q110 103 98 80Z" fill="#a77a57"/>
-
-<circle cx="62" cy="64" r="4" fill="#514538"/>
-<circle cx="88" cy="64" r="4" fill="#514538"/>
-
-<ellipse cx="75" cy="81" rx="12" ry="9" fill="#f0ddc7"/>
-<ellipse cx="75" cy="77" rx="5" ry="4" fill="#514538"/>
-
-<path d="M75 82 Q68 93 60 85 M75 82 Q82 93 90 85"
-stroke="#514538" stroke-width="2" fill="none"/>
-
-</svg>
-
-<p>A little dog</p>
-</div>
-
-<!-- Capybara -->
-<div class="animal" onclick="openMemory('The capybara','The calmest little visitor in the whole garden. Absolutely unbothered by everything.')">
-
-<svg viewBox="0 0 150 135" fill="none">
-
-<ellipse cx="75" cy="103" rx="48" ry="23" fill="#aa8060"/>
-
-<ellipse cx="76" cy="70" rx="42" ry="34" fill="#b78d6d"/>
-
-<ellipse cx="46" cy="55" rx="12" ry="15" fill="#b78d6d"/>
-<ellipse cx="105" cy="55" rx="12" ry="15" fill="#b78d6d"/>
-
-<ellipse cx="76" cy="83" rx="27" ry="18" fill="#c8a184"/>
-
-<circle cx="62" cy="65" r="4" fill="#42372f"/>
-<circle cx="90" cy="65" r="4" fill="#42372f"/>
-
-<ellipse cx="76" cy="80" rx="5" ry="4" fill="#514538"/>
-
-<path d="M69 89 Q76 94 83 89" stroke="#514538" stroke-width="1.5" fill="none"/>
-
-</svg>
-
-<p>Mr. Capybara</p>
-</div>
 
 </div>
 
@@ -745,42 +1186,47 @@ stroke="#514538" stroke-width="2" fill="none"/>
 <h2>Just for you.</h2>
 
 <p class="description">
-There is something waiting for you.
-A little message, hidden in this garden.
+The animals have a little message for you.
+Would you like to hear it?
 </p>
 
-<button class="button" onclick="revealSurprise()">
-OPEN YOUR SURPRISE ✿
+<button class="button" onclick="showSurprise()">
+OPEN YOUR SURPRISE
 </button>
 
 <div class="surprise-box" id="surpriseBox">
-
 If I could keep one little corner
 of this enormous world just for us,
 it would look something like this.
 
 <br><br>
 
-And it would always have you in it.
+A little garden, a sleepy kitten,
+a thousand flowers and you.
+
+<br><br>
+
+I hope this little world
+always makes you smile.
 
 <br><br>
 
 — Yours.
-
 </div>
 
 </section>
 
 <footer>
 MADE WITH LOVE · JUST FOR YOU, MY BABY
+<br><br>
+KITENKEEPS · EST. 2024
 </footer>
 
-<button class="top-button" id="topButton"
-onclick="window.scrollTo({top:0,behavior:'smooth'})">
-↑
-</button>
+<button class="top-button" id="topButton" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
-<!-- MEMORY MODAL -->
+<button class="sound-button" id="soundButton" onclick="toggleSound()">♫ SOUND: OFF</button>
+
+<!-- MODAL -->
 
 <div class="modal" id="memoryModal" onclick="closeMemory(event)">
 
@@ -790,7 +1236,7 @@ onclick="window.scrollTo({top:0,behavior:'smooth'})">
 
 <div class="section-label">A LITTLE MEMORY</div>
 
-<h2 id="modalTitle">Our beginning</h2>
+<h2 id="modalTitle"></h2>
 
 <p id="modalText"></p>
 
@@ -800,39 +1246,209 @@ onclick="window.scrollTo({top:0,behavior:'smooth'})">
 
 <script>
 
-/* KITTEN INTERACTION */
+/* SOUND SYSTEM */
 
-const kitten = document.getElementById('mainKitten');
+let soundEnabled = false;
+let audioContext = null;
 
-kitten.addEventListener('click', () => {
+function toggleSound() {
 
-kitten.classList.toggle('awake');
+    soundEnabled = !soundEnabled;
+
+    document.getElementById('soundButton').textContent =
+        soundEnabled ? '♫ SOUND: ON' : '♫ SOUND: OFF';
+
+    if (soundEnabled) {
+        initAudio();
+        speak("Hello Tanha! Welcome to your little world.");
+    } else {
+        if ('speechSynthesis' in window) {
+            speechSynthesis.cancel();
+        }
+    }
+}
+
+function initAudio() {
+
+    if (!audioContext) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+        if (AudioContext) {
+            audioContext = new AudioContext();
+        }
+    }
+
+    if (audioContext && audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+}
+
+/* SIMPLE ORIGINAL SOUND EFFECTS */
+
+function playTone(frequency, duration, type='sine') {
+
+    if (!soundEnabled || !audioContext) return;
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = type;
+    oscillator.frequency.value = frequency;
+
+    gain.gain.setValueAtTime(.001, audioContext.currentTime);
+
+    gain.gain.exponentialRampToValueAtTime(
+        .08,
+        audioContext.currentTime + .03
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .001,
+        audioContext.currentTime + duration
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + duration + .05);
+}
+
+function animalSound(type) {
+
+    if (!soundEnabled) return;
+
+    if (type === 'cat') {
+        playTone(750,.12);
+        setTimeout(() => playTone(950,.18),150);
+    }
+
+    if (type === 'dog') {
+        playTone(260,.15,'triangle');
+        setTimeout(() => playTone(320,.15,'triangle'),200);
+    }
+
+    if (type === 'capy') {
+        playTone(380,.2,'sine');
+        setTimeout(() => playTone(450,.2,'sine'),220);
+    }
+
+    if (type === 'seal') {
+        playTone(520,.2,'triangle');
+        setTimeout(() => playTone(650,.25,'triangle'),200);
+    }
+
+    if (type === 'otter') {
+        playTone(850,.1);
+        setTimeout(() => playTone(1100,.15),130);
+    }
+}
+
+/* SPOKEN GREETINGS */
+
+function speak(message) {
+
+    if (!soundEnabled || !('speechSynthesis' in window)) return;
+
+    speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(message);
+
+    utterance.lang = 'en-US';
+    utterance.rate = .88;
+    utterance.pitch = 1.15;
+    utterance.volume = .9;
+
+    speechSynthesis.speak(utterance);
+}
+
+/* ANIMAL INTERACTIONS */
+
+document.querySelectorAll('.animal-card').forEach(card => {
+
+    card.addEventListener('click', () => {
+
+        const name = card.dataset.name;
+        const greeting = card.dataset.greeting;
+        const type = card.dataset.animal;
+
+        const greetingArea = document.getElementById('greeting');
+
+        greetingArea.innerHTML =
+            '<small>' + name.toUpperCase() + ' SAYS</small>' +
+            greeting;
+
+        animalSound(type);
+        speak(greeting);
+
+    });
 
 });
 
-/* FALLING PETALS */
+/* FLOWER INTERACTION */
 
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function flowerGreeting(message) {
 
-if (!reducedMotion) {
+    const greetingArea = document.getElementById('greeting');
 
-setInterval(() => {
+    greetingArea.innerHTML =
+        '<small>A FLOWER FOR TANHA</small>' + message;
 
-const petal = document.createElement('div');
+    playTone(700,.25);
+    setTimeout(() => playTone(900,.25),200);
 
-petal.className = 'petal';
+    speak(message);
+}
 
-petal.style.left = Math.random() * 100 + 'vw';
+/* MEMORY MODAL */
 
-petal.style.animationDuration = (7 + Math.random() * 6) + 's';
+function openMemory(title,message) {
 
-petal.style.opacity = Math.random() * .5 + .2;
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalText').textContent = message;
 
-document.body.appendChild(petal);
+    document.getElementById('memoryModal').classList.add('show');
 
-setTimeout(() => petal.remove(), 14000);
+}
 
-}, 1000);
+function closeMemory(event) {
+
+    if (
+        !event ||
+        event.target.id === 'memoryModal' ||
+        event.target.classList.contains('close')
+    ) {
+        document.getElementById('memoryModal').classList.remove('show');
+    }
+
+}
+
+document.addEventListener('keydown', event => {
+
+    if (event.key === 'Escape') {
+        document.getElementById('memoryModal').classList.remove('show');
+    }
+
+});
+
+/* SURPRISE */
+
+function showSurprise() {
+
+    const box = document.getElementById('surpriseBox');
+
+    box.classList.toggle('show');
+
+    if (box.classList.contains('show')) {
+
+        box.scrollIntoView({
+            behavior:'smooth',
+            block:'center'
+        });
+
+        speak("A little message for you, Tanha. You make this world more beautiful.");
+
+    }
 
 }
 
@@ -840,56 +1456,23 @@ setTimeout(() => petal.remove(), 14000);
 
 const observer = new IntersectionObserver(entries => {
 
-entries.forEach(entry => {
+    entries.forEach(entry => {
 
-if (entry.isIntersecting) {
+        if (entry.isIntersecting) {
 
-entry.target.classList.add('visible');
+            entry.target.classList.add('visible');
 
-observer.unobserve(entry.target);
+            observer.unobserve(entry.target);
 
-}
+        }
 
+    });
+
+},{threshold:.12});
+
+document.querySelectorAll('.reveal').forEach(element => {
+    observer.observe(element);
 });
-
-}, {threshold:.15});
-
-document.querySelectorAll('.reveal').forEach(el => {
-
-observer.observe(el);
-
-});
-
-/* MEMORY MODAL */
-
-function openMemory(title,text) {
-
-document.getElementById('modalTitle').textContent = title;
-
-document.getElementById('modalText').textContent = text;
-
-document.getElementById('memoryModal').classList.add('show');
-
-}
-
-function closeMemory(event) {
-
-if (!event || event.target.id === 'memoryModal' ||
-event.target.classList.contains('close')) {
-
-document.getElementById('memoryModal').classList.remove('show');
-
-}
-
-}
-
-/* SURPRISE */
-
-function revealSurprise() {
-
-document.getElementById('surpriseBox').classList.toggle('show');
-
-}
 
 /* BACK TO TOP */
 
@@ -897,23 +1480,42 @@ const topButton = document.getElementById('topButton');
 
 window.addEventListener('scroll', () => {
 
-topButton.classList.toggle('show',window.scrollY > 400);
+    topButton.classList.toggle('show',window.scrollY > 400);
 
 });
 
-/* ESCAPE KEY */
+/* FALLING PETALS */
 
-document.addEventListener('keydown', event => {
+const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+).matches;
 
-if (event.key === 'Escape') {
+if (!reducedMotion) {
 
-document.getElementById('memoryModal').classList.remove('show');
+    setInterval(() => {
+
+        const petal = document.createElement('div');
+
+        petal.className = 'petal';
+
+        petal.style.left = Math.random() * 100 + 'vw';
+
+        petal.style.animationDuration =
+            (7 + Math.random() * 6) + 's';
+
+        petal.style.opacity =
+            Math.random() * .4 + .2;
+
+        document.body.appendChild(petal);
+
+        setTimeout(() => petal.remove(),14000);
+
+    },1400);
 
 }
-
-});
 
 </script>
 
 </body>
 </html>
+```
