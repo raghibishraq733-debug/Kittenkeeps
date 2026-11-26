@@ -173,7 +173,7 @@
       position: sticky;
       top: 14px;
       z-index: 85;
-      max-width: 980px;
+      max-width: 1040px;
       margin: 0 auto;
       padding: 0 16px;
     }
@@ -208,8 +208,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       background: var(--cream);
       border: 1px solid var(--border-hairline);
@@ -217,21 +217,28 @@
       font-family: var(--font-sans);
       color: var(--wood);
       letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .brand-badge:hover {
+      transform: scale(1.08);
+      background: rgba(197, 142, 145, 0.16);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
       list-style: none;
     }
 
     .nav-links a {
       text-decoration: none;
       color: var(--brown-soft);
-      font-size: 0.86rem;
+      font-size: 0.82rem;
       letter-spacing: 0.02em;
-      padding: 6px 3px;
+      padding: 6px 2px;
       transition: color 0.25s ease;
     }
 
@@ -291,7 +298,7 @@
       border-color: var(--pink);
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 920px) {
       .nav-links {
         display: none;
       }
@@ -310,13 +317,13 @@
       position: relative;
       max-width: 1040px;
       margin: 0 auto;
-      padding: clamp(60px, 9vw, 110px) 22px;
+      padding: clamp(56px, 8.5vw, 104px) 22px;
     }
 
     .section-header {
       text-align: center;
       max-width: 650px;
-      margin: 0 auto 42px;
+      margin: 0 auto 40px;
     }
 
     .eyebrow {
@@ -377,14 +384,14 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      min-height: 52px;
-      padding: 14px 32px;
+      min-height: 50px;
+      padding: 13px 30px;
       border-radius: var(--radius-pill);
       border: 1px solid var(--wood);
       background: linear-gradient(180deg, #F7F3EB 0%, #EAE1D3 100%);
       color: var(--brown);
       font-family: var(--font-sans);
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: 500;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -403,7 +410,13 @@
       outline: none;
     }
 
-    /* 1. Hero Section */
+    .btn-storybook.rose-tint {
+      border-color: rgba(197, 142, 145, 0.65);
+      background: linear-gradient(180deg, #FBF4F4 0%, #F1DFE0 100%);
+      color: #7B4448;
+    }
+
+    /* 1. Hero Section + Live Time Counter */
     .hero {
       min-height: calc(100vh - 80px);
       display: flex;
@@ -411,16 +424,17 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding-top: 44px;
-      padding-bottom: 90px;
+      padding-top: 40px;
+      padding-bottom: 84px;
     }
 
     .hero-frame {
       position: relative;
-      max-width: 720px;
-      padding: clamp(36px, 6vw, 64px) clamp(24px, 5vw, 56px);
+      max-width: 750px;
+      width: 100%;
+      padding: clamp(34px, 5.5vw, 60px) clamp(22px, 5vw, 54px);
       border-radius: 32px;
-      background: rgba(242, 235, 221, 0.65);
+      background: rgba(242, 235, 221, 0.68);
       border: 1px solid var(--border-hairline);
       box-shadow: var(--shadow-card);
     }
@@ -437,11 +451,11 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--wood);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .hero h1 {
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       font-style: italic;
     }
 
@@ -451,7 +465,57 @@
       line-height: 1.65;
       color: var(--brown-soft);
       white-space: pre-line;
-      margin-bottom: 34px;
+      margin-bottom: 28px;
+    }
+
+    /* Time Together Counter Grid */
+    .time-counter-box {
+      margin: 0 auto 30px;
+      max-width: 540px;
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: rgba(245, 241, 233, 0.9);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .time-counter-label {
+      font-size: 0.73rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      margin-bottom: 10px;
+    }
+
+    .time-units {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .time-unit {
+      padding: 10px 6px;
+      border-radius: 14px;
+      background: var(--cream);
+      border: 1px solid rgba(161, 138, 112, 0.22);
+    }
+
+    .time-num {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: clamp(1.55rem, 3.5vw, 2.15rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--brown);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .time-word {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-top: 3px;
     }
 
     .hero-cta-row {
@@ -468,7 +532,7 @@
       color: var(--taupe);
     }
 
-    /* 2. Introduction Section */
+    /* 2. Introduction + Virtual Hug Sanctuary */
     .intro-card {
       max-width: 740px;
       margin: 0 auto;
@@ -506,6 +570,77 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--green-deep);
+    }
+
+    /* Virtual Hug Sanctuary Card */
+    .hug-sanctuary {
+      max-width: 740px;
+      margin: 26px auto 0;
+      padding: clamp(24px, 4vw, 34px);
+      background: linear-gradient(180deg, rgba(247, 240, 236, 0.92) 0%, rgba(242, 235, 221, 0.92) 100%);
+      border: 1px solid rgba(197, 142, 145, 0.36);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hug-pulse-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid rgba(197, 142, 145, 0.65);
+      transform: translate(-50%, -50%) scale(0);
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .hug-pulse-ring.active {
+      animation: hugEmbrace 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes hugEmbrace {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0.85;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(24);
+        opacity: 0;
+      }
+    }
+
+    .hug-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.18rem, 2.4vw, 1.38rem);
+      color: var(--brown);
+      margin-bottom: 18px;
+      min-height: 2.2em;
+    }
+
+    .hug-controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .hug-count-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--ivory);
+      border: 1px solid var(--border-hairline);
+      font-size: 0.82rem;
+      color: var(--brown-soft);
     }
 
     /* 2B. COZY COUPLE'S HOME SECTION */
@@ -740,6 +875,7 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .btn-subtle {
@@ -761,6 +897,210 @@
       border-color: var(--green);
       transform: translateY(-1px);
       outline: none;
+    }
+
+    /* 4B. OUR MOVIES SECTION */
+    .movies-stage {
+      background: var(--cream);
+      border: 1px solid var(--border-hairline);
+      border-radius: 28px;
+      padding: clamp(22px, 4vw, 36px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 720px) {
+      .movies-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .movie-card {
+      background: var(--ivory);
+      border: 1px solid var(--border-hairline);
+      border-radius: 20px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(81, 69, 56, 0.08);
+    }
+
+    .movie-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .movie-badge {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: var(--radius-pill);
+      background: rgba(120, 134, 107, 0.14);
+      color: var(--green-deep);
+      font-weight: 500;
+    }
+
+    .movie-badge.wishlist {
+      background: rgba(197, 142, 145, 0.15);
+      color: #8E5458;
+    }
+
+    .movie-card h3 {
+      font-size: 1.5rem;
+      margin-top: 6px;
+    }
+
+    .movie-note {
+      font-size: 0.92rem;
+      color: var(--brown-soft);
+      line-height: 1.6;
+    }
+
+    .movie-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(161, 138, 112, 0.18);
+    }
+
+    .movies-bar {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    /* 4C. DAILY LETTERS & OPEN-WHEN ENVELOPES */
+    .letters-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 840px) {
+      .letters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .letters-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .envelope-card {
+      position: relative;
+      background: linear-gradient(180deg, #F6F0E4 0%, #ECE3D3 100%);
+      border: 1px solid var(--border-hairline);
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-card);
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .envelope-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--pink);
+      box-shadow: 0 16px 34px rgba(81, 69, 56, 0.1);
+    }
+
+    .envelope-card.opened {
+      background: var(--ivory);
+      text-align: left;
+    }
+
+    .wax-seal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #D99FA2, #B4777B);
+      color: #FFF9F5;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 12px rgba(180, 119, 123, 0.32);
+      margin-bottom: 12px;
+    }
+
+    .envelope-card.opened .wax-seal {
+      width: 30px;
+      height: 30px;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
+    .envelope-tag {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 6px;
+    }
+
+    .envelope-card h3 {
+      font-size: 1.38rem;
+      margin-bottom: 8px;
+    }
+
+    .envelope-preview {
+      font-size: 0.84rem;
+      color: var(--brown-soft);
+      font-style: italic;
+    }
+
+    .envelope-body {
+      display: none;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(161, 138, 112, 0.38);
+      font-family: var(--font-serif);
+      font-size: 1.16rem;
+      line-height: 1.7;
+      color: var(--brown);
+      white-space: pre-line;
+      animation: letterUnfold 0.4s ease forwards;
+    }
+
+    .envelope-card.opened .envelope-body {
+      display: block;
+    }
+
+    .envelope-card.opened .envelope-preview {
+      display: none;
+    }
+
+    .letters-toolbar {
+      margin-top: 22px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     /* 5. Memories Section */
@@ -875,6 +1215,77 @@
       text-underline-offset: 3px;
       cursor: pointer;
       padding: 4px 0;
+    }
+
+    /* 5B. LITTLE SECRETS KEEPSAKE SECTION */
+    .secrets-stage {
+      background: linear-gradient(180deg, rgba(242, 235, 221, 0.85) 0%, rgba(238, 231, 220, 0.92) 100%);
+      border: 1px solid var(--border-hairline);
+      border-radius: 28px;
+      padding: clamp(24px, 4.5vw, 40px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .secrets-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 680px) {
+      .secrets-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .secret-card {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: var(--ivory);
+      border: 1px solid var(--border-hairline);
+      transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .secret-card.unlocked {
+      border-color: rgba(120, 134, 107, 0.55);
+      background: rgba(247, 245, 238, 0.98);
+    }
+
+    .secret-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .secret-status {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+
+    .secret-card.unlocked .secret-status {
+      color: var(--green-deep);
+      font-weight: 500;
+    }
+
+    .secret-card h3 {
+      font-size: 1.32rem;
+      margin-bottom: 6px;
+    }
+
+    .secret-text {
+      font-size: 0.9rem;
+      color: var(--brown-soft);
+      line-height: 1.6;
+    }
+
+    .secret-card.unlocked .secret-text {
+      font-family: var(--font-serif);
+      font-size: 1.14rem;
+      color: var(--brown);
     }
 
     /* 6. Surprise Section */
@@ -1043,7 +1454,8 @@
     }
 
     .field-group input,
-    .field-group textarea {
+    .field-group textarea,
+    .field-group select {
       width: 100%;
       padding: 10px 12px;
       border-radius: 12px;
@@ -1071,7 +1483,8 @@
         scroll-behavior: auto;
       }
       .animal-bubble,
-      .letter-reveal {
+      .letter-reveal,
+      .hug-pulse-ring.active {
         animation: none;
       }
     }
@@ -1091,17 +1504,20 @@
   <!-- Navigation -->
   <header class="site-nav">
     <nav class="nav-pill" data-perch="nav" aria-label="Primary Navigation">
-      <a href="#top" class="brand-mark">
-        <span class="brand-badge" aria-hidden="true">TNN</span>
-        <span>Kittenkeeps</span>
-      </a>
+      <div class="brand-mark">
+        <button type="button" id="secret-monogram-btn" class="brand-badge" title="TNN">TNN</button>
+        <a href="#top" style="text-decoration:none; color:inherit;">Kittenkeeps</a>
+      </div>
 
       <ul class="nav-links">
         <li><a href="#our-place">Our Place</a></li>
         <li><a href="#cozy-home">Cozy Home</a></li>
         <li><a href="#their-world">Their World</a></li>
         <li><a href="#garden">Garden</a></li>
+        <li><a href="#movies">Movies</a></li>
+        <li><a href="#daily-letters">Letters</a></li>
         <li><a href="#memories">Memories</a></li>
+        <li><a href="#secrets">Secrets</a></li>
         <li><a href="#surprise">For You</a></li>
       </ul>
 
@@ -1126,7 +1542,7 @@
   </header>
 
   <main id="top">
-    <!-- 1. HERO SECTION -->
+    <!-- 1. HERO SECTION + TIME TOGETHER COUNTER -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-frame" data-safe-text="true">
         <div class="hero-monogram">
@@ -1141,10 +1557,36 @@
 This little place is one of them.
 I love you, babu.</p>
 
+        <!-- Live Time-Together Counter -->
+        <div class="time-counter-box" aria-label="Time together since May 24, 2024">
+          <p class="time-counter-label">Loving you since May 24, 2024</p>
+          <div class="time-units">
+            <div class="time-unit">
+              <span class="time-num" id="count-days">0</span>
+              <span class="time-word">Days</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-num" id="count-hours">00</span>
+              <span class="time-word">Hours</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-num" id="count-minutes">00</span>
+              <span class="time-word">Minutes</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-num" id="count-seconds">00</span>
+              <span class="time-word">Seconds</span>
+            </div>
+          </div>
+        </div>
+
         <div class="hero-cta-row">
           <a href="#cozy-home" class="btn-storybook" data-perch="button">
             <span>COME INSIDE</span>
           </a>
+          <button type="button" class="btn-storybook rose-tint" id="hero-hug-btn">
+            <span>SEND A HUG</span>
+          </button>
         </div>
 
         <p class="hero-hint">Tap any kitten, cat butt, puppy, capybara, otter, seal, cozy home item, or flower along the way.</p>
@@ -1157,7 +1599,7 @@ I love you, babu.</p>
       </svg>
     </div>
 
-    <!-- 2. INTRODUCTION SECTION -->
+    <!-- 2. INTRODUCTION SECTION + VIRTUAL HUG SANCTUARY -->
     <section id="our-place" aria-labelledby="intro-heading">
       <div class="intro-card" data-safe-text="true">
         <span class="eyebrow">A Quiet Sanctuary</span>
@@ -1166,6 +1608,24 @@ I love you, babu.</p>
 
 A place for memories, little moments, photographs and everything that words sometimes cannot explain.</p>
         <p class="intro-signature">Dedicated to Tanha Naween Nawar · My Baby · My Chumopakhi</p>
+      </div>
+
+      <!-- Interactive Virtual Hug Box -->
+      <div class="hug-sanctuary" data-safe-text="true">
+        <div class="hug-pulse-ring" id="hug-pulse-ring" aria-hidden="true"></div>
+        <span class="eyebrow">Whenever You Need Arms Around You</span>
+        <p class="hug-quote" id="hug-quote">“Close your eyes for a second, babu—this is a long, warm, tight hug just for you.”</p>
+        <div class="hug-controls-row">
+          <button type="button" class="btn-storybook rose-tint" id="sanctuary-hug-btn">
+            <span>Wrap Me In A Hug</span>
+          </button>
+          <span class="hug-count-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C58E91" aria-hidden="true">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <span>Hugs shared: <strong id="hug-counter-display">0</strong></span>
+          </span>
+        </div>
       </div>
     </section>
 
@@ -1179,7 +1639,7 @@ A place for memories, little moments, photographs and everything that words some
 
       <div class="home-stage">
         <div class="home-canvas-wrap">
-          <canvas id="home-canvas" aria-label="Interactive cozy couple living room with fireplace, sofa, tea table, guitar, bookshelf, and window"></canvas>
+          <canvas id="home-canvas" aria-label="Interactive cozy couple living room with sofa, tea table, guitar, bookshelf, and window"></canvas>
         </div>
 
         <div class="home-readout">
@@ -1238,10 +1698,44 @@ A place for memories, little moments, photographs and everything that words some
         <div class="garden-note-box">
           <p class="garden-message" id="garden-message">“A tulip for you, babu. A little reminder that beautiful things bloom in their own time.”</p>
           <div class="garden-actions">
+            <span class="pond-tag" id="flower-count-tag">10 blooms</span>
             <button type="button" class="btn-subtle" id="plant-tulip-btn">+ Plant a Tulip</button>
             <button type="button" class="btn-subtle" id="breeze-btn">Send a Gentle Breeze</button>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- 4B. OUR MOVIES SECTION -->
+    <section id="movies" aria-labelledby="movies-heading">
+      <div class="section-header" data-safe-text="true">
+        <span class="eyebrow">Cozy Watch Parties &amp; Late-Night Stories</span>
+        <h2 id="movies-heading">Our little cinema.</h2>
+        <p class="section-subtitle">Films we have wandered through together—and the ones waiting for our next cozy watch party, baby.</p>
+      </div>
+
+      <div class="movies-stage">
+        <div class="movies-grid" id="movies-grid"></div>
+
+        <div class="movies-bar">
+          <span class="pond-tag" id="movies-summary-tag">Watched &amp; Saved Together</span>
+          <button type="button" class="btn-subtle" id="add-movie-btn">+ Add a Movie for Us</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4C. DAILY LETTERS & OPEN-WHEN ENVELOPES -->
+    <section id="daily-letters" aria-labelledby="letters-heading">
+      <div class="section-header" data-safe-text="true">
+        <span class="eyebrow">Little Notes Folded in Paper</span>
+        <h2 id="letters-heading">Daily letters for you.</h2>
+        <p class="section-subtitle">Tap any wax-sealed envelope whenever your heart wants a quiet word from me, chumopakhi.</p>
+      </div>
+
+      <div class="letters-grid" id="letters-grid"></div>
+
+      <div class="letters-toolbar">
+        <button type="button" class="btn-subtle" id="add-daily-letter-btn">+ Tuck a New Note Inside</button>
       </div>
     </section>
 
@@ -1254,6 +1748,19 @@ A place for memories, little moments, photographs and everything that words some
       </div>
 
       <div class="memories-grid" id="memories-grid"></div>
+    </section>
+
+    <!-- 5B. LITTLE SECRETS & HIDDEN KEEPSAKES -->
+    <section id="secrets" aria-labelledby="secrets-heading">
+      <div class="section-header" data-safe-text="true">
+        <span class="eyebrow">Tucked Between the Pages</span>
+        <h2 id="secrets-heading">Little secrets (<span id="secrets-found-count">0</span>/4).</h2>
+        <p class="section-subtitle">Four quiet surprises are hidden around Kittenkeeps. Explore and tap around to unlock each one, babu.</p>
+      </div>
+
+      <div class="secrets-stage">
+        <div class="secrets-grid" id="secrets-grid"></div>
+      </div>
     </section>
 
     <!-- 6. SURPRISE SECTION -->
@@ -1298,7 +1805,7 @@ I hope this little world always makes you smile, babu. Mwah!
     </svg>
   </button>
 
-  <!-- Modal for Editing Memory / Letter / Optional Audio Files -->
+  <!-- Modal for Editing Memory / Letter / Movies / Daily Notes / Audio Files -->
   <div class="modal-backdrop" id="editor-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-card">
       <h3 id="modal-title">Customize Keepsake</h3>
@@ -1320,7 +1827,8 @@ I hope this little world always makes you smile, babu. Mwah!
       /* =========================================================================
          1. STORAGE & PERSONALIZED STATE
       ========================================================================= */
-      const STORAGE_KEY = "kittenkeeps_tanha_v2";
+      const STORAGE_KEY = "kittenkeeps_tanha_v3";
+      const START_DATE_MS = new Date("2024-05-24T00:00:00").getTime();
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       const DEFAULT_MEMORIES = [
@@ -1358,6 +1866,115 @@ I hope this little world always makes you smile, babu. Mwah!
         }
       ];
 
+      const DEFAULT_MOVIES = [
+        {
+          id: "before-sunrise",
+          title: "Before Sunrise",
+          status: "Watched Together",
+          tag: "Our First Movie",
+          note: "Two strangers talking till dawn in Vienna—where our movie nights first began."
+        },
+        {
+          id: "before-sunset",
+          title: "Before Sunset",
+          status: "Watched Together",
+          tag: "Second Chapter",
+          note: "Afternoon sunlight in Paris and every word left unsaid finally spoken."
+        },
+        {
+          id: "about-time",
+          title: "About Time",
+          status: "Cozy Watchlist",
+          tag: "Rainy Evening Pick",
+          note: "Living every ordinary day twice just to notice how sweet the small moments are."
+        },
+        {
+          id: "past-lives",
+          title: "Past Lives",
+          status: "Cozy Watchlist",
+          tag: "Quiet Romance",
+          note: "Saved for a late-night watch party with warm tea and blankets."
+        }
+      ];
+
+      const DEFAULT_DAILY_LETTERS = [
+        {
+          id: "today-note",
+          tag: "Today's Pocket Note",
+          title: "In case nobody told you today",
+          preview: "Tap the wax seal to unfold...",
+          body: "You are the softest, brightest part of my every single day, babu. Whatever today brings, you never have to carry it alone. Mwah!",
+          opened: false
+        },
+        {
+          id: "miss-me",
+          tag: "Open When",
+          title: "Open when you miss me",
+          preview: "Tap the wax seal to unfold...",
+          body: "Close your eyes for three seconds and picture me holding your hand. Even when miles sit between us, my heart is sitting right next to yours, chumopakhi.",
+          opened: false
+        },
+        {
+          id: "tired-day",
+          tag: "Open When",
+          title: "Open when you feel tired",
+          preview: "Tap the wax seal to unfold...",
+          body: "Put your shoulders down, take one slow breath, and let yourself rest, baby. You do not have to solve everything tonight—I am so proud of you.",
+          opened: false
+        },
+        {
+          id: "need-smile",
+          tag: "Open When",
+          title: "Open when you need a smile",
+          preview: "Tap the wax seal to unfold...",
+          body: "Reminder: Payesh and Melow are currently plotting to steal your pillow, and I am sending you ten forehead kisses in a row. Mwah, mwah, mwah!",
+          opened: false
+        },
+        {
+          id: "before-sleep",
+          tag: "Open When",
+          title: "Open right before sleep",
+          preview: "Tap the wax seal to unfold...",
+          body: "Goodnight, my baby. May your dreams be full of tulips, gentle sea otters holding paws, and the coziest sleep. I love you endlessly.",
+          opened: false
+        },
+        {
+          id: "ordinary-moment",
+          tag: "Little Reminder",
+          title: "Open on any ordinary afternoon",
+          preview: "Tap the wax seal to unfold...",
+          body: "Nothing special has to happen for me to be grateful for you. Just knowing you exist in this world makes ordinary days feel extraordinary, Tanha.",
+          opened: false
+        }
+      ];
+
+      const SECRET_DEFINITIONS = [
+        {
+          id: "monogram",
+          title: "Secret I · The Monogram",
+          hint: "Hint: Tap the tiny round TNN badge at the top-left of the navigation bar three times.",
+          message: "You found our initials! TNN — the three letters that turned an ordinary May day into my favorite story."
+        },
+        {
+          id: "guitar",
+          title: "Secret II · Midnight Melody",
+          hint: "Hint: Visit Our Cozy Home and strum the wooden acoustic guitar three times.",
+          message: "Every chord on that guitar was written with you in mind, chumopakhi—my favorite song will always be your laugh."
+        },
+        {
+          id: "tulips",
+          title: "Secret III · The Extra Bloom",
+          hint: "Hint: Plant at least 3 new tulips in The Flower Garden.",
+          message: "A whole meadow wouldn't be enough flowers for you, babu—thank you for making everything around you grow."
+        },
+        {
+          id: "otters",
+          title: "Secret IV · Holding Paws",
+          hint: "Hint: Tap Oliver or Olive in the Driftwood Lily Pond.",
+          message: "Just like sea otters holding paws so they never drift apart in their sleep—I'm always holding onto you, baby."
+        }
+      ];
+
       const DEFAULT_LETTER = `If I could keep one little corner of this enormous world just for us, it would look something like this.
 
 A cozy little home, a sleepy kitten, a thousand tulips and you.
@@ -1371,18 +1988,26 @@ I hope this little world always makes you smile, babu. Mwah!
         voiceRate: 0.96,
         voicePitch: 1.08,
         eveningMode: false,
+        hugCount: 1,
         memories: JSON.parse(JSON.stringify(DEFAULT_MEMORIES)),
+        movies: JSON.parse(JSON.stringify(DEFAULT_MOVIES)),
+        dailyLetters: JSON.parse(JSON.stringify(DEFAULT_DAILY_LETTERS)),
+        unlockedSecrets: [],
         letter: DEFAULT_LETTER,
         customTulips: []
       };
 
       try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        // Migrate from v2 if present
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || localStorage.getItem("kittenkeeps_tanha_v2") || "null");
         if (saved) {
           appState = {
             ...appState,
             ...saved,
-            memories: Array.isArray(saved.memories) && saved.memories.length ? saved.memories : appState.memories
+            memories: Array.isArray(saved.memories) && saved.memories.length ? saved.memories : appState.memories,
+            movies: Array.isArray(saved.movies) && saved.movies.length ? saved.movies : appState.movies,
+            dailyLetters: Array.isArray(saved.dailyLetters) && saved.dailyLetters.length ? saved.dailyLetters : appState.dailyLetters,
+            unlockedSecrets: Array.isArray(saved.unlockedSecrets) ? saved.unlockedSecrets : []
           };
         }
       } catch (_) {}
@@ -1392,6 +2017,81 @@ I hope this little world always makes you smile, babu. Mwah!
           localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
         } catch (_) {}
       }
+
+      /* =========================================================================
+         1B. LIVE TIME-TOGETHER COUNTER (SINCE MAY 24, 2024)
+      ========================================================================= */
+      const countDaysEl = document.getElementById("count-days");
+      const countHoursEl = document.getElementById("count-hours");
+      const countMinutesEl = document.getElementById("count-minutes");
+      const countSecondsEl = document.getElementById("count-seconds");
+
+      function updateTogetherCounter() {
+        const now = Date.now();
+        const diff = Math.max(0, now - START_DATE_MS);
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        if (countDaysEl) countDaysEl.textContent = String(days);
+        if (countHoursEl) countHoursEl.textContent = String(hours).padStart(2, "0");
+        if (countMinutesEl) countMinutesEl.textContent = String(minutes).padStart(2, "0");
+        if (countSecondsEl) countSecondsEl.textContent = String(seconds).padStart(2, "0");
+      }
+      updateTogetherCounter();
+      setInterval(updateTogetherCounter, 1000);
+
+      /* =========================================================================
+         1C. VIRTUAL HUG INTERACTION
+      ========================================================================= */
+      const HUG_LINES = [
+        "Close your eyes for a second, babu—this is a long, warm, tight hug just for you.",
+        "Wrapping both arms around my chumopakhi until every worry melts away. Mwah!",
+        "One big squeeze for my baby—remembering October 11 when we got to hug twice.",
+        "Consider yourself officially squished in the coziest hug in the universe, Tanha.",
+        "Holding you close right here in our little corner of the world, babu."
+      ];
+
+      const hugCounterDisplay = document.getElementById("hug-counter-display");
+      const hugQuoteEl = document.getElementById("hug-quote");
+      const hugPulseRing = document.getElementById("hug-pulse-ring");
+
+      function updateHugUI() {
+        if (hugCounterDisplay) hugCounterDisplay.textContent = String(appState.hugCount || 0);
+      }
+      updateHugUI();
+
+      function triggerVirtualHug(originX, originY) {
+        appState.hugCount = (appState.hugCount || 0) + 1;
+        persistState();
+        updateHugUI();
+
+        const line = HUG_LINES[appState.hugCount % HUG_LINES.length];
+        if (hugQuoteEl) hugQuoteEl.textContent = `“${line}”`;
+
+        if (hugPulseRing) {
+          hugPulseRing.classList.remove("active");
+          void hugPulseRing.offsetWidth;
+          hugPulseRing.classList.add("active");
+        }
+
+        spawnMwahBurst(originX, originY, 8);
+        spawnPetalBurst(originX, originY, 10);
+        speakGreeting("Sending you the warmest, tightest hug, my baby. Mwah!", 0.06);
+      }
+
+      document.getElementById("hero-hug-btn").addEventListener("click", (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        triggerVirtualHug(r.left + r.width * 0.5, r.top);
+        document.getElementById("our-place").scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
+      document.getElementById("sanctuary-hug-btn").addEventListener("click", (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        triggerVirtualHug(r.left + r.width * 0.5, r.top);
+      });
 
       /* =========================================================================
          2. AUDIO & SPOKEN GREETINGS ENGINE
@@ -1492,6 +2192,62 @@ I hope this little world always makes you smile, babu. Mwah!
       });
 
       /* =========================================================================
+         2B. LITTLE SECRETS UNLOCK & RENDER ENGINE
+      ========================================================================= */
+      const secretsGrid = document.getElementById("secrets-grid");
+      const secretsFoundCountEl = document.getElementById("secrets-found-count");
+      let monogramTapCount = 0;
+      let guitarStrumCount = 0;
+
+      function unlockSecret(secretId, clientX, clientY) {
+        if (!appState.unlockedSecrets.includes(secretId)) {
+          appState.unlockedSecrets.push(secretId);
+          persistState();
+          renderSecrets();
+          refreshLayoutZones();
+          const def = SECRET_DEFINITIONS.find(s => s.id === secretId);
+          if (def) {
+            spawnMwahBurst(clientX || window.innerWidth * 0.5, clientY || window.innerHeight * 0.35, 9);
+            spawnPetalBurst(clientX || window.innerWidth * 0.5, clientY || window.innerHeight * 0.35, 12);
+            speakGreeting(`You unlocked a secret keepsake, babu! ${def.message}`, 0.08);
+          }
+        }
+      }
+
+      function renderSecrets() {
+        if (!secretsGrid) return;
+        secretsGrid.innerHTML = "";
+        if (secretsFoundCountEl) {
+          secretsFoundCountEl.textContent = String(appState.unlockedSecrets.length);
+        }
+        SECRET_DEFINITIONS.forEach((sec) => {
+          const isUnlocked = appState.unlockedSecrets.includes(sec.id);
+          const card = document.createElement("article");
+          card.className = "secret-card" + (isUnlocked ? " unlocked" : "");
+          card.setAttribute("data-safe-text", "true");
+          card.innerHTML = `
+            <div class="secret-card-head">
+              <span class="secret-status">${isUnlocked ? "Unlocked Keepsake" : "Hidden Secret"}</span>
+              <span aria-hidden="true">${isUnlocked ? "✦" : "◈"}</span>
+            </div>
+            <h3>${escapeHtml(sec.title)}</h3>
+            <p class="secret-text">${escapeHtml(isUnlocked ? sec.message : sec.hint)}</p>
+          `;
+          secretsGrid.appendChild(card);
+        });
+      }
+      renderSecrets();
+
+      document.getElementById("secret-monogram-btn").addEventListener("click", (e) => {
+        monogramTapCount += 1;
+        const r = e.currentTarget.getBoundingClientRect();
+        spawnPetalBurst(r.left + 15, r.bottom + 8, 4);
+        if (monogramTapCount >= 3) {
+          unlockSecret("monogram", r.left + 15, r.bottom + 18);
+        }
+      });
+
+      /* =========================================================================
          3. COZY COUPLE'S HOME INTERACTIVE ROOM ENGINE
       ========================================================================= */
       const homeCanvas = document.getElementById("home-canvas");
@@ -1502,7 +2258,6 @@ I hope this little world always makes you smile, babu. Mwah!
       let homeH = 400;
       let teaSteamBoost = 1;
       let guitarStrumTimer = 0;
-      let hearthSparkTimer = 0;
       let cushionBounce = 0;
 
       function applyLampMode() {
@@ -1556,7 +2311,7 @@ I hope this little world always makes you smile, babu. Mwah!
           id: "bookshelf",
           nx: 0.48, ny: 0.30, r: 58,
           action: (cx, cy) => {
-            homeNoteEl.textContent = "“Our shelf of stories, poetry, and a tiny carved wooden cat—every chapter leads back to you, chumopakhi.”";
+            homeNoteEl.textContent = "“Our shelf of stories, poetry, and a tiny framed heart—every chapter leads back to you, chumopakhi.”";
             spawnMwahBurst(cx, cy, 4);
           }
         },
@@ -1578,9 +2333,13 @@ I hope this little world always makes you smile, babu. Mwah!
           nx: 0.13, ny: 0.68, r: 54,
           action: (cx, cy) => {
             guitarStrumTimer = 2.2;
+            guitarStrumCount += 1;
             homeNoteEl.textContent = "“Strumming a soft acoustic melody just for Tanha—every string sings for my chumopakhi.”";
             spawnMwahBurst(cx, cy, 5);
             speakGreeting("Playing a gentle melody just for you, chumopakhi. Mwah!", 0.06);
+            if (guitarStrumCount >= 3) {
+              unlockSecret("guitar", cx, cy);
+            }
           }
         },
         {
@@ -1617,7 +2376,6 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.fillStyle = wallGrad;
         homeCtx.fillRect(0, 0, homeW, homeH * 0.76);
 
-        // Wooden wainscoting paneling
         homeCtx.fillStyle = evening ? "#C7B49A" : "#E2D5C1";
         homeCtx.fillRect(0, homeH * 0.56, homeW, homeH * 0.2);
         homeCtx.strokeStyle = "rgba(161, 138, 112, 0.32)";
@@ -1634,7 +2392,6 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.fillStyle = floorGrad;
         homeCtx.fillRect(0, homeH * 0.76, homeW, homeH * 0.24);
 
-        // Floorboard lines
         homeCtx.strokeStyle = "rgba(81, 69, 56, 0.16)";
         homeCtx.lineWidth = 1;
         for (let fy = homeH * 0.81; fy < homeH; fy += 16) {
@@ -1644,7 +2401,7 @@ I hope this little world always makes you smile, babu. Mwah!
           homeCtx.stroke();
         }
 
-        // 3. Woven Oval Rug in Center
+        // 3. Woven Oval Rug
         homeCtx.save();
         homeCtx.fillStyle = evening ? "#D5C5B0" : "#EFE6D8";
         homeCtx.strokeStyle = "#C58E91";
@@ -1655,14 +2412,13 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.stroke();
         homeCtx.restore();
 
-        // 4. Wooden Picture Window (left)
+        // 4. Wooden Picture Window
         const winX = homeW * 0.21;
         const winY = homeH * 0.32;
         const winW = Math.min(138, homeW * 0.22);
         const winH = Math.min(148, homeH * 0.36);
 
         homeCtx.save();
-        // Sky view outside window
         const skyGrad = homeCtx.createLinearGradient(0, winY - winH / 2, 0, winY + winH / 2);
         if (evening) {
           skyGrad.addColorStop(0, "#4A5568");
@@ -1676,7 +2432,6 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.roundRect(winX - winW / 2, winY - winH / 2, winW, winH, 12);
         homeCtx.fill();
 
-        // Stars or drifting cloud outside window
         if (evening) {
           homeCtx.fillStyle = "#FFF7DC";
           [[-24, -32], [18, -38], [28, -14], [-15, -10]].forEach(([sx, sy]) => {
@@ -1694,7 +2449,6 @@ I hope this little world always makes you smile, babu. Mwah!
           homeCtx.fill();
         }
 
-        // Window sill tulips
         [-14, 0, 14].forEach((tx, idx) => {
           const sway = Math.sin(time * 1.6 + idx) * 2;
           homeCtx.strokeStyle = "#6C7D5E";
@@ -1709,7 +2463,6 @@ I hope this little world always makes you smile, babu. Mwah!
           homeCtx.fill();
         });
 
-        // Wooden window frame & crossbars
         homeCtx.strokeStyle = "#8E7358";
         homeCtx.lineWidth = 5;
         homeCtx.beginPath();
@@ -1724,19 +2477,17 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.stroke();
         homeCtx.restore();
 
-        // 5. Floating Wooden Bookshelf & Keepsakes (center-top)
+        // 5. Floating Wooden Bookshelf & Keepsakes
         const shelfX = homeW * 0.48;
         const shelfY = homeH * 0.34;
         const shelfW = Math.min(156, homeW * 0.25);
 
         homeCtx.save();
-        // Shelf plank
         homeCtx.fillStyle = "#9C7F61";
         homeCtx.beginPath();
         homeCtx.roundRect(shelfX - shelfW / 2, shelfY, shelfW, 8, 4);
         homeCtx.fill();
 
-        // Cute pastel/earthy books standing on shelf
         const books = [
           { x: -52, w: 11, h: 34, c: "#78866B" },
           { x: -39, w: 13, h: 38, c: "#C58E91" },
@@ -1750,7 +2501,6 @@ I hope this little world always makes you smile, babu. Mwah!
           homeCtx.fill();
         });
 
-        // Framed heart/couple mini portrait on shelf
         homeCtx.fillStyle = "#F7F3EB";
         homeCtx.strokeStyle = "#8E7358";
         homeCtx.lineWidth = 2.5;
@@ -1763,7 +2513,6 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.arc(shelfX + 23, shelfY - 16, 4.5, 0, Math.PI * 2);
         homeCtx.fill();
 
-        // Trailing pothos plant on right end of shelf
         homeCtx.fillStyle = "#C89D7C";
         homeCtx.beginPath();
         homeCtx.roundRect(shelfX + 44, shelfY - 18, 18, 18, 3);
@@ -1778,24 +2527,21 @@ I hope this little world always makes you smile, babu. Mwah!
         });
         homeCtx.restore();
 
-        // 6. Plush Couple's Linen Sofa (center)
+        // 6. Plush Couple's Linen Sofa
         const sofaX = homeW * 0.46;
         const sofaY = homeH * 0.69 + cushionBounce * 4;
         const sofaW = Math.min(230, homeW * 0.36);
 
         homeCtx.save();
-        // Sofa shadow
         homeCtx.fillStyle = "rgba(81, 69, 56, 0.14)";
         homeCtx.beginPath();
         homeCtx.ellipse(sofaX, sofaY + 34, sofaW * 0.52, 9, 0, 0, Math.PI * 2);
         homeCtx.fill();
 
-        // Wooden legs
         homeCtx.fillStyle = "#7C6248";
         homeCtx.fillRect(sofaX - sofaW * 0.42, sofaY + 20, 7, 13);
         homeCtx.fillRect(sofaX + sofaW * 0.42 - 7, sofaY + 20, 7, 13);
 
-        // Sofa backrest
         homeCtx.fillStyle = "#DFD4C3";
         homeCtx.strokeStyle = "#B8A58E";
         homeCtx.lineWidth = 1.5;
@@ -1804,7 +2550,6 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.fill();
         homeCtx.stroke();
 
-        // Cozy throw pillows (dusty pink & botanical green)
         homeCtx.fillStyle = "#C58E91";
         homeCtx.beginPath();
         homeCtx.roundRect(sofaX - sofaW * 0.34, sofaY - 24, 34, 28, 10);
@@ -1815,14 +2560,12 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.roundRect(sofaX + sofaW * 0.34 - 34, sofaY - 24, 34, 28, 10);
         homeCtx.fill();
 
-        // Sofa seat cushions & armrests
         homeCtx.fillStyle = "#EAE1D2";
         homeCtx.beginPath();
         homeCtx.roundRect(sofaX - sofaW * 0.48, sofaY - 4, sofaW * 0.96, 26, 12);
         homeCtx.fill();
         homeCtx.stroke();
 
-        // Armrests
         homeCtx.fillStyle = "#D8CCB9";
         homeCtx.beginPath();
         homeCtx.roundRect(sofaX - sofaW * 0.51, sofaY - 14, 20, 36, 10);
@@ -1830,7 +2573,7 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.fill();
         homeCtx.restore();
 
-        // 7. Wooden Acoustic Guitar Leaning on Left
+        // 7. Wooden Acoustic Guitar
         const gx = homeW * 0.13;
         const gy = homeH * 0.72;
         homeCtx.save();
@@ -1838,7 +2581,6 @@ I hope this little world always makes you smile, babu. Mwah!
         const strumWobble = guitarStrumTimer > 0 ? Math.sin(time * 36) * 0.04 : 0;
         homeCtx.rotate(-0.18 + strumWobble);
 
-        // Guitar neck & headstock
         homeCtx.fillStyle = "#7C5E42";
         homeCtx.fillRect(-3.5, -68, 7, 46);
         homeCtx.fillStyle = "#5B432E";
@@ -1846,7 +2588,6 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.roundRect(-5.5, -78, 11, 12, 3);
         homeCtx.fill();
 
-        // Guitar body (figure-8 warm spruce wood)
         homeCtx.fillStyle = "#C69463";
         homeCtx.strokeStyle = "#8C6239";
         homeCtx.lineWidth = 2;
@@ -1859,13 +2600,11 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.fill();
         homeCtx.stroke();
 
-        // Soundhole
         homeCtx.fillStyle = "#4A3625";
         homeCtx.beginPath();
         homeCtx.arc(0, -5, 6, 0, Math.PI * 2);
         homeCtx.fill();
 
-        // Musical notes floating when strummed!
         if (guitarStrumTimer > 0) {
           homeCtx.fillStyle = "#C58E91";
           homeCtx.font = "16px serif";
@@ -1874,11 +2613,10 @@ I hope this little world always makes you smile, babu. Mwah!
         }
         homeCtx.restore();
 
-        // 8. Round Wooden Coffee Table & Two Steaming Tea Mugs (center-right)
+        // 8. Round Wooden Coffee Table & Two Steaming Tea Mugs
         const tx = homeW * 0.72;
         const ty = homeH * 0.76;
         homeCtx.save();
-        // Table legs
         homeCtx.strokeStyle = "#8A6D50";
         homeCtx.lineWidth = 4;
         homeCtx.beginPath();
@@ -1888,13 +2626,11 @@ I hope this little world always makes you smile, babu. Mwah!
         homeCtx.lineTo(tx + 30, ty + 24);
         homeCtx.stroke();
 
-        // Tabletop
         homeCtx.fillStyle = "#B59674";
         homeCtx.beginPath();
         homeCtx.ellipse(tx, ty, 44, 11, 0, 0, Math.PI * 2);
         homeCtx.fill();
 
-        // Two ceramic mugs (cream & dusty rose)
         [
           { mx: tx - 14, color: "#FAF6EE" },
           { mx: tx + 12, color: "#D69E9F" }
@@ -1904,7 +2640,6 @@ I hope this little world always makes you smile, babu. Mwah!
           homeCtx.roundRect(mug.mx - 7, ty - 14, 14, 13, 3);
           homeCtx.fill();
 
-          // Rising steam wisps
           homeCtx.strokeStyle = `rgba(255, 255, 255, ${0.42 * Math.min(1.5, teaSteamBoost * 0.6)})`;
           homeCtx.lineWidth = 1.5;
           const steamOffset = (time * 18 * teaSteamBoost + idx * 10) % 22;
@@ -1915,18 +2650,16 @@ I hope this little world always makes you smile, babu. Mwah!
         });
         homeCtx.restore();
 
-        // 9. Warm Standing Floor Lamp (right)
+        // 9. Warm Standing Floor Lamp
         const lx = homeW * 0.86;
         const ly = homeH * 0.76;
         homeCtx.save();
-        // Lamp pole & base
         homeCtx.fillStyle = "#8A6D50";
         homeCtx.beginPath();
         homeCtx.ellipse(lx, ly + 8, 18, 5, 0, 0, Math.PI * 2);
         homeCtx.fill();
         homeCtx.fillRect(lx - 2.5, ly - 125, 5, 133);
 
-        // Warm ambient light cone when evening mode is active
         if (evening) {
           const glow = homeCtx.createRadialGradient(lx, ly - 125, 10, lx, ly - 95, 195);
           glow.addColorStop(0, "rgba(255, 214, 145, 0.52)");
@@ -1938,7 +2671,6 @@ I hope this little world always makes you smile, babu. Mwah!
           homeCtx.fill();
         }
 
-        // Pleated fabric lampshade
         homeCtx.fillStyle = evening ? "#FBE3B5" : "#F5EDE0";
         homeCtx.strokeStyle = "#B89D82";
         homeCtx.lineWidth = 1.5;
@@ -1977,8 +2709,116 @@ I hope this little world always makes you smile, babu. Mwah!
       });
 
       /* =========================================================================
-         4. RENDER MEMORIES & SURPRISE LETTER
+         4. RENDER MOVIES, DAILY LETTERS & MEMORIES
       ========================================================================= */
+      const moviesGrid = document.getElementById("movies-grid");
+      const moviesSummaryTag = document.getElementById("movies-summary-tag");
+
+      function renderMovies() {
+        if (!moviesGrid) return;
+        moviesGrid.innerHTML = "";
+        let watchedCount = 0;
+
+        appState.movies.forEach((mv) => {
+          const isWatched = mv.status === "Watched Together";
+          if (isWatched) watchedCount += 1;
+
+          const card = document.createElement("article");
+          card.className = "movie-card";
+          card.setAttribute("data-safe-text", "true");
+          card.innerHTML = `
+            <div>
+              <div class="movie-card-top">
+                <span class="movie-badge ${isWatched ? "" : "wishlist"}">${escapeHtml(mv.status)}</span>
+                <span style="font-size:0.76rem; color:var(--taupe);">${escapeHtml(mv.tag || "")}</span>
+              </div>
+              <h3>${escapeHtml(mv.title)}</h3>
+              <p class="movie-note" style="margin-top:8px;">${escapeHtml(mv.note)}</p>
+            </div>
+            <div class="movie-footer">
+              <button type="button" class="memory-edit-btn" data-toggle-movie="${escapeHtml(mv.id)}">
+                ${isWatched ? "Move to Watchlist" : "Mark Watched Together"}
+              </button>
+              <button type="button" class="memory-edit-btn" data-edit-movie="${escapeHtml(mv.id)}">Edit</button>
+            </div>
+          `;
+          moviesGrid.appendChild(card);
+        });
+
+        if (moviesSummaryTag) {
+          moviesSummaryTag.textContent = `${watchedCount} watched together · ${appState.movies.length} total films`;
+        }
+
+        moviesGrid.querySelectorAll("[data-toggle-movie]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-toggle-movie");
+            const mv = appState.movies.find(m => m.id === id);
+            if (mv) {
+              mv.status = mv.status === "Watched Together" ? "Cozy Watchlist" : "Watched Together";
+              persistState();
+              renderMovies();
+              if (mv.status === "Watched Together") {
+                const r = btn.getBoundingClientRect();
+                spawnMwahBurst(r.left + 40, r.top, 5);
+              }
+            }
+          });
+        });
+
+        moviesGrid.querySelectorAll("[data-edit-movie]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            openMovieEditor(btn.getAttribute("data-edit-movie"));
+          });
+        });
+      }
+      renderMovies();
+
+      // Daily Letters / Open-When Envelopes
+      const lettersGrid = document.getElementById("letters-grid");
+
+      function renderDailyLetters() {
+        if (!lettersGrid) return;
+        lettersGrid.innerHTML = "";
+        appState.dailyLetters.forEach((lt, idx) => {
+          const card = document.createElement("article");
+          card.className = "envelope-card" + (lt.opened ? " opened" : "");
+          card.setAttribute("role", "button");
+          card.setAttribute("tabindex", "0");
+          card.setAttribute("data-safe-text", "true");
+          card.innerHTML = `
+            <div class="wax-seal" aria-hidden="true">${lt.opened ? "♥" : (idx + 1)}</div>
+            <span class="envelope-tag">${escapeHtml(lt.tag)}</span>
+            <h3>${escapeHtml(lt.title)}</h3>
+            <p class="envelope-preview">${escapeHtml(lt.preview || "Tap the wax seal to unfold...")}</p>
+            <div class="envelope-body">${escapeHtml(lt.body)}</div>
+          `;
+
+          const toggleEnvelope = (e) => {
+            lt.opened = !lt.opened;
+            persistState();
+            renderDailyLetters();
+            refreshLayoutZones();
+            if (lt.opened) {
+              const rect = card.getBoundingClientRect();
+              spawnPetalBurst(rect.left + rect.width * 0.5, rect.top + 30, 8);
+              spawnMwahBurst(rect.left + rect.width * 0.5, rect.top + 30, 4);
+            }
+          };
+
+          card.addEventListener("click", toggleEnvelope);
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              toggleEnvelope(e);
+            }
+          });
+
+          lettersGrid.appendChild(card);
+        });
+      }
+      renderDailyLetters();
+
+      // Memories Section
       const memoriesGrid = document.getElementById("memories-grid");
       const photoFileInput = document.getElementById("photo-file-input");
       let pendingPhotoMemoryId = null;
@@ -2107,7 +2947,7 @@ I hope this little world always makes you smile, babu. Mwah!
       });
 
       /* =========================================================================
-         5. MODAL EDITOR (MEMORIES, LETTER, OPTIONAL AUDIO FILES)
+         5. MODAL EDITOR (MEMORIES, MOVIES, DAILY LETTERS, LETTER, AUDIO FILES)
       ========================================================================= */
       const modalBackdrop = document.getElementById("editor-modal");
       const modalTitle = document.getElementById("modal-title");
@@ -2124,6 +2964,100 @@ I hope this little world always makes you smile, babu. Mwah!
       modalCancel.addEventListener("click", closeModal);
       modalBackdrop.addEventListener("click", (e) => {
         if (e.target === modalBackdrop) closeModal();
+      });
+
+      function openMovieEditor(movieId) {
+        const existing = movieId ? appState.movies.find(m => m.id === movieId) : null;
+        modalTitle.textContent = existing ? `Edit "${existing.title}"` : "Add a Movie for Us";
+        modalDesc.textContent = "Save a film we watched together or add one to our cozy watchlist.";
+        modalBody.innerHTML = `
+          <div class="field-group">
+            <label for="edit-mv-title">Movie Title</label>
+            <input id="edit-mv-title" type="text" placeholder="e.g. Eternal Sunshine of the Spotless Mind" value="${escapeHtml(existing ? existing.title : "")}" />
+          </div>
+          <div class="field-group">
+            <label for="edit-mv-status">Status</label>
+            <select id="edit-mv-status">
+              <option value="Watched Together" ${existing && existing.status === "Watched Together" ? "selected" : ""}>Watched Together</option>
+              <option value="Cozy Watchlist" ${!existing || existing.status === "Cozy Watchlist" ? "selected" : ""}>Cozy Watchlist</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="edit-mv-tag">Small Label</label>
+            <input id="edit-mv-tag" type="text" placeholder="e.g. Late Night Watch Party" value="${escapeHtml(existing ? existing.tag : "Watch Party Pick")}" />
+          </div>
+          <div class="field-group">
+            <label for="edit-mv-note">Our Memory or Note</label>
+            <textarea id="edit-mv-note" placeholder="Write a sweet note about watching it together...">${escapeHtml(existing ? existing.note : "")}</textarea>
+          </div>
+        `;
+        activeSaveHandler = () => {
+          const titleVal = document.getElementById("edit-mv-title").value.trim();
+          if (!titleVal) return;
+          const statusVal = document.getElementById("edit-mv-status").value;
+          const tagVal = document.getElementById("edit-mv-tag").value.trim() || "Our Cinema";
+          const noteVal = document.getElementById("edit-mv-note").value.trim() || "Saved for a cozy evening together.";
+
+          if (existing) {
+            existing.title = titleVal;
+            existing.status = statusVal;
+            existing.tag = tagVal;
+            existing.note = noteVal;
+          } else {
+            appState.movies.push({
+              id: "mv_" + Date.now(),
+              title: titleVal,
+              status: statusVal,
+              tag: tagVal,
+              note: noteVal
+            });
+          }
+          persistState();
+          renderMovies();
+          refreshLayoutZones();
+          closeModal();
+        };
+        modalBackdrop.classList.add("open");
+      }
+
+      document.getElementById("add-movie-btn").addEventListener("click", () => openMovieEditor(null));
+
+      document.getElementById("add-daily-letter-btn").addEventListener("click", () => {
+        modalTitle.textContent = "Tuck a New Envelope Note";
+        modalDesc.textContent = "Create a new wax-sealed note for Tanha to unfold anytime.";
+        modalBody.innerHTML = `
+          <div class="field-group">
+            <label for="new-env-tag">Envelope Label</label>
+            <input id="new-env-tag" type="text" value="Open When" />
+          </div>
+          <div class="field-group">
+            <label for="new-env-title">Envelope Title</label>
+            <input id="new-env-title" type="text" placeholder="e.g. Open when it rains outside" />
+          </div>
+          <div class="field-group">
+            <label for="new-env-body">Letter Inside</label>
+            <textarea id="new-env-body" placeholder="Write your message for babu..."></textarea>
+          </div>
+        `;
+        activeSaveHandler = () => {
+          const tag = document.getElementById("new-env-tag").value.trim() || "Love Note";
+          const title = document.getElementById("new-env-title").value.trim();
+          const body = document.getElementById("new-env-body").value.trim();
+          if (!title || !body) return;
+          appState.dailyLetters.push({
+            id: "env_" + Date.now(),
+            tag,
+            title,
+            preview: "Tap the wax seal to unfold...",
+            body,
+            opened: false
+          });
+          persistState();
+          renderDailyLetters();
+          refreshLayoutZones();
+          closeModal();
+        };
+        modalBackdrop.classList.add("open");
       });
 
       function openMemoryEditor(memId) {
@@ -2256,7 +3190,6 @@ I hope this little world always makes you smile, babu. Mwah!
         ctx.save();
         ctx.translate(a.x, a.y);
 
-        // Soft ground contact shadow
         if (!isPeeking) {
           ctx.save();
           ctx.fillStyle = "rgba(81, 69, 56, 0.13)";
@@ -2266,12 +3199,10 @@ I hope this little world always makes you smile, babu. Mwah!
           ctx.restore();
         }
 
-        // Cute rear-facing "CAT BUTT" pose!
         if (isCatButt) {
           ctx.scale(s, s);
           const swish = Math.sin(time * 3.4 + a.seed) * 9;
 
-          // Ears peeking just over the top of the round head
           [-7, 7].forEach((ex, idx) => {
             ctx.save();
             ctx.translate(ex, -15);
@@ -2286,7 +3217,6 @@ I hope this little world always makes you smile, babu. Mwah!
             ctx.restore();
           });
 
-          // Back of head
           const headGrad = ctx.createRadialGradient(0, -10, 2, 0, -8, 13);
           headGrad.addColorStop(0, a.palette.light);
           headGrad.addColorStop(1, a.palette.mid);
@@ -2295,7 +3225,6 @@ I hope this little world always makes you smile, babu. Mwah!
           ctx.arc(0, -8, 11.5, 0, Math.PI * 2);
           ctx.fill();
 
-          // Plump, round fluffy hindquarters (the cat butt!)
           const buttGrad = ctx.createRadialGradient(-3, 2, 3, 0, 5, 19);
           buttGrad.addColorStop(0, a.palette.light);
           buttGrad.addColorStop(0.72, a.palette.mid);
@@ -2305,7 +3234,6 @@ I hope this little world always makes you smile, babu. Mwah!
           ctx.ellipse(0, 5, 16.5, 14.5, 0, 0, Math.PI * 2);
           ctx.fill();
 
-          // Two little tucked hind paws peeking at the bottom
           [-8.5, 8.5].forEach((px) => {
             ctx.fillStyle = a.palette.light;
             ctx.beginPath();
@@ -2316,7 +3244,6 @@ I hope this little world always makes you smile, babu. Mwah!
             ctx.stroke();
           });
 
-          // Cute little cat-butt star mark ('x' / '✦') right below the tail base
           ctx.strokeStyle = "#C58E91";
           ctx.lineWidth = 1.4;
           ctx.lineCap = "round";
@@ -2327,7 +3254,6 @@ I hope this little world always makes you smile, babu. Mwah!
           ctx.lineTo(-2.2, 9.5);
           ctx.stroke();
 
-          // Upright gracefully swishing tail rising from the top of the rump
           ctx.lineCap = "round";
           ctx.lineWidth = a.fluffy ? 7.5 : 5.8;
           ctx.strokeStyle = a.palette.accent;
@@ -2360,7 +3286,6 @@ I hope this little world always makes you smile, babu. Mwah!
           return;
         }
 
-        // Multi-segment smooth spline tail
         const tailWag = isSleeping
           ? Math.sin(time * 1.3 + a.seed) * 3
           : Math.sin(time * (a.state === "PLAYING" ? 6.5 : 3.1) + a.seed) * 11;
@@ -2382,7 +3307,6 @@ I hope this little world always makes you smile, babu. Mwah!
         ctx.stroke();
         ctx.restore();
 
-        // Back legs (squatted slightly if pooping!)
         if (!isSleeping) {
           [-10, -4].forEach((lx, i) => {
             const stride = (isSitting || isPooping) ? 0 : walkCycle * (i === 0 ? 5.5 : -5.5);
@@ -2393,7 +3317,6 @@ I hope this little world always makes you smile, babu. Mwah!
           });
         }
 
-        // Torso
         const bodyRx = isSleeping ? 23 : (isStretching ? 24 : ((isSitting || isPooping) ? 15.5 : 19));
         const bodyRy = isSleeping ? 12.5 : (isStretching ? 10.5 : ((isSitting || isPooping) ? 15.5 : 12.5 + breathe * 0.35));
         const bodyY = isSleeping ? 8 : (isPooping ? 6 : (isSitting ? 3 : 3 - Math.abs(walkCycle) * 1.2));
@@ -2517,7 +3440,6 @@ I hope this little world always makes you smile, babu. Mwah!
             ctx.lineCap = "round";
             ctx.beginPath();
             if (isPooping) {
-              // Concentrated > < eyes while pooping!
               ctx.moveTo(ex - 2, -2);
               ctx.lineTo(ex + 1, 0);
               ctx.lineTo(ex - 2, 2);
@@ -2545,7 +3467,6 @@ I hope this little world always makes you smile, babu. Mwah!
           }
         });
 
-        // Extra rosy blush when pooping or reacting!
         ctx.fillStyle = isPooping ? "rgba(197, 110, 115, 0.52)" : "rgba(197, 142, 145, 0.32)";
         ctx.beginPath();
         ctx.ellipse(-7.5, 3, 2.8, 1.7, 0, 0, Math.PI * 2);
@@ -2973,7 +3894,7 @@ I hope this little world always makes you smile, babu. Mwah!
 
       let safeRects = [];
       let perchTargets = [];
-      let docHeight = 3600;
+      let docHeight = 4200;
       let docWidth = window.innerWidth;
       const poops = [];
 
@@ -3001,13 +3922,11 @@ I hope this little world always makes you smile, babu. Mwah!
         ctx.translate(p.x, p.y);
         ctx.scale(pop, pop);
 
-        // Soft shadow
         ctx.fillStyle = "rgba(81, 69, 56, 0.14)";
         ctx.beginPath();
         ctx.ellipse(0, 5, 10, 3.2, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Three-tier storybook cocoa swirl
         ctx.fillStyle = "#7D5B42";
         ctx.beginPath();
         ctx.ellipse(0, 2.5, 8.5, 3.8, 0, 0, Math.PI * 2);
@@ -3025,13 +3944,11 @@ I hope this little world always makes you smile, babu. Mwah!
         ctx.closePath();
         ctx.fill();
 
-        // Comical tiny botanical leaf sprout on top so it's extra cute!
         ctx.fillStyle = "#78866B";
         ctx.beginPath();
         ctx.ellipse(3, -8.5, 3.5, 1.8, -0.4, 0, Math.PI * 2);
         ctx.fill();
 
-        // Gentle squiggly aroma line
         ctx.strokeStyle = "rgba(147, 132, 118, 0.45)";
         ctx.lineWidth = 1.1;
         const wiggle = Math.sin(time * 3 + p.seed) * 1.5;
@@ -3087,7 +4004,7 @@ I hope this little world always makes you smile, babu. Mwah!
       }
 
       const agents = LAND_ANIMALS.map((cfg, idx) => {
-        const startY = 180 + (idx * 310) % Math.max(1400, docHeight - 240);
+        const startY = 180 + (idx * 340) % Math.max(1600, docHeight - 240);
         const startX = (idx % 2 === 0 ? 0.16 : 0.84) * Math.max(340, window.innerWidth);
         return {
           ...cfg,
@@ -3213,7 +4130,6 @@ I hope this little world always makes you smile, babu. Mwah!
       }
 
       function updateAgents(dt, time) {
-        // Expire old poops automatically after 55 seconds so page stays tidy
         for (let i = poops.length - 1; i >= 0; i--) {
           if (time - poops[i].born > 55) {
             poops.splice(i, 1);
@@ -3248,7 +4164,6 @@ I hope this little world always makes you smile, babu. Mwah!
               } else {
                 const roll = Math.random();
                 if (roll < 0.08 && poops.length < 5) {
-                  // Occasional cute poop moment!
                   a.state = "POOPING";
                   a.stateTimer = 2.4;
                   a.didPoopThisCycle = false;
@@ -3293,10 +4208,8 @@ I hope this little world always makes you smile, babu. Mwah!
       function renderWorldCanvas(time) {
         worldCtx.clearRect(0, 0, docWidth, docHeight);
 
-        // Render any cute storybook poops on the ground
         poops.forEach((p) => drawCutePoop(worldCtx, p, time));
 
-        // Render animals sorted by Y coordinate
         const sorted = [...agents].sort((a, b) => a.y - b.y);
         sorted.forEach((a) => {
           if (a.species === "cat") drawStorybookCat(worldCtx, a, time);
@@ -3306,14 +4219,12 @@ I hope this little world always makes you smile, babu. Mwah!
       }
 
       function findHitWorldEntity(pageX, pageY) {
-        // Check animals first
         for (let i = agents.length - 1; i >= 0; i--) {
           const a = agents[i];
           if (Math.hypot(pageX - a.x, pageY - a.y) <= 38) {
             return { type: "animal", item: a };
           }
         }
-        // Check poops
         for (let i = poops.length - 1; i >= 0; i--) {
           const p = poops[i];
           if (Math.hypot(pageX - p.x, pageY - p.y) <= 28) {
@@ -3366,7 +4277,6 @@ I hope this little world always makes you smile, babu. Mwah!
         }
       }, { passive: true });
 
-      // Playful buttons in Their World
       document.getElementById("cat-butt-parade-btn").addEventListener("click", () => {
         const cats = agents.filter(a => a.species === "cat");
         const chosen = cats[Math.floor(Math.random() * cats.length)];
@@ -3788,6 +4698,10 @@ I hope this little world always makes you smile, babu. Mwah!
         const msg = showSpeechBubble(proxy);
         tryPlaySpeciesRecording(aq.species);
         speakGreeting(msg, 0.1);
+
+        if (aq.species === "otter") {
+          unlockSecret("otters", rect.left + px, rect.top + py);
+        }
       }
 
       pondCanvas.addEventListener("pointerdown", (e) => {
@@ -3850,6 +4764,7 @@ I hope this little world always makes you smile, babu. Mwah!
       const gardenCanvas = document.getElementById("garden-canvas");
       const gardenCtx = gardenCanvas.getContext("2d");
       const gardenMsgEl = document.getElementById("garden-message");
+      const flowerCountTag = document.getElementById("flower-count-tag");
       let gardenW = 800;
       let gardenH = 380;
       let windImpulse = 0;
@@ -3886,6 +4801,11 @@ I hope this little world always makes you smile, babu. Mwah!
       ];
 
       appState.customTulips.forEach((ct) => GARDEN_FLOWERS.push(ct));
+
+      function updateFlowerCountUI() {
+        if (flowerCountTag) flowerCountTag.textContent = `${GARDEN_FLOWERS.length} blooms`;
+      }
+      updateFlowerCountUI();
 
       function resizeGarden() {
         const rect = gardenCanvas.parentElement.getBoundingClientRect();
@@ -4050,7 +4970,7 @@ I hope this little world always makes you smile, babu. Mwah!
         spawnPetalBurst(rect.left + rect.width * 0.3, rect.top + rect.height * 0.4, 14);
       });
 
-      document.getElementById("plant-tulip-btn").addEventListener("click", () => {
+      document.getElementById("plant-tulip-btn").addEventListener("click", (e) => {
         const colors = ["#C58E91", "#D89B9E", "#DFB19A", "#CFA0A3"];
         const newTulip = {
           x: 0.14 + Math.random() * 0.72,
@@ -4063,7 +4983,13 @@ I hope this little world always makes you smile, babu. Mwah!
         GARDEN_FLOWERS.push(newTulip);
         appState.customTulips.push(newTulip);
         persistState();
+        updateFlowerCountUI();
         gardenMsgEl.textContent = "“A brand-new tulip planted just for my babu—may it always remind you how loved you are. Mwah!”";
+        const r = e.currentTarget.getBoundingClientRect();
+        spawnPetalBurst(r.left + 40, r.top, 8);
+        if (appState.customTulips.length >= 3) {
+          unlockSecret("tulips", r.left + 40, r.top);
+        }
       });
 
       /* =========================================================================
@@ -4145,7 +5071,6 @@ I hope this little world always makes you smile, babu. Mwah!
       function renderAmbient(dt, time) {
         ambientCtx.clearRect(0, 0, ambW, ambH);
 
-        // Floating "mwah!" kisses & hearts
         for (let i = mwahParticles.length - 1; i >= 0; i--) {
           const m = mwahParticles[i];
           m.x += (m.vx + Math.sin(time * 3 + i) * 10) * dt;
