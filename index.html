@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="description" content="Kittenkeeps — Just a little corner of the internet built for Tanha Naween Nawar." />
   <meta name="theme-color" content="#F5F1E9" />
-  <title>Kittenkeeps —our little words</title>
+  <title>Kittenkeeps — A Little World for Tanha</title>
 
   <!-- Editorial Storybook Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,9 +26,7 @@
       --pink-soft: #DFB7B9;
       --wood: #A18A70;
       --wood-light: #C8B69E;
-      --water-top: #DCE6E2;
-      --water-deep: #BFD2CC;
-      --shadow-warm: rgba(81, 69, 56, 0.08);
+      --amber-glow: rgba(235, 184, 118, 0.24);
       --shadow-card: 0 14px 36px rgba(81, 69, 56, 0.07);
       --border-hairline: rgba(161, 138, 112, 0.28);
       --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -65,6 +63,14 @@
         radial-gradient(circle at 20% 62%, rgba(161, 138, 112, 0.08) 0%, transparent 45%),
         radial-gradient(circle at 82% 85%, rgba(197, 142, 145, 0.07) 0%, transparent 40%);
       overflow-x: hidden;
+      transition: background-color 0.6s ease;
+    }
+
+    body.cozy-evening {
+      background-color: #EFE6D8;
+      background-image:
+        radial-gradient(circle at 50% 24%, rgba(232, 178, 110, 0.16) 0%, transparent 55%),
+        radial-gradient(circle at 15% 70%, rgba(197, 142, 145, 0.1) 0%, transparent 45%);
     }
 
     /* Subtle warm storybook paper grain */
@@ -79,25 +85,25 @@
       background-size: 14px 14px;
     }
 
-    /* Global Living World Canvas (spans full document height) */
+    /* Global Living World Canvas (Animals + Cute Poops across the page) */
     #world-canvas {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      pointer-events: none; /* Dynamically toggled to auto only when hovering/touching an animal */
+      pointer-events: none;
       z-index: 45;
       touch-action: manipulation;
     }
 
-    /* Ambient Petals & Butterflies Layer */
+    /* Ambient Petals, Butterflies & Floating Mwah Kisses */
     #ambient-canvas {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 35;
+      z-index: 75;
     }
 
     /* Floating Speech Bubble Layer */
@@ -107,16 +113,16 @@
       left: 0;
       width: 100%;
       pointer-events: none;
-      z-index: 60;
+      z-index: 65;
     }
 
     .animal-bubble {
       position: absolute;
       transform: translate(-50%, -100%);
-      max-width: min(260px, 74vw);
-      background: rgba(245, 241, 233, 0.96);
+      max-width: min(265px, 76vw);
+      background: rgba(245, 241, 233, 0.97);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(161, 138, 112, 0.42);
+      border: 1px solid rgba(161, 138, 112, 0.45);
       border-radius: 18px;
       padding: 10px 14px;
       box-shadow: 0 10px 26px rgba(81, 69, 56, 0.12);
@@ -135,9 +141,9 @@
       left: 50%;
       width: 11px;
       height: 11px;
-      background: rgba(245, 241, 233, 0.96);
-      border-right: 1px solid rgba(161, 138, 112, 0.42);
-      border-bottom: 1px solid rgba(161, 138, 112, 0.42);
+      background: rgba(245, 241, 233, 0.97);
+      border-right: 1px solid rgba(161, 138, 112, 0.45);
+      border-bottom: 1px solid rgba(161, 138, 112, 0.45);
       transform: translateX(-50%) rotate(45deg);
     }
 
@@ -166,8 +172,8 @@
     .site-nav {
       position: sticky;
       top: 14px;
-      z-index: 80;
-      max-width: 920px;
+      z-index: 85;
+      max-width: 980px;
       margin: 0 auto;
       padding: 0 16px;
     }
@@ -177,9 +183,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 10px 18px;
-      background: rgba(245, 241, 233, 0.86);
+      gap: 10px;
+      padding: 9px 16px;
+      background: rgba(245, 241, 233, 0.88);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border-hairline);
       border-radius: var(--radius-pill);
@@ -216,16 +222,16 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 15px;
       list-style: none;
     }
 
     .nav-links a {
       text-decoration: none;
       color: var(--brown-soft);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       letter-spacing: 0.02em;
-      padding: 6px 4px;
+      padding: 6px 3px;
       transition: color 0.25s ease;
     }
 
@@ -238,7 +244,7 @@
     .nav-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
 
     .icon-btn {
@@ -246,15 +252,15 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      min-width: 40px;
-      height: 40px;
+      min-width: 38px;
+      height: 38px;
       padding: 0 12px;
       border-radius: var(--radius-pill);
       border: 1px solid var(--border-hairline);
       background: var(--cream);
       color: var(--brown);
       font-family: var(--font-sans);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       cursor: pointer;
       transition: transform 0.2s ease, background-color 0.25s ease, border-color 0.25s ease;
     }
@@ -273,12 +279,24 @@
       color: var(--green-deep);
     }
 
-    @media (max-width: 720px) {
+    .mwah-btn {
+      border-color: rgba(197, 142, 145, 0.55);
+      background: rgba(197, 142, 145, 0.14);
+      color: #8E5458;
+      font-weight: 500;
+    }
+
+    .mwah-btn:hover {
+      background: rgba(197, 142, 145, 0.24);
+      border-color: var(--pink);
+    }
+
+    @media (max-width: 820px) {
       .nav-links {
         display: none;
       }
       .nav-pill {
-        padding: 8px 14px;
+        padding: 8px 12px;
       }
     }
 
@@ -292,13 +310,13 @@
       position: relative;
       max-width: 1040px;
       margin: 0 auto;
-      padding: clamp(64px, 10vw, 118px) 22px;
+      padding: clamp(60px, 9vw, 110px) 22px;
     }
 
     .section-header {
       text-align: center;
-      max-width: 640px;
-      margin: 0 auto 44px;
+      max-width: 650px;
+      margin: 0 auto 42px;
     }
 
     .eyebrow {
@@ -393,8 +411,8 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding-top: 48px;
-      padding-bottom: 96px;
+      padding-top: 44px;
+      padding-bottom: 90px;
     }
 
     .hero-frame {
@@ -402,7 +420,7 @@
       max-width: 720px;
       padding: clamp(36px, 6vw, 64px) clamp(24px, 5vw, 56px);
       border-radius: 32px;
-      background: rgba(242, 235, 221, 0.62);
+      background: rgba(242, 235, 221, 0.65);
       border: 1px solid var(--border-hairline);
       box-shadow: var(--shadow-card);
     }
@@ -413,7 +431,7 @@
       gap: 10px;
       padding: 6px 16px;
       border-radius: var(--radius-pill);
-      background: rgba(245, 241, 233, 0.9);
+      background: rgba(245, 241, 233, 0.92);
       border: 1px solid var(--border-hairline);
       font-size: 0.78rem;
       letter-spacing: 0.16em;
@@ -434,6 +452,14 @@
       color: var(--brown-soft);
       white-space: pre-line;
       margin-bottom: 34px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
 
     .hero-hint {
@@ -480,6 +506,66 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--green-deep);
+    }
+
+    /* 2B. COZY COUPLE'S HOME SECTION */
+    .home-stage {
+      background: var(--cream);
+      border: 1px solid var(--border-hairline);
+      border-radius: 30px;
+      padding: clamp(20px, 3.5vw, 34px);
+      box-shadow: var(--shadow-card);
+      transition: box-shadow 0.5s ease, background-color 0.5s ease;
+    }
+
+    body.cozy-evening .home-stage {
+      box-shadow: 0 18px 46px rgba(176, 124, 64, 0.16);
+    }
+
+    .home-canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: clamp(340px, 48vw, 450px);
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(161, 138, 112, 0.34);
+      background: #EFE7D9;
+    }
+
+    #home-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .home-readout {
+      margin-top: 18px;
+      padding: 16px 20px;
+      border-radius: 18px;
+      background: rgba(245, 241, 233, 0.92);
+      border: 1px solid var(--border-hairline);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .home-note-text {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--brown);
+      flex: 1;
+      min-width: 230px;
+    }
+
+    .home-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     /* 3. Living Animal World & Habitat */
@@ -588,6 +674,17 @@
       background: rgba(245, 241, 233, 0.95);
     }
 
+    .world-play-bar {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-hairline);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
     /* 4. Botanical Garden */
     .garden-stage {
       position: relative;
@@ -655,13 +752,14 @@
       font-family: var(--font-sans);
       font-size: 0.8rem;
       cursor: pointer;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
     }
 
     .btn-subtle:hover,
     .btn-subtle:focus-visible {
       background: var(--paper);
       border-color: var(--green);
+      transform: translateY(-1px);
       outline: none;
     }
 
@@ -981,10 +1079,10 @@
 </head>
 <body>
 
-  <!-- Ambient Petals & Butterflies Layer -->
+  <!-- Ambient Petals, Butterflies & Floating Mwah Kisses Layer -->
   <canvas id="ambient-canvas" aria-hidden="true"></canvas>
 
-  <!-- Living Roaming Animals Layer (Cats, Dogs, Capybaras across the entire page) -->
+  <!-- Living Roaming Animals & Cute Poops Layer -->
   <canvas id="world-canvas" aria-label="Interactive animals roaming across Kittenkeeps"></canvas>
 
   <!-- Floating Animal Speech Bubbles -->
@@ -1000,13 +1098,21 @@
 
       <ul class="nav-links">
         <li><a href="#our-place">Our Place</a></li>
+        <li><a href="#cozy-home">Cozy Home</a></li>
         <li><a href="#their-world">Their World</a></li>
-        <li><a href="#garden">Flower Garden</a></li>
+        <li><a href="#garden">Garden</a></li>
         <li><a href="#memories">Memories</a></li>
-        <li><a href="#letter">For You</a></li>
+        <li><a href="#surprise">For You</a></li>
       </ul>
 
       <div class="nav-controls">
+        <button id="send-mwah-btn" class="icon-btn mwah-btn" type="button" title="Send a sweet mwah kiss">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span>Mwah!</span>
+        </button>
+
         <button id="toggle-voice" class="icon-btn" type="button" aria-pressed="true" title="Toggle spoken animal greetings">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -1024,7 +1130,7 @@
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-frame" data-safe-text="true">
         <div class="hero-monogram">
-          <span>mwah</span>
+          <span>For My Chumopakhi</span>
           <span aria-hidden="true">·</span>
           <span>Est. May 24, 2024</span>
         </div>
@@ -1033,13 +1139,15 @@
 
         <p class="hero-subtitle">Some things deserve a place of their own.
 This little place is one of them.
-I love you mwah.</p>
+I love you, babu.</p>
 
-        <a href="#our-place" class="btn-storybook" data-perch="button">
-          <span>COME INSIDE</span>
-        </a>
+        <div class="hero-cta-row">
+          <a href="#cozy-home" class="btn-storybook" data-perch="button">
+            <span>COME INSIDE</span>
+          </a>
+        </div>
 
-        <p class="hero-hint">Tap any kitten, puppy, capybara, otter, seal, or flower along the way.</p>
+        <p class="hero-hint">Tap any kitten, cat butt, puppy, capybara, otter, seal, cozy home item, or flower along the way.</p>
       </div>
     </section>
 
@@ -1057,7 +1165,31 @@ I love you mwah.</p>
         <p class="intro-body">Among all the places in this world, I wanted to create one that feels a little more like home.
 
 A place for memories, little moments, photographs and everything that words sometimes cannot explain.</p>
-        <p class="intro-signature">Dedicated to Tanha Naween Nawar · My Kitten</p>
+        <p class="intro-signature">Dedicated to Tanha Naween Nawar · My Baby · My Chumopakhi</p>
+      </div>
+    </section>
+
+    <!-- 2B. COZY COUPLE'S HOME SECTION -->
+    <section id="cozy-home" aria-labelledby="home-heading">
+      <div class="section-header" data-safe-text="true">
+        <span class="eyebrow">Warm Wood, Soft Cushions &amp; Morning Tea</span>
+        <h2 id="home-heading">Our little cozy home.</h2>
+        <p class="section-subtitle">Step inside our dream corner, baby. Tap the warm floor lamp, the steaming tea mugs, the acoustic guitar, the plush sofa, the bookshelf, or the tulip window to explore.</p>
+      </div>
+
+      <div class="home-stage">
+        <div class="home-canvas-wrap">
+          <canvas id="home-canvas" aria-label="Interactive cozy couple living room with fireplace, sofa, tea table, guitar, bookshelf, and window"></canvas>
+        </div>
+
+        <div class="home-readout">
+          <p class="home-note-text" id="home-note-text">“Welcome home, babu. Kick off your shoes—Payesh and Melow already warmed up the cushions for you. Mwah!”</p>
+          <div class="home-controls">
+            <button type="button" class="btn-subtle" id="toggle-lamp-btn">Switch to Evening Glow</button>
+            <button type="button" class="btn-subtle" id="brew-tea-btn">Brew Warm Tea</button>
+            <button type="button" class="btn-subtle" id="home-mwah-btn">Give a Mwah</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1066,7 +1198,7 @@ A place for memories, little moments, photographs and everything that words some
       <div class="section-header" data-safe-text="true">
         <span class="eyebrow">Fourteen Little Companions</span>
         <h2 id="world-heading">Welcome to their world.</h2>
-        <p class="section-subtitle">They have been waiting to meet you. While Payesh, Melow, Mochi, Snowy, Pumpkin, Miso, Biscuit, Teddy, Coco, and Mochaccino wander freely across the whole page, Oliver, Olive, Pebble, and Bubbles love the quiet pond below.</p>
+        <p class="section-subtitle">They have been waiting to meet you, chumopakhi. Payesh, Melow, Mochi, Snowy, Pumpkin, Miso, Biscuit, Teddy, Coco, and Mochaccino roam across the whole page (and occasionally leave tiny poops or show off their fluffy cat butts!), while Oliver, Olive, Pebble, and Bubbles splash in the pond below.</p>
       </div>
 
       <div class="habitat-stage">
@@ -1079,8 +1211,13 @@ A place for memories, little moments, photographs and everything that words some
         </div>
 
         <div class="resident-bar">
-          <p class="resident-bar-label">Call a friend over to say hello to Tanha:</p>
+          <p class="resident-bar-label">Call a friend over to say hello to babu:</p>
           <div class="resident-chips" id="resident-chips" role="group" aria-label="Call an animal"></div>
+        </div>
+
+        <div class="world-play-bar">
+          <button type="button" class="btn-subtle" id="cat-butt-parade-btn">Fluffy Cat Butt Pose</button>
+          <button type="button" class="btn-subtle" id="scoop-poops-btn">Tidy Up Little Poops (<span id="poop-count">0</span>)</button>
         </div>
       </div>
     </section>
@@ -1099,7 +1236,7 @@ A place for memories, little moments, photographs and everything that words some
         </div>
 
         <div class="garden-note-box">
-          <p class="garden-message" id="garden-message">“A tulip for you, Tanha. A little reminder that beautiful things bloom in their own time.”</p>
+          <p class="garden-message" id="garden-message">“A tulip for you, babu. A little reminder that beautiful things bloom in their own time.”</p>
           <div class="garden-actions">
             <button type="button" class="btn-subtle" id="plant-tulip-btn">+ Plant a Tulip</button>
             <button type="button" class="btn-subtle" id="breeze-btn">Send a Gentle Breeze</button>
@@ -1124,19 +1261,19 @@ A place for memories, little moments, photographs and everything that words some
       <div class="surprise-box" data-safe-text="true">
         <span class="eyebrow">A Note Kept Safe</span>
         <h2 id="surprise-heading">Just for you.</h2>
-        <p class="section-subtitle" style="margin-bottom: 28px;">Whenever you need a quiet reminder of how deeply you are loved.</p>
+        <p class="section-subtitle" style="margin-bottom: 28px;">Whenever you need a quiet reminder of how deeply you are loved, baby.</p>
 
         <button type="button" class="btn-storybook" id="open-surprise-btn" data-perch="button">
           <span>OPEN YOUR SURPRISE</span>
         </button>
 
         <div class="letter-reveal" id="letter-reveal" role="region" aria-label="Personal letter for Tanha">
-          <p class="letter-salutation">My dearest Tanha,</p>
+          <p class="letter-salutation">My dearest Tanha, my chumopakhi,</p>
           <div class="letter-content" id="letter-content">If I could keep one little corner of this enormous world just for us, it would look something like this.
 
-A little garden, a sleepy kitten, a thousand flowers and you.
+A cozy little home, a sleepy kitten, a thousand tulips and you.
 
-I hope this little world always makes you smile.
+I hope this little world always makes you smile, babu. Mwah!
 
 — Yours.</div>
           <div class="letter-actions">
@@ -1149,7 +1286,7 @@ I hope this little world always makes you smile.
 
   <!-- 7. FOOTER -->
   <footer data-safe-text="true">
-    <p class="footer-line-1">MADE WITH LOVE · JUST FOR YOU, MY BABY</p>
+    <p class="footer-line-1">MADE WITH LOVE · JUST FOR YOU, MY BABY · MWAH</p>
     <p class="footer-line-2">KITTENKEEPS · EST. 2024</p>
   </footer>
 
@@ -1183,7 +1320,7 @@ I hope this little world always makes you smile.
       /* =========================================================================
          1. STORAGE & PERSONALIZED STATE
       ========================================================================= */
-      const STORAGE_KEY = "kittenkeeps_tanha_v1";
+      const STORAGE_KEY = "kittenkeeps_tanha_v2";
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       const DEFAULT_MEMORIES = [
@@ -1223,9 +1360,9 @@ I hope this little world always makes you smile.
 
       const DEFAULT_LETTER = `If I could keep one little corner of this enormous world just for us, it would look something like this.
 
-A little garden, a sleepy kitten, a thousand flowers and you.
+A cozy little home, a sleepy kitten, a thousand tulips and you.
 
-I hope this little world always makes you smile.
+I hope this little world always makes you smile, babu. Mwah!
 
 — Yours.`;
 
@@ -1233,6 +1370,7 @@ I hope this little world always makes you smile.
         voiceEnabled: true,
         voiceRate: 0.96,
         voicePitch: 1.08,
+        eveningMode: false,
         memories: JSON.parse(JSON.stringify(DEFAULT_MEMORIES)),
         letter: DEFAULT_LETTER,
         customTulips: []
@@ -1257,9 +1395,6 @@ I hope this little world always makes you smile.
 
       /* =========================================================================
          2. AUDIO & SPOKEN GREETINGS ENGINE
-            - Speaks warm greetings via Web Speech API (optional, toggleable).
-            - Also supports real audio files if placed in ./sounds/<species>.mp3
-              or attached locally in the Studio drawer, without ever faking beeps.
       ========================================================================= */
       const customAudioUrls = {
         cat: null,
@@ -1357,7 +1492,492 @@ I hope this little world always makes you smile.
       });
 
       /* =========================================================================
-         3. RENDER MEMORIES & SURPRISE LETTER
+         3. COZY COUPLE'S HOME INTERACTIVE ROOM ENGINE
+      ========================================================================= */
+      const homeCanvas = document.getElementById("home-canvas");
+      const homeCtx = homeCanvas.getContext("2d");
+      const homeNoteEl = document.getElementById("home-note-text");
+      const toggleLampBtn = document.getElementById("toggle-lamp-btn");
+      let homeW = 900;
+      let homeH = 400;
+      let teaSteamBoost = 1;
+      let guitarStrumTimer = 0;
+      let hearthSparkTimer = 0;
+      let cushionBounce = 0;
+
+      function applyLampMode() {
+        document.body.classList.toggle("cozy-evening", appState.eveningMode);
+        toggleLampBtn.textContent = appState.eveningMode ? "Switch to Morning Sun" : "Switch to Evening Glow";
+      }
+      applyLampMode();
+
+      toggleLampBtn.addEventListener("click", () => {
+        appState.eveningMode = !appState.eveningMode;
+        persistState();
+        applyLampMode();
+        homeNoteEl.textContent = appState.eveningMode
+          ? "“Evening lantern glow on—the coziest light in the world just for you and me, baby. Mwah!”"
+          : "“Morning sunlight pouring through the tulip window—good morning, my chumopakhi!”";
+      });
+
+      document.getElementById("brew-tea-btn").addEventListener("click", () => {
+        teaSteamBoost = 2.6;
+        homeNoteEl.textContent = "“Fresh warm tea brewed for two—one mug for my babu, and one right beside yours.”";
+        speakGreeting("Fresh warm tea brewed for two, babu. Mwah!", 0.06);
+      });
+
+      document.getElementById("home-mwah-btn").addEventListener("click", () => {
+        const rect = homeCanvas.getBoundingClientRect();
+        spawnMwahBurst(rect.left + rect.width * 0.5, rect.top + rect.height * 0.45, 7);
+        homeNoteEl.textContent = "“Mwah! A soft kiss right on your forehead, my baby chumopakhi.”";
+        speakGreeting("Mwah! A soft kiss just for you, my baby chumopakhi.", 0.08);
+      });
+
+      function resizeHome() {
+        const rect = homeCanvas.parentElement.getBoundingClientRect();
+        homeW = Math.max(280, rect.width);
+        homeH = Math.max(300, rect.height);
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        homeCanvas.width = homeW * dpr;
+        homeCanvas.height = homeH * dpr;
+        homeCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      const HOME_HOTSPOTS = [
+        {
+          id: "window",
+          nx: 0.21, ny: 0.34, r: 62,
+          action: (cx, cy) => {
+            homeNoteEl.textContent = "“Looking out our wooden window at our blooming tulips—every view is prettier with you, babu.”";
+            spawnPetalBurst(cx, cy, 8);
+          }
+        },
+        {
+          id: "bookshelf",
+          nx: 0.48, ny: 0.30, r: 58,
+          action: (cx, cy) => {
+            homeNoteEl.textContent = "“Our shelf of stories, poetry, and a tiny carved wooden cat—every chapter leads back to you, chumopakhi.”";
+            spawnMwahBurst(cx, cy, 4);
+          }
+        },
+        {
+          id: "lamp",
+          nx: 0.84, ny: 0.36, r: 58,
+          action: (cx, cy) => {
+            appState.eveningMode = !appState.eveningMode;
+            persistState();
+            applyLampMode();
+            homeNoteEl.textContent = appState.eveningMode
+              ? "“Warm amber lamp lit—curled up together at home, baby. Mwah!”"
+              : "“Soft daylight filling our living room—morning kisses for my babu!”";
+            spawnPetalBurst(cx, cy, 6);
+          }
+        },
+        {
+          id: "guitar",
+          nx: 0.13, ny: 0.68, r: 54,
+          action: (cx, cy) => {
+            guitarStrumTimer = 2.2;
+            homeNoteEl.textContent = "“Strumming a soft acoustic melody just for Tanha—every string sings for my chumopakhi.”";
+            spawnMwahBurst(cx, cy, 5);
+            speakGreeting("Playing a gentle melody just for you, chumopakhi. Mwah!", 0.06);
+          }
+        },
+        {
+          id: "sofa",
+          nx: 0.46, ny: 0.66, r: 85,
+          action: (cx, cy) => {
+            cushionBounce = 1.0;
+            homeNoteEl.textContent = "“Our plush linen sofa with soft throw pillows—saved the spot right next to me for you, baby. Mwah!”";
+            spawnMwahBurst(cx, cy, 6);
+          }
+        },
+        {
+          id: "tea",
+          nx: 0.72, ny: 0.73, r: 56,
+          action: (cx, cy) => {
+            teaSteamBoost = 2.6;
+            homeNoteEl.textContent = "“Two warm ceramic mugs steaming on our wooden coffee table—cozy evenings with my babu.”";
+            spawnPetalBurst(cx, cy, 6);
+          }
+        }
+      ];
+
+      function renderHomeRoom(dt, time) {
+        homeCtx.clearRect(0, 0, homeW, homeH);
+        const evening = appState.eveningMode;
+        teaSteamBoost = Math.max(1, teaSteamBoost - dt * 0.45);
+        guitarStrumTimer = Math.max(0, guitarStrumTimer - dt);
+        cushionBounce *= Math.pow(0.08, dt);
+
+        // 1. Cozy Wall & Wainscoting
+        const wallGrad = homeCtx.createLinearGradient(0, 0, 0, homeH * 0.76);
+        wallGrad.addColorStop(0, evening ? "#DFD2BF" : "#F5EFE4");
+        wallGrad.addColorStop(1, evening ? "#D0C0A9" : "#EAE0D0");
+        homeCtx.fillStyle = wallGrad;
+        homeCtx.fillRect(0, 0, homeW, homeH * 0.76);
+
+        // Wooden wainscoting paneling
+        homeCtx.fillStyle = evening ? "#C7B49A" : "#E2D5C1";
+        homeCtx.fillRect(0, homeH * 0.56, homeW, homeH * 0.2);
+        homeCtx.strokeStyle = "rgba(161, 138, 112, 0.32)";
+        homeCtx.lineWidth = 1.5;
+        homeCtx.beginPath();
+        homeCtx.moveTo(0, homeH * 0.56);
+        homeCtx.lineTo(homeW, homeH * 0.56);
+        homeCtx.stroke();
+
+        // 2. Warm Honey-Oak Hardwood Floor
+        const floorGrad = homeCtx.createLinearGradient(0, homeH * 0.76, 0, homeH);
+        floorGrad.addColorStop(0, evening ? "#9E8366" : "#C5AD8E");
+        floorGrad.addColorStop(1, evening ? "#7E654B" : "#AE9474");
+        homeCtx.fillStyle = floorGrad;
+        homeCtx.fillRect(0, homeH * 0.76, homeW, homeH * 0.24);
+
+        // Floorboard lines
+        homeCtx.strokeStyle = "rgba(81, 69, 56, 0.16)";
+        homeCtx.lineWidth = 1;
+        for (let fy = homeH * 0.81; fy < homeH; fy += 16) {
+          homeCtx.beginPath();
+          homeCtx.moveTo(0, fy);
+          homeCtx.lineTo(homeW, fy);
+          homeCtx.stroke();
+        }
+
+        // 3. Woven Oval Rug in Center
+        homeCtx.save();
+        homeCtx.fillStyle = evening ? "#D5C5B0" : "#EFE6D8";
+        homeCtx.strokeStyle = "#C58E91";
+        homeCtx.lineWidth = 2.5;
+        homeCtx.beginPath();
+        homeCtx.ellipse(homeW * 0.5, homeH * 0.88, homeW * 0.34, homeH * 0.085, 0, 0, Math.PI * 2);
+        homeCtx.fill();
+        homeCtx.stroke();
+        homeCtx.restore();
+
+        // 4. Wooden Picture Window (left)
+        const winX = homeW * 0.21;
+        const winY = homeH * 0.32;
+        const winW = Math.min(138, homeW * 0.22);
+        const winH = Math.min(148, homeH * 0.36);
+
+        homeCtx.save();
+        // Sky view outside window
+        const skyGrad = homeCtx.createLinearGradient(0, winY - winH / 2, 0, winY + winH / 2);
+        if (evening) {
+          skyGrad.addColorStop(0, "#4A5568");
+          skyGrad.addColorStop(1, "#8D7B88");
+        } else {
+          skyGrad.addColorStop(0, "#DCE8EC");
+          skyGrad.addColorStop(1, "#F4EFE4");
+        }
+        homeCtx.fillStyle = skyGrad;
+        homeCtx.beginPath();
+        homeCtx.roundRect(winX - winW / 2, winY - winH / 2, winW, winH, 12);
+        homeCtx.fill();
+
+        // Stars or drifting cloud outside window
+        if (evening) {
+          homeCtx.fillStyle = "#FFF7DC";
+          [[-24, -32], [18, -38], [28, -14], [-15, -10]].forEach(([sx, sy]) => {
+            homeCtx.beginPath();
+            homeCtx.arc(winX + sx, winY + sy, 1.6, 0, Math.PI * 2);
+            homeCtx.fill();
+          });
+        } else {
+          const cloudShift = Math.sin(time * 0.4) * 8;
+          homeCtx.fillStyle = "rgba(255, 255, 255, 0.78)";
+          homeCtx.beginPath();
+          homeCtx.arc(winX - 10 + cloudShift, winY - 22, 12, 0, Math.PI * 2);
+          homeCtx.arc(winX + 4 + cloudShift, winY - 24, 14, 0, Math.PI * 2);
+          homeCtx.arc(winX + 18 + cloudShift, winY - 21, 10, 0, Math.PI * 2);
+          homeCtx.fill();
+        }
+
+        // Window sill tulips
+        [-14, 0, 14].forEach((tx, idx) => {
+          const sway = Math.sin(time * 1.6 + idx) * 2;
+          homeCtx.strokeStyle = "#6C7D5E";
+          homeCtx.lineWidth = 2;
+          homeCtx.beginPath();
+          homeCtx.moveTo(winX + tx, winY + winH / 2 - 4);
+          homeCtx.lineTo(winX + tx + sway, winY + winH / 2 - 24);
+          homeCtx.stroke();
+          homeCtx.fillStyle = idx === 1 ? "#C58E91" : "#DFB19A";
+          homeCtx.beginPath();
+          homeCtx.ellipse(winX + tx + sway, winY + winH / 2 - 27, 4.2, 6, 0, 0, Math.PI * 2);
+          homeCtx.fill();
+        });
+
+        // Wooden window frame & crossbars
+        homeCtx.strokeStyle = "#8E7358";
+        homeCtx.lineWidth = 5;
+        homeCtx.beginPath();
+        homeCtx.roundRect(winX - winW / 2, winY - winH / 2, winW, winH, 12);
+        homeCtx.stroke();
+        homeCtx.lineWidth = 2.5;
+        homeCtx.beginPath();
+        homeCtx.moveTo(winX, winY - winH / 2);
+        homeCtx.lineTo(winX, winY + winH / 2);
+        homeCtx.moveTo(winX - winW / 2, winY);
+        homeCtx.lineTo(winX + winW / 2, winY);
+        homeCtx.stroke();
+        homeCtx.restore();
+
+        // 5. Floating Wooden Bookshelf & Keepsakes (center-top)
+        const shelfX = homeW * 0.48;
+        const shelfY = homeH * 0.34;
+        const shelfW = Math.min(156, homeW * 0.25);
+
+        homeCtx.save();
+        // Shelf plank
+        homeCtx.fillStyle = "#9C7F61";
+        homeCtx.beginPath();
+        homeCtx.roundRect(shelfX - shelfW / 2, shelfY, shelfW, 8, 4);
+        homeCtx.fill();
+
+        // Cute pastel/earthy books standing on shelf
+        const books = [
+          { x: -52, w: 11, h: 34, c: "#78866B" },
+          { x: -39, w: 13, h: 38, c: "#C58E91" },
+          { x: -24, w: 10, h: 31, c: "#D6C2A8" },
+          { x: -12, w: 12, h: 36, c: "#8E7358" }
+        ];
+        books.forEach((bk) => {
+          homeCtx.fillStyle = bk.c;
+          homeCtx.beginPath();
+          homeCtx.roundRect(shelfX + bk.x, shelfY - bk.h, bk.w, bk.h, 2);
+          homeCtx.fill();
+        });
+
+        // Framed heart/couple mini portrait on shelf
+        homeCtx.fillStyle = "#F7F3EB";
+        homeCtx.strokeStyle = "#8E7358";
+        homeCtx.lineWidth = 2.5;
+        homeCtx.beginPath();
+        homeCtx.roundRect(shelfX + 10, shelfY - 32, 26, 32, 4);
+        homeCtx.fill();
+        homeCtx.stroke();
+        homeCtx.fillStyle = "#C58E91";
+        homeCtx.beginPath();
+        homeCtx.arc(shelfX + 23, shelfY - 16, 4.5, 0, Math.PI * 2);
+        homeCtx.fill();
+
+        // Trailing pothos plant on right end of shelf
+        homeCtx.fillStyle = "#C89D7C";
+        homeCtx.beginPath();
+        homeCtx.roundRect(shelfX + 44, shelfY - 18, 18, 18, 3);
+        homeCtx.fill();
+        homeCtx.fillStyle = "#78866B";
+        [
+          [48, -22], [56, -24], [62, -16], [64, -6], [62, 5]
+        ].forEach(([lx, ly]) => {
+          homeCtx.beginPath();
+          homeCtx.ellipse(shelfX + lx, shelfY + ly, 5.5, 3.2, 0.4, 0, Math.PI * 2);
+          homeCtx.fill();
+        });
+        homeCtx.restore();
+
+        // 6. Plush Couple's Linen Sofa (center)
+        const sofaX = homeW * 0.46;
+        const sofaY = homeH * 0.69 + cushionBounce * 4;
+        const sofaW = Math.min(230, homeW * 0.36);
+
+        homeCtx.save();
+        // Sofa shadow
+        homeCtx.fillStyle = "rgba(81, 69, 56, 0.14)";
+        homeCtx.beginPath();
+        homeCtx.ellipse(sofaX, sofaY + 34, sofaW * 0.52, 9, 0, 0, Math.PI * 2);
+        homeCtx.fill();
+
+        // Wooden legs
+        homeCtx.fillStyle = "#7C6248";
+        homeCtx.fillRect(sofaX - sofaW * 0.42, sofaY + 20, 7, 13);
+        homeCtx.fillRect(sofaX + sofaW * 0.42 - 7, sofaY + 20, 7, 13);
+
+        // Sofa backrest
+        homeCtx.fillStyle = "#DFD4C3";
+        homeCtx.strokeStyle = "#B8A58E";
+        homeCtx.lineWidth = 1.5;
+        homeCtx.beginPath();
+        homeCtx.roundRect(sofaX - sofaW * 0.46, sofaY - 34, sofaW * 0.92, 44, 16);
+        homeCtx.fill();
+        homeCtx.stroke();
+
+        // Cozy throw pillows (dusty pink & botanical green)
+        homeCtx.fillStyle = "#C58E91";
+        homeCtx.beginPath();
+        homeCtx.roundRect(sofaX - sofaW * 0.34, sofaY - 24, 34, 28, 10);
+        homeCtx.fill();
+
+        homeCtx.fillStyle = "#78866B";
+        homeCtx.beginPath();
+        homeCtx.roundRect(sofaX + sofaW * 0.34 - 34, sofaY - 24, 34, 28, 10);
+        homeCtx.fill();
+
+        // Sofa seat cushions & armrests
+        homeCtx.fillStyle = "#EAE1D2";
+        homeCtx.beginPath();
+        homeCtx.roundRect(sofaX - sofaW * 0.48, sofaY - 4, sofaW * 0.96, 26, 12);
+        homeCtx.fill();
+        homeCtx.stroke();
+
+        // Armrests
+        homeCtx.fillStyle = "#D8CCB9";
+        homeCtx.beginPath();
+        homeCtx.roundRect(sofaX - sofaW * 0.51, sofaY - 14, 20, 36, 10);
+        homeCtx.roundRect(sofaX + sofaW * 0.51 - 20, sofaY - 14, 20, 36, 10);
+        homeCtx.fill();
+        homeCtx.restore();
+
+        // 7. Wooden Acoustic Guitar Leaning on Left
+        const gx = homeW * 0.13;
+        const gy = homeH * 0.72;
+        homeCtx.save();
+        homeCtx.translate(gx, gy);
+        const strumWobble = guitarStrumTimer > 0 ? Math.sin(time * 36) * 0.04 : 0;
+        homeCtx.rotate(-0.18 + strumWobble);
+
+        // Guitar neck & headstock
+        homeCtx.fillStyle = "#7C5E42";
+        homeCtx.fillRect(-3.5, -68, 7, 46);
+        homeCtx.fillStyle = "#5B432E";
+        homeCtx.beginPath();
+        homeCtx.roundRect(-5.5, -78, 11, 12, 3);
+        homeCtx.fill();
+
+        // Guitar body (figure-8 warm spruce wood)
+        homeCtx.fillStyle = "#C69463";
+        homeCtx.strokeStyle = "#8C6239";
+        homeCtx.lineWidth = 2;
+        homeCtx.beginPath();
+        homeCtx.ellipse(0, -14, 15, 13, 0, 0, Math.PI * 2);
+        homeCtx.fill();
+        homeCtx.stroke();
+        homeCtx.beginPath();
+        homeCtx.ellipse(0, 6, 20, 17, 0, 0, Math.PI * 2);
+        homeCtx.fill();
+        homeCtx.stroke();
+
+        // Soundhole
+        homeCtx.fillStyle = "#4A3625";
+        homeCtx.beginPath();
+        homeCtx.arc(0, -5, 6, 0, Math.PI * 2);
+        homeCtx.fill();
+
+        // Musical notes floating when strummed!
+        if (guitarStrumTimer > 0) {
+          homeCtx.fillStyle = "#C58E91";
+          homeCtx.font = "16px serif";
+          homeCtx.fillText("♪", 18, -32 - (2.2 - guitarStrumTimer) * 14);
+          homeCtx.fillText("♫", -24, -44 - (2.2 - guitarStrumTimer) * 18);
+        }
+        homeCtx.restore();
+
+        // 8. Round Wooden Coffee Table & Two Steaming Tea Mugs (center-right)
+        const tx = homeW * 0.72;
+        const ty = homeH * 0.76;
+        homeCtx.save();
+        // Table legs
+        homeCtx.strokeStyle = "#8A6D50";
+        homeCtx.lineWidth = 4;
+        homeCtx.beginPath();
+        homeCtx.moveTo(tx - 24, ty);
+        homeCtx.lineTo(tx - 30, ty + 24);
+        homeCtx.moveTo(tx + 24, ty);
+        homeCtx.lineTo(tx + 30, ty + 24);
+        homeCtx.stroke();
+
+        // Tabletop
+        homeCtx.fillStyle = "#B59674";
+        homeCtx.beginPath();
+        homeCtx.ellipse(tx, ty, 44, 11, 0, 0, Math.PI * 2);
+        homeCtx.fill();
+
+        // Two ceramic mugs (cream & dusty rose)
+        [
+          { mx: tx - 14, color: "#FAF6EE" },
+          { mx: tx + 12, color: "#D69E9F" }
+        ].forEach((mug, idx) => {
+          homeCtx.fillStyle = mug.color;
+          homeCtx.beginPath();
+          homeCtx.roundRect(mug.mx - 7, ty - 14, 14, 13, 3);
+          homeCtx.fill();
+
+          // Rising steam wisps
+          homeCtx.strokeStyle = `rgba(255, 255, 255, ${0.42 * Math.min(1.5, teaSteamBoost * 0.6)})`;
+          homeCtx.lineWidth = 1.5;
+          const steamOffset = (time * 18 * teaSteamBoost + idx * 10) % 22;
+          homeCtx.beginPath();
+          homeCtx.moveTo(mug.mx, ty - 17 - steamOffset * 0.4);
+          homeCtx.quadraticCurveTo(mug.mx + 4, ty - 24 - steamOffset * 0.7, mug.mx - 2, ty - 31 - steamOffset);
+          homeCtx.stroke();
+        });
+        homeCtx.restore();
+
+        // 9. Warm Standing Floor Lamp (right)
+        const lx = homeW * 0.86;
+        const ly = homeH * 0.76;
+        homeCtx.save();
+        // Lamp pole & base
+        homeCtx.fillStyle = "#8A6D50";
+        homeCtx.beginPath();
+        homeCtx.ellipse(lx, ly + 8, 18, 5, 0, 0, Math.PI * 2);
+        homeCtx.fill();
+        homeCtx.fillRect(lx - 2.5, ly - 125, 5, 133);
+
+        // Warm ambient light cone when evening mode is active
+        if (evening) {
+          const glow = homeCtx.createRadialGradient(lx, ly - 125, 10, lx, ly - 95, 195);
+          glow.addColorStop(0, "rgba(255, 214, 145, 0.52)");
+          glow.addColorStop(0.55, "rgba(242, 188, 112, 0.18)");
+          glow.addColorStop(1, "rgba(242, 188, 112, 0)");
+          homeCtx.fillStyle = glow;
+          homeCtx.beginPath();
+          homeCtx.arc(lx, ly - 95, 195, 0, Math.PI * 2);
+          homeCtx.fill();
+        }
+
+        // Pleated fabric lampshade
+        homeCtx.fillStyle = evening ? "#FBE3B5" : "#F5EDE0";
+        homeCtx.strokeStyle = "#B89D82";
+        homeCtx.lineWidth = 1.5;
+        homeCtx.beginPath();
+        homeCtx.moveTo(lx - 18, ly - 152);
+        homeCtx.lineTo(lx + 18, ly - 152);
+        homeCtx.lineTo(lx + 28, ly - 118);
+        homeCtx.lineTo(lx - 28, ly - 118);
+        homeCtx.closePath();
+        homeCtx.fill();
+        homeCtx.stroke();
+        homeCtx.restore();
+      }
+
+      homeCanvas.addEventListener("pointerdown", (e) => {
+        const rect = homeCanvas.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+
+        let matched = null;
+        let minDist = Infinity;
+        HOME_HOTSPOTS.forEach((hs) => {
+          const d = Math.hypot(cx - hs.nx * homeW, cy - hs.ny * homeH);
+          if (d < hs.r && d < minDist) {
+            minDist = d;
+            matched = hs;
+          }
+        });
+
+        if (matched) {
+          matched.action(e.clientX, e.clientY);
+        } else {
+          spawnMwahBurst(e.clientX, e.clientY, 4);
+          homeNoteEl.textContent = "“Every corner of our little home feels warm when you're inside, babu. Mwah!”";
+        }
+      });
+
+      /* =========================================================================
+         4. RENDER MEMORIES & SURPRISE LETTER
       ========================================================================= */
       const memoriesGrid = document.getElementById("memories-grid");
       const photoFileInput = document.getElementById("photo-file-input");
@@ -1478,14 +2098,16 @@ I hope this little world always makes you smile.
         const isOpen = letterReveal.classList.toggle("open");
         openSurpriseBtn.querySelector("span").textContent = isOpen ? "CLOSE LETTER" : "OPEN YOUR SURPRISE";
         if (isOpen) {
-          spawnPetalBurst(window.innerWidth * 0.5, openSurpriseBtn.getBoundingClientRect().top, 16);
-          speakGreeting("If I could keep one little corner of this enormous world just for us, it would look something like this.", 0.04);
+          const r = openSurpriseBtn.getBoundingClientRect();
+          spawnPetalBurst(window.innerWidth * 0.5, r.top, 14);
+          spawnMwahBurst(window.innerWidth * 0.5, r.top, 6);
+          speakGreeting("I hope this little world always makes you smile, babu. Mwah!", 0.04);
         }
         setTimeout(refreshLayoutZones, 120);
       });
 
       /* =========================================================================
-         4. MODAL EDITOR (MEMORIES, LETTER, OPTIONAL AUDIO FILES)
+         5. MODAL EDITOR (MEMORIES, LETTER, OPTIONAL AUDIO FILES)
       ========================================================================= */
       const modalBackdrop = document.getElementById("editor-modal");
       const modalTitle = document.getElementById("modal-title");
@@ -1616,10 +2238,7 @@ I hope this little world always makes you smile.
       });
 
       /* =========================================================================
-         5. STORYBOOK CHARACTER ILLUSTRATION ENGINE
-            High-craft layered watercolor/gouache organic Bezier art with
-            articulated limbs, spline tails, blinking eyes, ear twitches,
-            breathing ribcages, and props (shells, tulips, yuzu).
+         6. STORYBOOK CHARACTER ILLUSTRATION ENGINE (INCLUDING CAT BUTT & POOP!)
       ========================================================================= */
       function drawStorybookCat(ctx, a, time) {
         const s = a.scale || 1;
@@ -1628,6 +2247,8 @@ I hope this little world always makes you smile.
         const isSitting = a.state === "SITTING" || a.state === "PERCHED" || a.state === "GROOMING";
         const isPeeking = a.state === "PEEKING";
         const isStretching = a.state === "STRETCHING";
+        const isCatButt = a.state === "CAT_BUTT";
+        const isPooping = a.state === "POOPING";
         const walkCycle = (a.state === "WALKING" || a.state === "RUNNING")
           ? Math.sin(time * (a.state === "RUNNING" ? 15 : 8.5) + a.seed)
           : 0;
@@ -1640,17 +2261,89 @@ I hope this little world always makes you smile.
           ctx.save();
           ctx.fillStyle = "rgba(81, 69, 56, 0.13)";
           ctx.beginPath();
-          ctx.ellipse(0, 18 * s, (isSleeping ? 28 : 22) * s, 5.5 * s, 0, 0, Math.PI * 2);
+          ctx.ellipse(0, 18 * s, (isSleeping ? 28 : 21) * s, 5.5 * s, 0, 0, Math.PI * 2);
           ctx.fill();
           ctx.restore();
+        }
+
+        // Cute rear-facing "CAT BUTT" pose!
+        if (isCatButt) {
+          ctx.scale(s, s);
+          const swish = Math.sin(time * 3.4 + a.seed) * 9;
+
+          // Ears peeking just over the top of the round head
+          [-7, 7].forEach((ex, idx) => {
+            ctx.save();
+            ctx.translate(ex, -15);
+            ctx.rotate(idx === 0 ? -0.22 : 0.22);
+            ctx.fillStyle = a.palette.accent;
+            ctx.beginPath();
+            ctx.moveTo(-4.5, 4);
+            ctx.lineTo(0, -7);
+            ctx.lineTo(4.5, 4);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          });
+
+          // Back of head
+          const headGrad = ctx.createRadialGradient(0, -10, 2, 0, -8, 13);
+          headGrad.addColorStop(0, a.palette.light);
+          headGrad.addColorStop(1, a.palette.mid);
+          ctx.fillStyle = headGrad;
+          ctx.beginPath();
+          ctx.arc(0, -8, 11.5, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Plump, round fluffy hindquarters (the cat butt!)
+          const buttGrad = ctx.createRadialGradient(-3, 2, 3, 0, 5, 19);
+          buttGrad.addColorStop(0, a.palette.light);
+          buttGrad.addColorStop(0.72, a.palette.mid);
+          buttGrad.addColorStop(1, a.palette.dark);
+          ctx.fillStyle = buttGrad;
+          ctx.beginPath();
+          ctx.ellipse(0, 5, 16.5, 14.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Two little tucked hind paws peeking at the bottom
+          [-8.5, 8.5].forEach((px) => {
+            ctx.fillStyle = a.palette.light;
+            ctx.beginPath();
+            ctx.ellipse(px, 16.5, 4.8, 3.3, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "rgba(81, 69, 56, 0.22)";
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          });
+
+          // Cute little cat-butt star mark ('x' / '✦') right below the tail base
+          ctx.strokeStyle = "#C58E91";
+          ctx.lineWidth = 1.4;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(-2.2, 5.5);
+          ctx.lineTo(2.2, 9.5);
+          ctx.moveTo(2.2, 5.5);
+          ctx.lineTo(-2.2, 9.5);
+          ctx.stroke();
+
+          // Upright gracefully swishing tail rising from the top of the rump
+          ctx.lineCap = "round";
+          ctx.lineWidth = a.fluffy ? 7.5 : 5.8;
+          ctx.strokeStyle = a.palette.accent;
+          ctx.beginPath();
+          ctx.moveTo(0, 2);
+          ctx.bezierCurveTo(swish * 0.4, -10, -swish * 0.6, -24, swish * 0.9, -32);
+          ctx.stroke();
+
+          ctx.restore();
+          return;
         }
 
         ctx.scale(a.facing * s, s);
 
         if (isPeeking) {
-          // Peeking paws + upper face over heading/nav edge
-          drawCatHead(ctx, a, time, 0, -4, false, false);
-          // Two little front paws resting on the ledge
+          drawCatHead(ctx, a, time, 0, -4, false, false, false);
           [-10, 10].forEach((px, idx) => {
             const pawGrad = ctx.createRadialGradient(px, 11, 1, px, 12, 7);
             pawGrad.addColorStop(0, a.palette.light);
@@ -1689,21 +2382,21 @@ I hope this little world always makes you smile.
         ctx.stroke();
         ctx.restore();
 
-        // Back legs
+        // Back legs (squatted slightly if pooping!)
         if (!isSleeping) {
           [-10, -4].forEach((lx, i) => {
-            const stride = isSitting ? 0 : walkCycle * (i === 0 ? 5.5 : -5.5);
+            const stride = (isSitting || isPooping) ? 0 : walkCycle * (i === 0 ? 5.5 : -5.5);
             ctx.fillStyle = a.palette.dark;
             ctx.beginPath();
-            ctx.roundRect(lx + stride - 3.5, isSitting ? 6 : 5, 7, isSitting ? 12 : 14, 3.5);
+            ctx.roundRect(lx + stride - 3.5, (isSitting || isPooping) ? 8 : 5, 7, (isSitting || isPooping) ? 10 : 14, 3.5);
             ctx.fill();
           });
         }
 
-        // Torso with organic gouache gradient
-        const bodyRx = isSleeping ? 23 : (isStretching ? 24 : (isSitting ? 15.5 : 19));
-        const bodyRy = isSleeping ? 12.5 : (isStretching ? 10.5 : (isSitting ? 15.5 : 12.5 + breathe * 0.35));
-        const bodyY = isSleeping ? 8 : (isSitting ? 3 : 3 - Math.abs(walkCycle) * 1.2);
+        // Torso
+        const bodyRx = isSleeping ? 23 : (isStretching ? 24 : ((isSitting || isPooping) ? 15.5 : 19));
+        const bodyRy = isSleeping ? 12.5 : (isStretching ? 10.5 : ((isSitting || isPooping) ? 15.5 : 12.5 + breathe * 0.35));
+        const bodyY = isSleeping ? 8 : (isPooping ? 6 : (isSitting ? 3 : 3 - Math.abs(walkCycle) * 1.2));
         const bodyGrad = ctx.createRadialGradient(-2, bodyY - 4, 3, 0, bodyY, bodyRx * 1.15);
         bodyGrad.addColorStop(0, a.palette.light);
         bodyGrad.addColorStop(0.68, a.palette.mid);
@@ -1711,10 +2404,9 @@ I hope this little world always makes you smile.
 
         ctx.fillStyle = bodyGrad;
         ctx.beginPath();
-        ctx.ellipse(-2, bodyY, bodyRx, bodyRy, isStretching ? -0.14 : (isSitting ? -0.22 : 0), 0, Math.PI * 2);
+        ctx.ellipse(-2, bodyY, bodyRx, bodyRy, isStretching ? -0.14 : ((isSitting || isPooping) ? -0.25 : 0), 0, Math.PI * 2);
         ctx.fill();
 
-        // Tabby stripes for Melow, Pumpkin, Miso
         if (a.tabby) {
           ctx.save();
           ctx.strokeStyle = a.palette.stripe;
@@ -1729,7 +2421,6 @@ I hope this little world always makes you smile.
           ctx.restore();
         }
 
-        // Fluffy chest ruff for Payesh & Snowy
         if (a.fluffy && !isSleeping) {
           ctx.fillStyle = a.palette.light;
           ctx.beginPath();
@@ -1737,29 +2428,27 @@ I hope this little world always makes you smile.
           ctx.fill();
         }
 
-        // Front legs (or dangling paws when perched on a button!)
         if (!isSleeping) {
           [6, 12].forEach((lx, i) => {
-            const stride = isSitting ? 0 : walkCycle * (i === 0 ? -5.5 : 5.5);
+            const stride = (isSitting || isPooping) ? 0 : walkCycle * (i === 0 ? -5.5 : 5.5);
             const legGrad = ctx.createLinearGradient(lx, 4, lx, 20);
             legGrad.addColorStop(0, a.palette.mid);
             legGrad.addColorStop(1, a.palette.light);
             ctx.fillStyle = legGrad;
             ctx.beginPath();
-            ctx.roundRect(lx + stride - 3.3, isSitting ? 6 : 6, 6.6, a.dangling ? 16 : 13, 3.3);
+            ctx.roundRect(lx + stride - 3.3, (isSitting || isPooping) ? 6 : 6, 6.6, a.dangling ? 16 : 13, 3.3);
             ctx.fill();
           });
         }
 
-        // Head
-        const headX = isSleeping ? 14 : (isSitting ? 9 : 14);
-        const headY = isSleeping ? 7 : (isStretching ? 4 : (isSitting ? -10 : -7 - Math.abs(walkCycle) * 1.1));
-        drawCatHead(ctx, a, time, headX, headY, isSleeping, a.state === "GROOMING");
+        const headX = isSleeping ? 14 : ((isSitting || isPooping) ? 9 : 14);
+        const headY = isSleeping ? 7 : (isStretching ? 4 : (isPooping ? -8 : (isSitting ? -10 : -7 - Math.abs(walkCycle) * 1.1)));
+        drawCatHead(ctx, a, time, headX, headY, isSleeping, a.state === "GROOMING", isPooping);
 
         ctx.restore();
       }
 
-      function drawCatHead(ctx, a, time, hx, hy, isSleeping, isGrooming) {
+      function drawCatHead(ctx, a, time, hx, hy, isSleeping, isGrooming, isPooping) {
         ctx.save();
         const tilt = isGrooming ? Math.sin(time * 7) * 0.14 : Math.sin(time * 1.5 + a.seed) * 0.04;
         ctx.translate(hx, hy);
@@ -1767,7 +2456,6 @@ I hope this little world always makes you smile.
 
         const earTwitch = Math.sin(time * 4.2 + a.seed * 3) > 0.96 ? 0.14 : 0;
 
-        // Left & Right Ears
         [
           { x: -8, y: -11, rot: -0.28 - earTwitch },
           { x: 7, y: -11, rot: 0.28 + earTwitch }
@@ -1783,7 +2471,6 @@ I hope this little world always makes you smile.
           ctx.closePath();
           ctx.fill();
 
-          // Inner ear warm pink
           ctx.fillStyle = "#E6B8B7";
           ctx.beginPath();
           ctx.moveTo(-3.2, 3);
@@ -1794,7 +2481,6 @@ I hope this little world always makes you smile.
           ctx.restore();
         });
 
-        // Head shape with soft cheek fluff
         const headGrad = ctx.createRadialGradient(-2, -3, 2, 0, 0, 15);
         headGrad.addColorStop(0, a.palette.light);
         headGrad.addColorStop(0.75, a.palette.mid);
@@ -1809,7 +2495,6 @@ I hope this little world always makes you smile.
         ctx.bezierCurveTo(-11, 10.5, -14.5, 3, -12.5, -2);
         ctx.fill();
 
-        // Forehead tabby M-markings
         if (a.tabby) {
           ctx.strokeStyle = a.palette.stripe;
           ctx.lineWidth = 1.4;
@@ -1822,9 +2507,8 @@ I hope this little world always makes you smile.
           ctx.stroke();
         }
 
-        // Eyes (blinking or peacefully closed)
         const blinkPhase = (time * 0.45 + a.seed) % 1;
-        const blinking = isSleeping || blinkPhase > 0.94 || a.state === "REACTING";
+        const blinking = isSleeping || blinkPhase > 0.94 || a.state === "REACTING" || isPooping;
 
         [-4.8, 5.2].forEach((ex) => {
           if (blinking) {
@@ -1832,16 +2516,18 @@ I hope this little world always makes you smile.
             ctx.lineWidth = 1.5;
             ctx.lineCap = "round";
             ctx.beginPath();
-            if (a.state === "REACTING") {
-              // Happy arched eyes ^ ^
+            if (isPooping) {
+              // Concentrated > < eyes while pooping!
+              ctx.moveTo(ex - 2, -2);
+              ctx.lineTo(ex + 1, 0);
+              ctx.lineTo(ex - 2, 2);
+            } else if (a.state === "REACTING") {
               ctx.arc(ex, 0.5, 2.7, Math.PI * 1.15, Math.PI * 1.85);
             } else {
-              // Peaceful sleepy curve
               ctx.arc(ex, -1.2, 2.7, Math.PI * 0.15, Math.PI * 0.85);
             }
             ctx.stroke();
           } else {
-            // Expressive iris + pupil + catchlight
             ctx.fillStyle = a.eyeColor;
             ctx.beginPath();
             ctx.ellipse(ex, -0.5, 2.7, 3.1, 0, 0, Math.PI * 2);
@@ -1859,14 +2545,13 @@ I hope this little world always makes you smile.
           }
         });
 
-        // Rosy cheeks
-        ctx.fillStyle = "rgba(197, 142, 145, 0.32)";
+        // Extra rosy blush when pooping or reacting!
+        ctx.fillStyle = isPooping ? "rgba(197, 110, 115, 0.52)" : "rgba(197, 142, 145, 0.32)";
         ctx.beginPath();
-        ctx.ellipse(-7.5, 3, 2.6, 1.5, 0, 0, Math.PI * 2);
-        ctx.ellipse(8, 3, 2.6, 1.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(-7.5, 3, 2.8, 1.7, 0, 0, Math.PI * 2);
+        ctx.ellipse(8, 3, 2.8, 1.7, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Tiny pink nose & gentle mouth
         ctx.fillStyle = "#D68E92";
         ctx.beginPath();
         ctx.moveTo(-1.7, 2.4);
@@ -1885,7 +2570,6 @@ I hope this little world always makes you smile.
         ctx.quadraticCurveTo(2.2, 6.2, 3.9, 5.2);
         ctx.stroke();
 
-        // Delicate whiskers
         ctx.strokeStyle = "rgba(81, 69, 56, 0.35)";
         ctx.lineWidth = 0.85;
         [-1, 1].forEach((dir) => {
@@ -1902,7 +2586,7 @@ I hope this little world always makes you smile.
 
       function drawStorybookDog(ctx, a, time) {
         const s = a.scale || 1;
-        const isSitting = a.state === "SITTING" || a.state === "PERCHED";
+        const isSitting = a.state === "SITTING" || a.state === "PERCHED" || a.state === "POOPING";
         const isRunning = a.state === "RUNNING";
         const walkCycle = (a.state === "WALKING" || isRunning)
           ? Math.sin(time * (isRunning ? 16 : 9.5) + a.seed)
@@ -1913,7 +2597,6 @@ I hope this little world always makes you smile.
         ctx.save();
         ctx.translate(a.x, a.y);
 
-        // Contact shadow
         ctx.fillStyle = "rgba(81, 69, 56, 0.13)";
         ctx.beginPath();
         ctx.ellipse(0, 19 * s, 23 * s, 5.5 * s, 0, 0, Math.PI * 2);
@@ -1921,7 +2604,6 @@ I hope this little world always makes you smile.
 
         ctx.scale(a.facing * s, s);
 
-        // Happy wagging tail
         ctx.save();
         ctx.translate(-16, 2);
         ctx.rotate(-0.5 + tailAngle);
@@ -1934,7 +2616,6 @@ I hope this little world always makes you smile.
         ctx.stroke();
         ctx.restore();
 
-        // Back legs
         [-11, -5].forEach((lx, i) => {
           const stride = isSitting ? 0 : walkCycle * (i === 0 ? 6 : -6);
           ctx.fillStyle = a.palette.dark;
@@ -1943,7 +2624,6 @@ I hope this little world always makes you smile.
           ctx.fill();
         });
 
-        // Plump puppy body
         const bodyY = 3 - Math.abs(walkCycle) * 1.4;
         const bodyGrad = ctx.createRadialGradient(0, bodyY - 4, 3, 0, bodyY, 22);
         bodyGrad.addColorStop(0, a.palette.light);
@@ -1954,7 +2634,6 @@ I hope this little world always makes you smile.
         ctx.ellipse(-1, bodyY, isSitting ? 16.5 : 20, isSitting ? 15 : 13, isSitting ? -0.25 : 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Botanical green ribbon collar
         ctx.strokeStyle = "#78866B";
         ctx.lineWidth = 3.5;
         ctx.beginPath();
@@ -1962,7 +2641,6 @@ I hope this little world always makes you smile.
         ctx.quadraticCurveTo(13, bodyY - 1, 10, bodyY + 8);
         ctx.stroke();
 
-        // Front legs
         [6, 12].forEach((lx, i) => {
           const stride = isSitting ? 0 : walkCycle * (i === 0 ? -6 : 6);
           ctx.fillStyle = a.palette.mid;
@@ -1971,13 +2649,11 @@ I hope this little world always makes you smile.
           ctx.fill();
         });
 
-        // Puppy Head
         const hx = isSitting ? 10 : 14;
         const hy = (isSitting ? -11 : -8) - Math.abs(walkCycle) * 1.4;
         ctx.save();
         ctx.translate(hx, hy);
 
-        // Head dome
         const headGrad = ctx.createRadialGradient(-2, -3, 2, 0, 0, 15);
         headGrad.addColorStop(0, a.palette.light);
         headGrad.addColorStop(0.75, a.palette.mid);
@@ -1987,13 +2663,11 @@ I hope this little world always makes you smile.
         ctx.arc(0, -1, 13.2, 0, Math.PI * 2);
         ctx.fill();
 
-        // Soft snout
         ctx.fillStyle = a.palette.light;
         ctx.beginPath();
         ctx.ellipse(6.5, 3.5, 7.5, 5.8, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Floppy ear
         const earBounce = Math.abs(walkCycle) * 0.18 + (a.state === "REACTING" ? 0.14 : 0);
         ctx.save();
         ctx.translate(-5, -7);
@@ -2004,7 +2678,6 @@ I hope this little world always makes you smile.
         ctx.fill();
         ctx.restore();
 
-        // Happy puppy eyes
         [-1.5, 6.5].forEach((ex) => {
           ctx.fillStyle = "#33261D";
           ctx.beginPath();
@@ -2016,13 +2689,18 @@ I hope this little world always makes you smile.
           ctx.fill();
         });
 
-        // Wet dark nose
+        if (a.state === "POOPING") {
+          ctx.fillStyle = "rgba(197, 110, 115, 0.48)";
+          ctx.beginPath();
+          ctx.ellipse(3, 1.5, 3, 1.8, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
         ctx.fillStyle = "#3A2C23";
         ctx.beginPath();
         ctx.ellipse(11.5, 2.2, 2.7, 2.1, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Little pink happy tongue when excited or running
         if (isRunning || a.state === "REACTING" || a.state === "PLAYING") {
           ctx.fillStyle = "#D98A90";
           ctx.beginPath();
@@ -2036,13 +2714,12 @@ I hope this little world always makes you smile.
 
       function drawStorybookCapybara(ctx, a, time) {
         const s = a.scale || 1;
-        const isRelaxing = a.state === "SITTING" || a.state === "SLEEPING" || a.state === "EATING";
+        const isRelaxing = a.state === "SITTING" || a.state === "SLEEPING" || a.state === "EATING" || a.state === "POOPING";
         const walkCycle = a.state === "WALKING" ? Math.sin(time * 5.2 + a.seed) : 0;
 
         ctx.save();
         ctx.translate(a.x, a.y);
 
-        // Contact shadow
         ctx.fillStyle = "rgba(81, 69, 56, 0.14)";
         ctx.beginPath();
         ctx.ellipse(0, 21 * s, 32 * s, 6.5 * s, 0, 0, Math.PI * 2);
@@ -2050,7 +2727,6 @@ I hope this little world always makes you smile.
 
         ctx.scale(a.facing * s, s);
 
-        // Sturdy little legs
         if (!isRelaxing) {
           [-16, -9, 8, 15].forEach((lx, i) => {
             const stride = walkCycle * (i % 2 === 0 ? 3.5 : -3.5);
@@ -2061,7 +2737,6 @@ I hope this little world always makes you smile.
           });
         }
 
-        // Plump, noble barrel body
         const bodyY = isRelaxing ? 8 : 4 - Math.abs(walkCycle) * 0.7;
         const bodyGrad = ctx.createRadialGradient(-2, bodyY - 6, 4, 0, bodyY, 32);
         bodyGrad.addColorStop(0, a.palette.light);
@@ -2072,13 +2747,11 @@ I hope this little world always makes you smile.
         ctx.ellipse(-2, bodyY, 28, isRelaxing ? 14.5 : 16, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Iconic gentle rectangular-oval Capybara head
         const hx = 21;
         const hy = isRelaxing ? -2 : -5 - Math.abs(walkCycle) * 0.7;
         ctx.save();
         ctx.translate(hx, hy);
 
-        // Tiny rounded ear tucked back
         ctx.fillStyle = a.palette.dark;
         ctx.beginPath();
         ctx.arc(-6, -9, 3.8, 0, Math.PI * 2);
@@ -2093,7 +2766,6 @@ I hope this little world always makes you smile.
         ctx.roundRect(-11, -10, 24, 18.5, [9, 10, 8, 8]);
         ctx.fill();
 
-        // Calm half-closed serene eye
         ctx.strokeStyle = "#3B2E24";
         ctx.lineWidth = 1.8;
         ctx.lineCap = "round";
@@ -2102,7 +2774,6 @@ I hope this little world always makes you smile.
         ctx.lineTo(4.5, -3.5);
         ctx.stroke();
 
-        // Cute nostril & calm mouth
         ctx.fillStyle = "#3B2E24";
         ctx.beginPath();
         ctx.arc(10.5, -1.5, 1.5, 0, Math.PI * 2);
@@ -2115,7 +2786,6 @@ I hope this little world always makes you smile.
         ctx.quadraticCurveTo(8, 5, 5, 3.8);
         ctx.stroke();
 
-        // Coco wears a tiny pink tulip or yuzu on head when relaxing!
         if (a.hasBlossom) {
           ctx.fillStyle = "#78866B";
           ctx.fillRect(-1.5, -15, 2.2, 5);
@@ -2130,12 +2800,13 @@ I hope this little world always makes you smile.
       }
 
       /* =========================================================================
-         6. LIVING ANIMAL ECOSYSTEM (ROAMING ACROSS ENTIRE PAGE + UI PERCHING)
+         7. LIVING ANIMAL ECOSYSTEM + CUTE STORYBOOK POOPS
       ========================================================================= */
       const worldCanvas = document.getElementById("world-canvas");
       const worldCtx = worldCanvas.getContext("2d");
       const speechLayer = document.getElementById("speech-layer");
       const residentChipsEl = document.getElementById("resident-chips");
+      const poopCountEl = document.getElementById("poop-count");
 
       const LAND_ANIMALS = [
         {
@@ -2150,9 +2821,9 @@ I hope this little world always makes you smile.
           eyeColor: "#9A744C",
           palette: { light: "#FFFFFF", mid: "#F6F1E7", dark: "#E4DACB", accent: "#EDE4D5", stripe: "#D8CCB9" },
           greetings: [
-            "Hi Tanha! I'm Payesh. I saved the softest spot on the page just for you.",
-            "Purr... welcome home, Kitten. May I curl up right beside you?",
-            "Hello Tanha! Melow was just chasing petals, so I came to say hi first."
+            "Mwah! Hi babu! I'm Payesh. I saved the softest cushion in the house just for you.",
+            "Purr... welcome home, chumopakhi. May I curl up right beside you?",
+            "Hello baby! Melow was chasing petals, so I came to give you a forehead kiss first."
           ]
         },
         {
@@ -2167,9 +2838,9 @@ I hope this little world always makes you smile.
           eyeColor: "#6E8B5B",
           palette: { light: "#F7C894", mid: "#E59A54", dark: "#C87936", accent: "#D5843E", stripe: "#A85D22" },
           greetings: [
-            "Meow! Tanha, look! I almost caught that butterfly!",
-            "Hi Tanha! I'm Melow. Have you seen Payesh? We're exploring your whole website!",
-            "Mrrp! I jumped onto the buttons just to get a better view of you!"
+            "Meow! Babu, look! I almost caught that butterfly!",
+            "Hi chumopakhi! I'm Melow. Have you seen Payesh? We're exploring your whole home!",
+            "Mwah! I jumped onto the buttons just to get a closer look at my favorite baby!"
           ]
         },
         {
@@ -2184,9 +2855,9 @@ I hope this little world always makes you smile.
           eyeColor: "#7E6752",
           palette: { light: "#FAF4EA", mid: "#EDE0CC", dark: "#D6C2A8", accent: "#B89D82", stripe: "#A78B71" },
           greetings: [
-            "Hi Tanha! I'm Mochi. Can I stay here forever?",
-            "Yawn... hello Tanha. Everything is so warm and cozy here.",
-            "Purr... gentle pets are my favorite thing in the world."
+            "Hi babu! I'm Mochi. Can I nap right beside you forever? Mwah!",
+            "Yawn... hello baby. Everything is so warm and cozy in our little home.",
+            "Purr... gentle pets from my chumopakhi are my favorite thing."
           ]
         },
         {
@@ -2201,9 +2872,9 @@ I hope this little world always makes you smile.
           eyeColor: "#8A7A68",
           palette: { light: "#FFFFFF", mid: "#F3EFE8", dark: "#DFD8CC", accent: "#EBE5DA", stripe: "#CFC6B8" },
           greetings: [
-            "Meow! I'm Snowy! Look at all the tulips blooming for you, Tanha!",
-            "Hello Tanha! I was following a falling petal and found you.",
-            "Chirp! Everything here smells like flowers and sunshine."
+            "Meow! I'm Snowy! Look at all the tulips blooming for you, babu!",
+            "Hello baby! I was following a falling petal and found you. Mwah!",
+            "Chirp! Everything here smells like flowers and sunshine, chumopakhi."
           ]
         },
         {
@@ -2218,9 +2889,9 @@ I hope this little world always makes you smile.
           eyeColor: "#B38A3E",
           palette: { light: "#F5BE88", mid: "#DC8243", dark: "#B86228", accent: "#C97033", stripe: "#944917" },
           greetings: [
-            "Mrrrow! I'm Pumpkin! Want to race me to the flower garden, Tanha?",
-            "Hi Tanha! I'm keeping watch over all your favorite memories.",
-            "Meow! You found me! That deserves at least two head scratches."
+            "Mrrrow! I'm Pumpkin! Want to race me to the flower garden, babu?",
+            "Hi baby! I'm keeping watch over all your favorite memories.",
+            "Mwah! You found me, chumopakhi! That deserves two head scratches."
           ]
         },
         {
@@ -2235,9 +2906,9 @@ I hope this little world always makes you smile.
           eyeColor: "#6B5642",
           palette: { light: "#DFCBB4", mid: "#BC9F82", dark: "#977B60", accent: "#A88B6F", stripe: "#765C44" },
           greetings: [
-            "Hello Tanha. I'm Miso. I was just admiring how peaceful this place is.",
-            "Mrrp! Welcome back, Tanha. We missed you!",
-            "Purr... I love sitting quietly beside your memory cards."
+            "Hello babu. I'm Miso. I was just admiring how peaceful our home is.",
+            "Mrrp! Welcome back, baby. We missed you!",
+            "Purr... I love sitting quietly beside your memory cards, chumopakhi."
           ]
         },
         {
@@ -2249,9 +2920,9 @@ I hope this little world always makes you smile.
           scale: 1.04,
           palette: { light: "#F2D5A7", mid: "#D4A364", dark: "#AD7C41" },
           greetings: [
-            "Woof woof! Hello Tanha! I'm Biscuit, and I'm so happy to see you!",
-            "Yip! Tail wagging at maximum speed because you're here, Tanha!",
-            "Woof! Shall we go say hello to Payesh and Coco together?"
+            "Woof woof! Hello babu! I'm Biscuit, and I'm so happy to see you! Mwah!",
+            "Yip! Tail wagging at maximum speed because my baby is here!",
+            "Woof! Shall we go say hello to Payesh and Coco together, chumopakhi?"
           ]
         },
         {
@@ -2263,9 +2934,9 @@ I hope this little world always makes you smile.
           scale: 1.0,
           palette: { light: "#F7EDE0", mid: "#E2CEB1", dark: "#BFA584" },
           greetings: [
-            "Ruff! Hi Tanha, I'm Teddy. I brought you my best happy wiggle.",
-            "Woof! Sitting right here waiting for your next visit, Tanha.",
-            "Yip yip! Everything feels brighter when you open this page."
+            "Ruff! Hi babu, I'm Teddy. I brought you my best happy wiggle.",
+            "Woof! Sitting right here waiting for your next visit, baby.",
+            "Yip yip! Everything feels brighter when you open this page, chumopakhi."
           ]
         },
         {
@@ -2278,9 +2949,9 @@ I hope this little world always makes you smile.
           hasBlossom: true,
           palette: { light: "#C7AA8E", mid: "#9E7E63", dark: "#785C45" },
           greetings: [
-            "Hello Tanha. I'm Coco. Don't worry, everything is okay.",
-            "Chirp... take a deep breath, Tanha. There is no rush anywhere in this world.",
-            "Squeak! Even a little tulip decided to rest on my head today."
+            "Hello babu. I'm Coco. Don't worry, everything is okay. Mwah!",
+            "Chirp... take a deep breath, baby. There is no rush anywhere in our little world.",
+            "Squeak! Even a little tulip decided to rest on my head for you, chumopakhi."
           ]
         },
         {
@@ -2293,17 +2964,84 @@ I hope this little world always makes you smile.
           hasBlossom: false,
           palette: { light: "#B89A7F", mid: "#8E7057", dark: "#6B503B" },
           greetings: [
-            "Whistle-chirp! Hi Tanha, I'm Mochaccino. Coco and I are guarding the tulips.",
-            "Hello Tanha! Would you like to sit in the garden with us for a little while?",
-            "Squeak-purr! Being peaceful is our favorite hobby."
+            "Whistle-chirp! Hi babu, I'm Mochaccino. Coco and I are guarding the tulips.",
+            "Hello baby! Would you like to sit in the garden with us for a little while?",
+            "Squeak-purr! Being peaceful with our chumopakhi is our favorite hobby."
           ]
         }
       ];
 
       let safeRects = [];
       let perchTargets = [];
-      let docHeight = 3200;
+      let docHeight = 3600;
       let docWidth = window.innerWidth;
+      const poops = [];
+
+      function updatePoopCounter() {
+        if (poopCountEl) poopCountEl.textContent = String(poops.length);
+      }
+
+      function spawnCutePoop(x, y, ownerName) {
+        if (poops.length >= 6) poops.shift();
+        poops.push({
+          id: "poop_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+          x: x,
+          y: y + 14,
+          owner: ownerName,
+          born: performance.now() / 1000,
+          seed: Math.random() * 6.28
+        });
+        updatePoopCounter();
+      }
+
+      function drawCutePoop(ctx, p, time) {
+        const age = time - p.born;
+        const pop = Math.min(1, age * 4);
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.scale(pop, pop);
+
+        // Soft shadow
+        ctx.fillStyle = "rgba(81, 69, 56, 0.14)";
+        ctx.beginPath();
+        ctx.ellipse(0, 5, 10, 3.2, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Three-tier storybook cocoa swirl
+        ctx.fillStyle = "#7D5B42";
+        ctx.beginPath();
+        ctx.ellipse(0, 2.5, 8.5, 3.8, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#8E694E";
+        ctx.beginPath();
+        ctx.ellipse(0, -1, 6.2, 3.2, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#9F785B";
+        ctx.beginPath();
+        ctx.moveTo(-3.5, -3);
+        ctx.quadraticCurveTo(0, -10, 3.5, -3);
+        ctx.closePath();
+        ctx.fill();
+
+        // Comical tiny botanical leaf sprout on top so it's extra cute!
+        ctx.fillStyle = "#78866B";
+        ctx.beginPath();
+        ctx.ellipse(3, -8.5, 3.5, 1.8, -0.4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Gentle squiggly aroma line
+        ctx.strokeStyle = "rgba(147, 132, 118, 0.45)";
+        ctx.lineWidth = 1.1;
+        const wiggle = Math.sin(time * 3 + p.seed) * 1.5;
+        ctx.beginPath();
+        ctx.moveTo(-2, -11);
+        ctx.quadraticCurveTo(-2 + wiggle, -15, -2 - wiggle, -19);
+        ctx.stroke();
+
+        ctx.restore();
+      }
 
       function refreshLayoutZones() {
         docWidth = document.documentElement.clientWidth;
@@ -2348,9 +3086,8 @@ I hope this little world always makes you smile.
         });
       }
 
-      // Initialize runtime agents
       const agents = LAND_ANIMALS.map((cfg, idx) => {
-        const startY = 180 + (idx * 290) % Math.max(1200, docHeight - 240);
+        const startY = 180 + (idx * 310) % Math.max(1400, docHeight - 240);
         const startX = (idx % 2 === 0 ? 0.16 : 0.84) * Math.max(340, window.innerWidth);
         return {
           ...cfg,
@@ -2361,11 +3098,10 @@ I hope this little world always makes you smile.
           targetX: startX + (idx % 2 === 0 ? 120 : -120),
           targetY: startY + 40,
           facing: idx % 2 === 0 ? 1 : -1,
-          state: idx % 3 === 0 ? "SLEEPING" : "WALKING",
-          stateTimer: 3 + idx * 1.1,
+          state: idx === 1 ? "CAT_BUTT" : (idx % 3 === 0 ? "SLEEPING" : "WALKING"),
+          stateTimer: 4 + idx * 1.1,
           seed: idx * 1.73 + 0.4,
           dangling: false,
-          partnerId: null,
           activeBubbleEl: null,
           bubbleTimeout: null
         };
@@ -2396,13 +3132,23 @@ I hope this little world always makes you smile.
       }
 
       function interactWithAgent(agent) {
+        const wasCatButt = agent.state === "CAT_BUTT";
+        const wasPooping = agent.state === "POOPING";
         agent.state = "REACTING";
         agent.stateTimer = 2.6;
         agent.dangling = false;
-        const spokenText = showSpeechBubble(agent);
+
+        let customMsg = null;
+        if (wasCatButt) {
+          customMsg = `Mwah! Hey babu, no poking ${agent.name}'s fluffy cat butt!`;
+        } else if (wasPooping) {
+          customMsg = `Eep! Don't look right now, baby—I'm busy!`;
+        }
+
+        const spokenText = showSpeechBubble(agent, customMsg);
         tryPlaySpeciesRecording(agent.species);
         speakGreeting(spokenText, agent.species === "cat" ? 0.08 : (agent.species === "capybara" ? -0.06 : 0.04));
-        spawnPetalBurst(agent.x, agent.y - 12, 6);
+        spawnMwahBurst(agent.x, agent.y - 16, 4);
       }
 
       function pickNewWaypoint(a) {
@@ -2411,7 +3157,6 @@ I hope this little world always makes you smile.
         const minY = 95;
         const maxY = Math.max(600, docHeight - 90);
 
-        // Occasional UI perching or peeking for cats & energetic puppies!
         if ((a.species === "cat" || a.id === "biscuit") && perchTargets.length && Math.random() < 0.28) {
           const target = perchTargets[Math.floor(Math.random() * perchTargets.length)];
           a.targetX = target.left + 24 + Math.random() * Math.max(10, target.right - target.left - 48);
@@ -2422,7 +3167,6 @@ I hope this little world always makes you smile.
           return;
         }
 
-        // Social interaction: Payesh & Melow seek each other out!
         if ((a.id === "payesh" || a.id === "melow") && Math.random() < 0.26) {
           const buddy = agents.find(other => other.id === (a.id === "payesh" ? "melow" : "payesh"));
           if (buddy) {
@@ -2434,7 +3178,6 @@ I hope this little world always makes you smile.
           }
         }
 
-        // Capybaras prefer the serene Garden & Animal World middle zones
         if (a.species === "capybara") {
           const gardenEl = document.getElementById("garden");
           const worldEl = document.getElementById("their-world");
@@ -2448,7 +3191,6 @@ I hope this little world always makes you smile.
           return;
         }
 
-        // General organic roaming avoiding center of text blocks
         for (let attempt = 0; attempt < 8; attempt++) {
           const sideBias = Math.random() < 0.55;
           const tx = sideBias
@@ -2471,10 +3213,17 @@ I hope this little world always makes you smile.
       }
 
       function updateAgents(dt, time) {
+        // Expire old poops automatically after 55 seconds so page stays tidy
+        for (let i = poops.length - 1; i >= 0; i--) {
+          if (time - poops[i].born > 55) {
+            poops.splice(i, 1);
+            updatePoopCounter();
+          }
+        }
+
         agents.forEach((a) => {
           a.stateTimer -= dt;
 
-          // Keep bubble anchored above animal as it moves
           if (a.activeBubbleEl) {
             a.activeBubbleEl.style.left = Math.min(docWidth - 135, Math.max(135, a.x)) + "px";
             a.activeBubbleEl.style.top = Math.max(68, a.y - 28) + "px";
@@ -2487,7 +3236,7 @@ I hope this little world always makes you smile.
 
             if (dist < 10 || a.stateTimer <= 0) {
               if (a.pendingPerch) {
-                if (a.pendingPerch === "nav" || (a.species === "cat" && Math.random() < 0.45)) {
+                if (a.pendingPerch === "nav" || (a.species === "cat" && Math.random() < 0.4)) {
                   a.state = "PEEKING";
                   a.dangling = false;
                 } else {
@@ -2498,14 +3247,25 @@ I hope this little world always makes you smile.
                 a.pendingPerch = null;
               } else {
                 const roll = Math.random();
-                if (a.species === "cat") {
-                  a.state = roll < 0.32 ? "SLEEPING" : (roll < 0.56 ? "SITTING" : (roll < 0.76 ? "GROOMING" : "STRETCHING"));
+                if (roll < 0.08 && poops.length < 5) {
+                  // Occasional cute poop moment!
+                  a.state = "POOPING";
+                  a.stateTimer = 2.4;
+                  a.didPoopThisCycle = false;
+                } else if (a.species === "cat") {
+                  if (roll < 0.28) a.state = "CAT_BUTT";
+                  else if (roll < 0.52) a.state = "SLEEPING";
+                  else if (roll < 0.72) a.state = "SITTING";
+                  else if (roll < 0.88) a.state = "GROOMING";
+                  else a.state = "STRETCHING";
+                  a.stateTimer = 3.5 + Math.random() * 5.5;
                 } else if (a.species === "dog") {
                   a.state = roll < 0.55 ? "SITTING" : "PLAYING";
+                  a.stateTimer = 3.2 + Math.random() * 5;
                 } else {
                   a.state = roll < 0.65 ? "SITTING" : "EATING";
+                  a.stateTimer = 3.8 + Math.random() * 5.5;
                 }
-                a.stateTimer = 3.2 + Math.random() * 5.5;
               }
             } else {
               const baseSpeed = a.species === "capybara" ? 24 : (a.state === "RUNNING" ? 86 : 44);
@@ -2515,14 +3275,16 @@ I hope this little world always makes you smile.
               if (Math.abs(dx) > 2) a.facing = dx >= 0 ? 1 : -1;
             }
           } else {
-            // Stationary / perched / sleeping states
+            if (a.state === "POOPING" && !a.didPoopThisCycle && a.stateTimer < 1.1) {
+              a.didPoopThisCycle = true;
+              spawnCutePoop(a.x - a.facing * 14, a.y, a.name);
+            }
             if (a.stateTimer <= 0) {
               a.dangling = false;
               pickNewWaypoint(a);
             }
           }
 
-          // Clamp within document bounds so no animal ever disappears off-screen
           a.x = Math.max(36, Math.min(docWidth - 36, a.x));
           a.y = Math.max(76, Math.min(docHeight - 40, a.y));
         });
@@ -2530,7 +3292,11 @@ I hope this little world always makes you smile.
 
       function renderWorldCanvas(time) {
         worldCtx.clearRect(0, 0, docWidth, docHeight);
-        // Sort by Y coordinate for natural depth layering
+
+        // Render any cute storybook poops on the ground
+        poops.forEach((p) => drawCutePoop(worldCtx, p, time));
+
+        // Render animals sorted by Y coordinate
         const sorted = [...agents].sort((a, b) => a.y - b.y);
         sorted.forEach((a) => {
           if (a.species === "cat") drawStorybookCat(worldCtx, a, time);
@@ -2539,45 +3305,94 @@ I hope this little world always makes you smile.
         });
       }
 
-      // Dynamic pointer-events on worldCanvas so buttons & links are NEVER blocked!
-      function findHitLandAnimal(pageX, pageY) {
-        const hitRadius = 38;
+      function findHitWorldEntity(pageX, pageY) {
+        // Check animals first
         for (let i = agents.length - 1; i >= 0; i--) {
           const a = agents[i];
-          if (Math.hypot(pageX - a.x, pageY - a.y) <= hitRadius) {
-            return a;
+          if (Math.hypot(pageX - a.x, pageY - a.y) <= 38) {
+            return { type: "animal", item: a };
+          }
+        }
+        // Check poops
+        for (let i = poops.length - 1; i >= 0; i--) {
+          const p = poops[i];
+          if (Math.hypot(pageX - p.x, pageY - p.y) <= 28) {
+            return { type: "poop", index: i, item: p };
           }
         }
         return null;
       }
 
+      function cleanPoopAtIndex(idx) {
+        const p = poops[idx];
+        if (!p) return;
+        poops.splice(idx, 1);
+        updatePoopCounter();
+        const proxy = {
+          name: "All Tidy!",
+          x: p.x,
+          y: p.y - 10,
+          greetings: [`All clean! Thank you for tidying up after ${p.owner}, babu — mwah!`],
+          activeBubbleEl: null,
+          bubbleTimeout: null
+        };
+        showSpeechBubble(proxy);
+        spawnPetalBurst(p.x, p.y - (window.scrollY || 0), 8);
+      }
+
       window.addEventListener("pointermove", (e) => {
-        const hit = findHitLandAnimal(e.pageX, e.pageY);
+        const hit = findHitWorldEntity(e.pageX, e.pageY);
         worldCanvas.style.pointerEvents = hit ? "auto" : "none";
         worldCanvas.style.cursor = hit ? "pointer" : "default";
       }, { passive: true });
 
       worldCanvas.addEventListener("pointerdown", (e) => {
-        const hit = findHitLandAnimal(e.pageX, e.pageY);
+        const hit = findHitWorldEntity(e.pageX, e.pageY);
         if (hit) {
           e.preventDefault();
           e.stopPropagation();
-          interactWithAgent(hit);
+          if (hit.type === "animal") interactWithAgent(hit.item);
+          else if (hit.type === "poop") cleanPoopAtIndex(hit.index);
         }
       });
 
-      // Fallback touch tap detection on mobile devices where pointermove doesn't precede tap
       document.addEventListener("touchstart", (e) => {
         if (!e.touches || !e.touches.length) return;
         const t = e.touches[0];
-        const hit = findHitLandAnimal(t.pageX, t.pageY);
+        const hit = findHitWorldEntity(t.pageX, t.pageY);
         if (hit) {
-          interactWithAgent(hit);
+          if (hit.type === "animal") interactWithAgent(hit.item);
+          else if (hit.type === "poop") cleanPoopAtIndex(hit.index);
         }
       }, { passive: true });
 
+      // Playful buttons in Their World
+      document.getElementById("cat-butt-parade-btn").addEventListener("click", () => {
+        const cats = agents.filter(a => a.species === "cat");
+        const chosen = cats[Math.floor(Math.random() * cats.length)];
+        if (chosen) {
+          const scrollY = window.scrollY || window.pageYOffset;
+          chosen.x = Math.min(docWidth - 80, Math.max(80, window.innerWidth * 0.5));
+          chosen.y = scrollY + Math.min(window.innerHeight * 0.55, 320);
+          chosen.state = "CAT_BUTT";
+          chosen.stateTimer = 8;
+          showSpeechBubble(chosen, `Hehe! ${chosen.name} is showing off a fluffy cat butt for babu!`);
+        }
+      });
+
+      document.getElementById("scoop-poops-btn").addEventListener("click", () => {
+        if (!poops.length) {
+          const payesh = agents.find(a => a.id === "payesh");
+          if (payesh) showSpeechBubble(payesh, "Everything is spotless right now, baby! Mwah!");
+          return;
+        }
+        poops.length = 0;
+        updatePoopCounter();
+        spawnMwahBurst(window.innerWidth * 0.5, window.innerHeight * 0.5, 6);
+      });
+
       /* =========================================================================
-         7. DRIFTWOOD LILY POND (SEA OTTERS OLIVER & OLIVE + SEALS PEBBLE & BUBBLES)
+         8. DRIFTWOOD LILY POND (SEA OTTERS OLIVER & OLIVE + SEALS PEBBLE & BUBBLES)
       ========================================================================= */
       const pondCanvas = document.getElementById("pond-canvas");
       const pondCtx = pondCanvas.getContext("2d");
@@ -2602,9 +3417,9 @@ I hope this little world always makes you smile.
           seed: 0.8,
           prop: "shell",
           greetings: [
-            "Chirp-squeak! Hi Tanha, I'm Oliver! Look at the pearlescent shell I found for you.",
-            "Squeak! Olive and I were just floating on our backs watching the clouds.",
-            "Happy otter chirp! Everything is calmer when you're here, Tanha."
+            "Chirp-squeak! Hi babu, I'm Oliver! Look at the pearlescent shell I found for you. Mwah!",
+            "Squeak! Olive and I were just floating on our backs watching the clouds, baby.",
+            "Happy otter chirp! Everything is calmer when our chumopakhi is here."
           ]
         },
         {
@@ -2622,9 +3437,9 @@ I hope this little world always makes you smile.
           seed: 2.1,
           prop: "tulip",
           greetings: [
-            "Soft chirp! Hello Tanha, I'm Olive. I kept a tiny pink tulip safe while floating.",
-            "Squeak! Oliver and I love holding paws so we don't drift apart.",
-            "Hi Tanha! The pond water is so gentle today."
+            "Soft chirp! Hello baby, I'm Olive. I kept a tiny pink tulip safe while floating.",
+            "Squeak! Oliver and I love holding paws so we don't drift apart, babu.",
+            "Mwah! The pond water is so gentle today, chumopakhi."
           ]
         },
         {
@@ -2642,9 +3457,9 @@ I hope this little world always makes you smile.
           seed: 3.4,
           spotted: true,
           greetings: [
-            "Arf-chirp! Hello Tanha! I'm Pebble. Watch me glide across the lily pond!",
-            "Soft seal call! Bubbles and I love doing splash loops together.",
-            "Hi Tanha! Flipper claps just for you!"
+            "Arf-chirp! Hello babu! I'm Pebble. Watch me glide across the lily pond!",
+            "Soft seal call! Bubbles and I love doing splash loops for our favorite baby.",
+            "Hi chumopakhi! Flipper claps and a big mwah just for you!"
           ]
         },
         {
@@ -2662,9 +3477,9 @@ I hope this little world always makes you smile.
           seed: 4.9,
           spotted: false,
           greetings: [
-            "Yip-chirp! I'm Bubbles! Look how fast I can roll in the water, Tanha!",
-            "Splash! Hi Tanha! Pebble and I were waiting for you to visit the pond.",
-            "Happy seal squeak! Sending you a whole pond full of good luck."
+            "Yip-chirp! I'm Bubbles! Look how fast I can roll in the water, babu!",
+            "Splash! Hi baby! Pebble and I were waiting for you to visit the pond.",
+            "Happy seal squeak! Sending a big mwah to our chumopakhi!"
           ]
         }
       ];
@@ -2692,13 +3507,11 @@ I hope this little world always makes you smile.
         ctx.rotate(roll);
         ctx.scale(o.facing, 1);
 
-        // Waterline shadow halo
         ctx.fillStyle = "rgba(94, 122, 115, 0.24)";
         ctx.beginPath();
         ctx.ellipse(0, 7, 34, 10, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Gently kicking hind flippers
         const kick = Math.sin(time * 4.5 + o.seed) * 3;
         ctx.fillStyle = "#5B3E2B";
         ctx.beginPath();
@@ -2706,7 +3519,6 @@ I hope this little world always makes you smile.
         ctx.ellipse(-26, -3 - kick, 8.5, 4, 0.2, 0, Math.PI * 2);
         ctx.fill();
 
-        // Plush floating otter torso
         const furGrad = ctx.createLinearGradient(0, -12, 0, 12);
         furGrad.addColorStop(0, o.id === "oliver" ? "#9C704E" : "#B38560");
         furGrad.addColorStop(1, "#6C4A31");
@@ -2715,26 +3527,22 @@ I hope this little world always makes you smile.
         ctx.ellipse(-2, 1, 24, 12.5, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Creamy chest patch
         ctx.fillStyle = "#DFC9B0";
         ctx.beginPath();
         ctx.ellipse(3, -3, 13, 7.5, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Round creamy-tan otter head
         ctx.fillStyle = "#E8D7C3";
         ctx.beginPath();
         ctx.arc(20, -4, 10.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Cute rounded ears
         ctx.fillStyle = "#7D583C";
         ctx.beginPath();
         ctx.arc(15, -13, 3.2, 0, Math.PI * 2);
         ctx.arc(24, -12.5, 3, 0, Math.PI * 2);
         ctx.fill();
 
-        // Eyes & button nose
         ctx.fillStyle = "#2E2219";
         ctx.beginPath();
         ctx.arc(18, -6, 1.8, 0, Math.PI * 2);
@@ -2742,7 +3550,6 @@ I hope this little world always makes you smile.
         ctx.ellipse(21.5, -2.5, 2.3, 1.7, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Little front paws holding a pearlescent shell or pink tulip!
         const pawLift = o.state === "REACTING" ? -4 : 0;
         ctx.fillStyle = "#7D583C";
         ctx.beginPath();
@@ -2779,13 +3586,11 @@ I hope this little world always makes you smile.
         ctx.rotate(rollAngle);
         ctx.scale(sObj.facing, 1);
 
-        // Water shadow
         ctx.fillStyle = "rgba(94, 122, 115, 0.24)";
         ctx.beginPath();
         ctx.ellipse(0, 9, 32, 9, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Tail flippers undulating
         const tailFlip = Math.sin(time * 6 + sObj.seed) * 4;
         ctx.fillStyle = "#7C8683";
         ctx.beginPath();
@@ -2796,7 +3601,6 @@ I hope this little world always makes you smile.
         ctx.closePath();
         ctx.fill();
 
-        // Streamlined chubby seal body
         const bodyGrad = ctx.createRadialGradient(4, -5, 4, 0, 0, 30);
         bodyGrad.addColorStop(0, sObj.spotted ? "#CFD6D3" : "#E3E8E6");
         bodyGrad.addColorStop(0.7, sObj.spotted ? "#A6B0AD" : "#BCC4C1");
@@ -2806,7 +3610,6 @@ I hope this little world always makes you smile.
         ctx.ellipse(0, 0, 26, 13.5, -0.06, 0, Math.PI * 2);
         ctx.fill();
 
-        // Harbor seal spots for Pebble
         if (sObj.spotted) {
           ctx.fillStyle = "rgba(92, 102, 99, 0.35)";
           [[-8, -4], [-2, 3], [5, -5], [-13, 2]].forEach(([sx, sy]) => {
@@ -2816,13 +3619,11 @@ I hope this little world always makes you smile.
           });
         }
 
-        // Seal head
         ctx.fillStyle = sObj.spotted ? "#BDC6C3" : "#D4DCDA";
         ctx.beginPath();
         ctx.arc(21, -5, 10.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Side flipper (claps when reacting!)
         const clap = sObj.state === "REACTING" ? Math.sin(time * 16) * 0.5 : 0;
         ctx.save();
         ctx.translate(6, 5);
@@ -2833,7 +3634,6 @@ I hope this little world always makes you smile.
         ctx.fill();
         ctx.restore();
 
-        // Glossy dark seal eyes & whiskers
         ctx.fillStyle = "#262B2A";
         ctx.beginPath();
         ctx.arc(20, -7, 2.4, 0, Math.PI * 2);
@@ -2853,7 +3653,6 @@ I hope this little world always makes you smile.
       function updateAndDrawPond(dt, time) {
         pondCtx.clearRect(0, 0, pondW, pondH);
 
-        // Soft sunlit water caustics
         pondCtx.save();
         pondCtx.strokeStyle = "rgba(255, 255, 255, 0.26)";
         pondCtx.lineWidth = 1.5;
@@ -2867,7 +3666,6 @@ I hope this little world always makes you smile.
         }
         pondCtx.restore();
 
-        // Decorative lily pads
         const pads = [
           { x: pondW * 0.16, y: pondH * 0.32, r: 22, flower: true },
           { x: pondW * 0.84, y: pondH * 0.28, r: 19, flower: false },
@@ -2902,7 +3700,6 @@ I hope this little world always makes you smile.
           pondCtx.restore();
         });
 
-        // Ripples
         for (let i = ripples.length - 1; i >= 0; i--) {
           const rp = ripples[i];
           rp.r += 32 * dt;
@@ -2918,7 +3715,6 @@ I hope this little world always makes you smile.
           pondCtx.stroke();
         }
 
-        // Update aquatic creatures
         const oliver = AQUATIC_ANIMALS[0];
         const olive = AQUATIC_ANIMALS[1];
 
@@ -2934,7 +3730,6 @@ I hope this little world always makes you smile.
             }
           }
 
-          // Oliver & Olive gently gravitate together to hold paws while floating!
           if (aq.id === "olive" && oliver.state === "FLOATING" && olive.state === "FLOATING") {
             const desiredX = Math.min(0.84, oliver.x + 0.085);
             const desiredY = oliver.y + 0.015;
@@ -2964,7 +3759,6 @@ I hope this little world always makes you smile.
           else drawSeal(pondCtx, aq, px, py, time);
         });
 
-        // Draw paw-holding connection when Oliver & Olive are floating side-by-side
         const distOtters = Math.hypot((oliver.x - olive.x) * pondW, (oliver.y - olive.y) * pondH);
         if (distOtters < 86 && oliver.state === "FLOATING" && olive.state === "FLOATING") {
           pondStatusEl.textContent = "Oliver & Olive are holding paws in the water";
@@ -3017,7 +3811,7 @@ I hope this little world always makes you smile.
       });
 
       /* =========================================================================
-         8. RESIDENT WHISTLE CHIPS (CALL ANY OF THE 14 ANIMALS)
+         9. RESIDENT WHISTLE CHIPS (CALL ANY OF THE 14 ANIMALS)
       ========================================================================= */
       function buildResidentChips() {
         residentChipsEl.innerHTML = "";
@@ -3051,7 +3845,7 @@ I hope this little world always makes you smile.
       buildResidentChips();
 
       /* =========================================================================
-         9. INTERACTIVE BOTANICAL GARDEN (TULIPS, DAISIES, WILDFLOWERS & WIND)
+         10. INTERACTIVE BOTANICAL GARDEN (TULIPS, DAISIES, WILDFLOWERS & WIND)
       ========================================================================= */
       const gardenCanvas = document.getElementById("garden-canvas");
       const gardenCtx = gardenCanvas.getContext("2d");
@@ -3062,19 +3856,19 @@ I hope this little world always makes you smile.
 
       const FLOWER_MESSAGES = {
         tulip: [
-          "A tulip for you, Tanha. A little reminder that beautiful things bloom in their own time.",
-          "A soft blush tulip for my favorite person—planted with all my love.",
-          "Every tulip in this little garden turns toward you, Tanha."
+          "A tulip for you, babu. A little reminder that beautiful things bloom in their own time.",
+          "A soft blush tulip for my baby—planted with all my love. Mwah!",
+          "Every tulip in this little garden turns toward you, chumopakhi."
         ],
         daisy: [
           "A tiny daisy for my favourite person. Keep blooming, little one.",
-          "Simple, bright, and quietly lovely—just like every afternoon spent with you.",
-          "A meadow daisy whispering that you are deeply cherished, Tanha."
+          "Simple, bright, and quietly lovely—just like every afternoon spent with you, babu.",
+          "A meadow daisy whispering that you are deeply cherished, baby."
         ],
         wildflower: [
           "A little wildflower, because the loveliest things are sometimes beautifully unexpected.",
-          "Grown wild and free in your own quiet corner of the internet.",
-          "A soft botanical wish for peaceful days and gentle smiles, Kitten."
+          "Grown wild and free in your own quiet corner of the internet, chumopakhi.",
+          "A soft botanical wish for peaceful days and gentle smiles, babu."
         ]
       };
 
@@ -3111,12 +3905,10 @@ I hope this little world always makes you smile.
         const topX = baseX + sway;
         const topY = baseY - stemH;
 
-        // Smooth decay toward resting bloom
         if (fl.bloom > 0.55) {
           fl.bloom = Math.max(0.55, fl.bloom - 0.003);
         }
 
-        // Curved botanical stem
         ctx.strokeStyle = "#6C7D5E";
         ctx.lineWidth = 3.2;
         ctx.lineCap = "round";
@@ -3125,14 +3917,12 @@ I hope this little world always makes you smile.
         ctx.quadraticCurveTo(baseX + sway * 0.35, baseY - stemH * 0.52, topX, topY);
         ctx.stroke();
 
-        // Botanical leaves along stem
         ctx.fillStyle = "#78866B";
         ctx.beginPath();
         ctx.ellipse(baseX + sway * 0.25 - 10, baseY - stemH * 0.32, 13, 5, -0.55, 0, Math.PI * 2);
         ctx.ellipse(baseX + sway * 0.45 + 10, baseY - stemH * 0.48, 12, 4.5, 0.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Blossom head
         ctx.save();
         ctx.translate(topX, topY);
         ctx.rotate(sway * 0.012);
@@ -3141,7 +3931,6 @@ I hope this little world always makes you smile.
 
         if (fl.type === "tulip") {
           const spread = (fl.bloom - 0.3) * 0.42;
-          // Left outer petal
           ctx.save();
           ctx.rotate(-spread);
           ctx.fillStyle = fl.color;
@@ -3150,7 +3939,6 @@ I hope this little world always makes you smile.
           ctx.fill();
           ctx.restore();
 
-          // Right outer petal
           ctx.save();
           ctx.rotate(spread);
           ctx.fillStyle = fl.color;
@@ -3159,7 +3947,6 @@ I hope this little world always makes you smile.
           ctx.fill();
           ctx.restore();
 
-          // Center petal with soft highlight
           const grad = ctx.createLinearGradient(0, -22, 0, 4);
           grad.addColorStop(0, "#E3B4B6");
           grad.addColorStop(1, fl.color);
@@ -3206,7 +3993,6 @@ I hope this little world always makes you smile.
         gardenCtx.clearRect(0, 0, gardenW, gardenH);
         windImpulse *= Math.pow(0.25, dt);
 
-        // Soft mossy meadow ground curve
         gardenCtx.fillStyle = "#D5DEC9";
         gardenCtx.beginPath();
         gardenCtx.moveTo(0, gardenH - 26);
@@ -3216,7 +4002,6 @@ I hope this little world always makes you smile.
         gardenCtx.closePath();
         gardenCtx.fill();
 
-        // Delicate grass blades
         gardenCtx.strokeStyle = "rgba(120, 134, 107, 0.55)";
         gardenCtx.lineWidth = 1.6;
         for (let gx = 16; gx < gardenW - 12; gx += 22) {
@@ -3278,11 +4063,11 @@ I hope this little world always makes you smile.
         GARDEN_FLOWERS.push(newTulip);
         appState.customTulips.push(newTulip);
         persistState();
-        gardenMsgEl.textContent = "“A brand-new tulip planted just for Tanha—may it always remind you how loved you are.”";
+        gardenMsgEl.textContent = "“A brand-new tulip planted just for my babu—may it always remind you how loved you are. Mwah!”";
       });
 
       /* =========================================================================
-         10. AMBIENT BUTTERFLIES & FALLING PETALS
+         11. AMBIENT BUTTERFLIES, FALLING PETALS & "MWAH" KISS PARTICLES
       ========================================================================= */
       const ambientCanvas = document.getElementById("ambient-canvas");
       const ambientCtx = ambientCanvas.getContext("2d");
@@ -3290,6 +4075,7 @@ I hope this little world always makes you smile.
       let ambH = window.innerHeight;
 
       const petals = [];
+      const mwahParticles = [];
       const butterflies = [
         { x: 0.25, y: 0.3, vx: 22, vy: 8, color: "#DFB7B9", seed: 0.5 },
         { x: 0.75, y: 0.55, vx: -18, vy: -9, color: "#E8D5A7", seed: 2.4 }
@@ -3321,11 +4107,66 @@ I hope this little world always makes you smile.
         }
       }
 
+      function spawnMwahBurst(clientX, clientY, count = 6) {
+        const labels = ["mwah!", "mwah", "babu", "chumopakhi"];
+        for (let i = 0; i < count; i++) {
+          if (mwahParticles.length > 26) mwahParticles.shift();
+          mwahParticles.push({
+            x: clientX + (Math.random() - 0.5) * 70,
+            y: clientY + (Math.random() - 0.5) * 30,
+            vx: (Math.random() - 0.5) * 28,
+            vy: -36 - Math.random() * 28,
+            life: 1.0,
+            label: i === 0 ? "mwah!" : labels[i % labels.length],
+            showWord: i % 2 === 0
+          });
+        }
+      }
+
+      document.getElementById("send-mwah-btn").addEventListener("click", (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        spawnMwahBurst(r.left + r.width * 0.5, r.bottom + 24, 8);
+        spawnPetalBurst(r.left + r.width * 0.5, r.bottom + 24, 10);
+        speakGreeting("Mwah! Love you so much, my baby chumopakhi.", 0.08);
+      });
+
+      function drawLittleHeart(ctx, x, y, size, alpha) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.fillStyle = `rgba(197, 114, 120, ${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(0, size * 0.35);
+        ctx.bezierCurveTo(-size, -size * 0.45, -size * 0.45, -size * 1.15, 0, -size * 0.45);
+        ctx.bezierCurveTo(size * 0.45, -size * 1.15, size, -size * 0.45, 0, size * 0.35);
+        ctx.fill();
+        ctx.restore();
+      }
+
       function renderAmbient(dt, time) {
         ambientCtx.clearRect(0, 0, ambW, ambH);
+
+        // Floating "mwah!" kisses & hearts
+        for (let i = mwahParticles.length - 1; i >= 0; i--) {
+          const m = mwahParticles[i];
+          m.x += (m.vx + Math.sin(time * 3 + i) * 10) * dt;
+          m.y += m.vy * dt;
+          m.life -= dt * 0.62;
+          if (m.life <= 0) {
+            mwahParticles.splice(i, 1);
+            continue;
+          }
+          drawLittleHeart(ambientCtx, m.x, m.y, 9, m.life * 0.9);
+          if (m.showWord) {
+            ambientCtx.save();
+            ambientCtx.font = "italic 600 15px 'Cormorant Garamond', Georgia, serif";
+            ambientCtx.fillStyle = `rgba(138, 76, 82, ${m.life})`;
+            ambientCtx.fillText(m.label, m.x + 11, m.y + 3);
+            ambientCtx.restore();
+          }
+        }
+
         if (prefersReducedMotion) return;
 
-        // Occasional gentle drifting petal from top
         if (petals.length < 12 && Math.random() < 0.035) {
           petals.push({
             x: Math.random() * ambW,
@@ -3358,7 +4199,6 @@ I hope this little world always makes you smile.
           ambientCtx.restore();
         }
 
-        // Delicate fluttering butterflies
         butterflies.forEach((b) => {
           b.x += (b.vx * dt) / ambW;
           b.y += ((b.vy + Math.sin(time * 2.6 + b.seed) * 18) * dt) / ambH;
@@ -3387,10 +4227,11 @@ I hope this little world always makes you smile.
       }
 
       /* =========================================================================
-         11. MAIN ANIMATION LOOP & RESPONSIVE LIFECYCLE
+         12. MAIN ANIMATION LOOP & RESPONSIVE LIFECYCLE
       ========================================================================= */
       function handleAllResizes() {
         resizeAmbient();
+        resizeHome();
         resizePond();
         resizeGarden();
         refreshLayoutZones();
@@ -3419,6 +4260,7 @@ I hope this little world always makes you smile.
 
         updateAgents(dt, time);
         renderWorldCanvas(time);
+        renderHomeRoom(dt, time);
         updateAndDrawPond(dt, time);
         renderGarden(dt, time);
         renderAmbient(dt, time);
