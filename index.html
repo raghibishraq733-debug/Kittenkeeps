@@ -1,1521 +1,3431 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Kittenkeeps — A Little World for Tanha</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
-<style>
-
-:root {
-    --bg:#f5f1e9;
-    --paper:#eee7dc;
-    --brown:#514538;
-    --muted:#938476;
-    --accent:#a18a70;
-    --green:#78866b;
-    --pink:#c58e91;
-    --line:#ded4c6;
-}
-
-* {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html {scroll-behavior:smooth;}
-
-body {
-    background:var(--bg);
-    color:var(--brown);
-    font-family:'DM Sans',sans-serif;
-    overflow-x:hidden;
-}
-
-button {font-family:inherit;}
-
-button:focus-visible,
-a:focus-visible {
-    outline:2px solid var(--green);
-    outline-offset:4px;
-}
-
-a {
-    color:inherit;
-    text-decoration:none;
-}
-
-/* NAVIGATION */
-
-nav {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:25px 7%;
-    border-bottom:1px solid var(--line);
-    background:rgba(245,241,233,.95);
-    position:relative;
-    z-index:20;
-}
-
-.logo {
-    font-family:'Cormorant Garamond',serif;
-    font-size:30px;
-}
-
-.nav-links {
-    display:flex;
-    gap:24px;
-}
-
-.nav-links a {
-    font-size:9px;
-    letter-spacing:2px;
-    color:var(--muted);
-    transition:.3s;
-}
-
-.nav-links a:hover {color:var(--brown);}
-
-/* SOUND BUTTON */
-
-.sound-button {
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:50;
-    background:var(--brown);
-    color:white;
-    border:0;
-    padding:14px 19px;
-    font-size:10px;
-    letter-spacing:1px;
-    cursor:pointer;
-    border-radius:30px;
-    box-shadow:0 5px 20px #51453820;
-}
-
-.sound-button:hover {
-    background:var(--green);
-}
-
-/* HERO */
-
-.hero {
-    min-height:85vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    position:relative;
-    padding:80px 20px;
-    overflow:hidden;
-}
-
-.eyebrow {
-    font-size:10px;
-    letter-spacing:5px;
-    color:var(--accent);
-    margin-bottom:35px;
-    animation:fadeUp 1.2s both;
-}
-
-h1 {
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(75px,12vw,130px);
-    font-weight:300;
-    line-height:.85;
-    animation:fadeUp 1.4s both;
-}
-
-h1 em {
-    color:#987e66;
-}
-
-.subtitle {
-    margin-top:32px;
-    color:var(--muted);
-    font-size:12px;
-    line-height:2.3;
-    letter-spacing:1px;
-}
-
-.button {
-    display:inline-block;
-    padding:16px 34px;
-    margin-top:35px;
-    border:1px solid var(--accent);
-    background:transparent;
-    color:var(--brown);
-    font-size:10px;
-    letter-spacing:2px;
-    cursor:pointer;
-    transition:.4s;
-}
-
-.button:hover {
-    background:var(--brown);
-    color:white;
-    transform:translateY(-4px);
-}
-
-.hero-flower {
-    position:absolute;
-    font-size:110px;
-    opacity:.13;
-    color:var(--green);
-    animation:sway 6s infinite ease-in-out;
-    pointer-events:none;
-}
-
-.hero-flower.one {
-    left:7%;
-    bottom:15%;
-}
-
-.hero-flower.two {
-    right:7%;
-    top:15%;
-    animation-delay:2s;
-}
-
-/* BOTANICAL SVG FLOWERS */
-
-.botanical {
-    width:100px;
-    position:absolute;
-    opacity:.7;
-    pointer-events:none;
-    animation:sway 5s infinite ease-in-out;
-}
-
-.botanical.left {
-    left:2%;
-    top:15%;
-}
-
-.botanical.right {
-    right:2%;
-    bottom:10%;
-}
-
-@keyframes sway {
-    0%,100% {transform:rotate(-8deg);}
-    50% {transform:rotate(8deg);}
-}
-
-/* SECTIONS */
-
-section.content {
-    padding:110px 20px;
-    text-align:center;
-    position:relative;
-}
-
-.section-label {
-    font-size:10px;
-    letter-spacing:4px;
-    color:var(--accent);
-    margin-bottom:22px;
-}
-
-h2 {
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(42px,6vw,65px);
-    font-weight:400;
-    margin-bottom:22px;
-}
-
-.description {
-    max-width:490px;
-    margin:auto;
-    font-size:13px;
-    line-height:2.3;
-    color:var(--muted);
-}
-
-/* ANIMAL WORLD */
-
-.animal-world {
-    background:#eee9df;
-    padding:100px 20px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-}
-
-.world-heading {
-    margin-bottom:15px;
-}
-
-.world-intro {
-    color:var(--muted);
-    font-size:12px;
-    line-height:2;
-    max-width:440px;
-    margin:auto;
-}
-
-/* ANIMAL GRID */
-
-.animal-grid {
-    display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    max-width:1100px;
-    margin:65px auto 0;
-    gap:20px;
-}
-
-.animal-card {
-    border:1px solid #ded4c6;
-    background:#f5f1e9;
-    padding:22px 12px;
-    min-width:0;
-    cursor:pointer;
-    transition:.4s;
-    position:relative;
-    overflow:hidden;
-}
-
-.animal-card:hover {
-    transform:translateY(-8px);
-    background:#faf7f0;
-    box-shadow:0 15px 30px #51453810;
-}
-
-.animal-card:active {
-    transform:scale(.97);
-}
-
-.animal-picture {
-    width:100%;
-    max-width:145px;
-    height:125px;
-    margin:auto;
-    display:block;
-    overflow:visible;
-}
-
-.animal-card h3 {
-    font-family:'Cormorant Garamond',serif;
-    font-size:23px;
-    font-weight:400;
-    margin-top:8px;
-}
-
-.animal-card p {
-    font-size:9px;
-    color:var(--muted);
-    letter-spacing:1px;
-    margin-top:6px;
-}
-
-.animal-card .tap {
-    font-size:9px;
-    color:var(--accent);
-    margin-top:12px;
-}
-
-/* ANIMAL MOVEMENTS */
-
-.float {
-    animation:float 3s ease-in-out infinite;
-    transform-origin:center;
-}
-
-.float.delay1 {animation-delay:.5s;}
-.float.delay2 {animation-delay:1s;}
-.float.delay3 {animation-delay:1.5s;}
-
-@keyframes float {
-    0%,100% {transform:translateY(0);}
-    50% {transform:translateY(-8px);}
-}
-
-.tail {
-    transform-box:fill-box;
-    transform-origin:10% 50%;
-    animation:wag .8s infinite ease-in-out;
-}
-
-@keyframes wag {
-    0%,100% {transform:rotate(-15deg);}
-    50% {transform:rotate(18deg);}
-}
-
-.blink {
-    animation:blink 4s infinite;
-    transform-box:fill-box;
-    transform-origin:center;
-}
-
-@keyframes blink {
-    0%,94%,100% {transform:scaleY(1);}
-    96% {transform:scaleY(.12);}
-}
-
-.swim {
-    animation:swim 3s ease-in-out infinite;
-}
-
-@keyframes swim {
-    0%,100% {transform:translateX(-5px) rotate(-2deg);}
-    50% {transform:translateX(6px) rotate(3deg);}
-}
-
-.walk {
-    animation:walk 2s ease-in-out infinite;
-}
-
-@keyframes walk {
-    0%,100% {transform:translateY(0);}
-    50% {transform:translateY(-5px);}
-}
-
-/* ANIMAL GREETING */
-
-.greeting-area {
-    max-width:500px;
-    margin:40px auto 0;
-    min-height:75px;
-    padding:20px;
-    border-top:1px solid var(--line);
-    color:var(--brown);
-    font-family:'Cormorant Garamond',serif;
-    font-size:24px;
-    line-height:1.5;
-}
-
-.greeting-area small {
-    display:block;
-    font-family:'DM Sans',sans-serif;
-    font-size:9px;
-    color:var(--muted);
-    letter-spacing:2px;
-    margin-bottom:8px;
-}
-
-/* FLOWER GARDEN */
-
-.garden {
-    padding:110px 20px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-}
-
-.flower-row {
-    display:flex;
-    justify-content:center;
-    align-items:end;
-    flex-wrap:wrap;
-    gap:35px;
-    margin-top:55px;
-}
-
-.flower-item {
-    width:105px;
-    cursor:pointer;
-    transition:.4s;
-}
-
-.flower-item:hover {
-    transform:translateY(-8px);
-}
-
-.flower-item svg {
-    width:100%;
-    overflow:visible;
-}
-
-.flower-item p {
-    font-family:'Cormorant Garamond',serif;
-    font-size:19px;
-    margin-top:10px;
-}
-
-.flower-head {
-    transform-origin:50% 100%;
-    animation:flowerSway 4s ease-in-out infinite;
-}
-
-@keyframes flowerSway {
-    0%,100% {transform:rotate(-5deg);}
-    50% {transform:rotate(5deg);}
-}
-
-/* MEMORIES */
-
-.memories {
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:22px;
-    margin-top:50px;
-}
-
-.memory-card {
-    width:240px;
-    padding:35px 20px;
-    border:1px solid var(--line);
-    background:transparent;
-    cursor:pointer;
-    transition:.4s;
-    color:var(--brown);
-}
-
-.memory-card:hover {
-    transform:translateY(-7px);
-    background:var(--paper);
-}
-
-.memory-card h3 {
-    font-family:'Cormorant Garamond',serif;
-    font-size:27px;
-    font-weight:400;
-}
-
-.memory-card p {
-    font-size:11px;
-    color:var(--muted);
-    margin-top:12px;
-}
-
-/* SURPRISE */
-
-.surprise-box {
-    display:none;
-    max-width:450px;
-    margin:35px auto;
-    padding:35px;
-    border:1px solid var(--line);
-    font-family:'Cormorant Garamond',serif;
-    font-size:25px;
-    line-height:1.7;
-    animation:fadeUp .8s both;
-}
-
-.surprise-box.show {
-    display:block;
-}
-
-/* MODAL */
-
-.modal {
-    display:none;
-    position:fixed;
-    inset:0;
-    background:#33291fbf;
-    z-index:100;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
-
-.modal.show {display:flex;}
-
-.modal-content {
-    max-width:430px;
-    width:100%;
-    background:var(--bg);
-    padding:45px 30px;
-    text-align:center;
-    position:relative;
-    animation:fadeUp .5s both;
-}
-
-.modal-content h2 {
-    font-size:42px;
-}
-
-.modal-content p {
-    font-family:'Cormorant Garamond',serif;
-    font-size:23px;
-    line-height:1.7;
-    color:var(--muted);
-}
-
-.close {
-    position:absolute;
-    top:12px;
-    right:17px;
-    border:0;
-    background:none;
-    font-size:26px;
-    cursor:pointer;
-}
-
-/* PETALS */
-
-.petal {
-    position:fixed;
-    top:-30px;
-    width:12px;
-    height:17px;
-    background:#d7a5a0;
-    border-radius:100% 0 100% 0;
-    opacity:.5;
-    z-index:2;
-    pointer-events:none;
-    animation:fall linear forwards;
-}
-
-@keyframes fall {
-    to {
-        transform:translateY(110vh) rotate(700deg);
-        opacity:0;
-    }
-}
-
-/* FOOTER */
-
-footer {
-    border-top:1px solid var(--line);
-    padding:50px 20px;
-    text-align:center;
-    color:var(--accent);
-    font-size:10px;
-    letter-spacing:3px;
-}
-
-/* REVEAL */
-
-.reveal {
-    opacity:0;
-    transform:translateY(35px);
-    transition:opacity .9s,transform .9s;
-}
-
-.reveal.visible {
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* TOP BUTTON */
-
-.top-button {
-    position:fixed;
-    bottom:80px;
-    right:20px;
-    width:42px;
-    height:42px;
-    background:var(--bg);
-    border:1px solid var(--accent);
-    color:var(--brown);
-    cursor:pointer;
-    opacity:0;
-    pointer-events:none;
-    transition:.3s;
-    z-index:40;
-}
-
-.top-button.show {
-    opacity:1;
-    pointer-events:auto;
-}
-
-/* MOBILE */
-
-@media(max-width:800px) {
-    .animal-grid {
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        max-width:520px;
-    }
-}
-
-@media(max-width:480px) {
-    nav {
-        padding:20px 5%;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="Kittenkeeps — Just a little corner of the internet built for Tanha Naween Nawar." />
+  <meta name="theme-color" content="#F5F1E9" />
+  <title>Kittenkeeps — A Little World for Tanha</title>
+
+  <!-- Editorial Storybook Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ivory: #F5F1E9;
+      --paper: #EEE7DC;
+      --cream: #F2EBDD;
+      --brown: #514538;
+      --brown-soft: #6B5C4C;
+      --taupe: #938476;
+      --green: #78866B;
+      --green-deep: #5E6B52;
+      --pink: #C58E91;
+      --pink-soft: #DFB7B9;
+      --wood: #A18A70;
+      --wood-light: #C8B69E;
+      --water-top: #DCE6E2;
+      --water-deep: #BFD2CC;
+      --shadow-warm: rgba(81, 69, 56, 0.08);
+      --shadow-card: 0 14px 36px rgba(81, 69, 56, 0.07);
+      --border-hairline: rgba(161, 138, 112, 0.28);
+      --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
     }
 
-    .logo {font-size:24px;}
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    .nav-links {gap:12px;}
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--ivory);
+      color: var(--brown);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      background-color: var(--ivory);
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(197, 142, 145, 0.08) 0%, transparent 38%),
+        radial-gradient(circle at 88% 22%, rgba(120, 134, 107, 0.09) 0%, transparent 42%),
+        radial-gradient(circle at 20% 62%, rgba(161, 138, 112, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 82% 85%, rgba(197, 142, 145, 0.07) 0%, transparent 40%);
+      overflow-x: hidden;
+    }
+
+    /* Subtle warm storybook paper grain */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 900;
+      opacity: 0.28;
+      background-image: radial-gradient(rgba(81, 69, 56, 0.14) 0.5px, transparent 0.5px);
+      background-size: 14px 14px;
+    }
+
+    /* Global Living World Canvas (spans full document height) */
+    #world-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none; /* Dynamically toggled to auto only when hovering/touching an animal */
+      z-index: 45;
+      touch-action: manipulation;
+    }
+
+    /* Ambient Petals & Butterflies Layer */
+    #ambient-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 35;
+    }
+
+    /* Floating Speech Bubble Layer */
+    #speech-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 60;
+    }
+
+    .animal-bubble {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      max-width: min(260px, 74vw);
+      background: rgba(245, 241, 233, 0.96);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(161, 138, 112, 0.42);
+      border-radius: 18px;
+      padding: 10px 14px;
+      box-shadow: 0 10px 26px rgba(81, 69, 56, 0.12);
+      color: var(--brown);
+      font-size: 0.86rem;
+      line-height: 1.45;
+      text-align: center;
+      animation: bubblePop 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      pointer-events: none;
+    }
+
+    .animal-bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 11px;
+      height: 11px;
+      background: rgba(245, 241, 233, 0.96);
+      border-right: 1px solid rgba(161, 138, 112, 0.42);
+      border-bottom: 1px solid rgba(161, 138, 112, 0.42);
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .animal-bubble .bubble-name {
+      display: block;
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--green-deep);
+      margin-bottom: 2px;
+      letter-spacing: 0.02em;
+    }
+
+    @keyframes bubblePop {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -88%) scale(0.92);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1);
+      }
+    }
+
+    /* Navigation */
+    .site-nav {
+      position: sticky;
+      top: 14px;
+      z-index: 80;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .nav-pill {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 18px;
+      background: rgba(245, 241, 233, 0.86);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-pill);
+      box-shadow: 0 8px 28px rgba(81, 69, 56, 0.06);
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: var(--brown);
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1px solid var(--border-hairline);
+      font-size: 0.72rem;
+      font-family: var(--font-sans);
+      color: var(--wood);
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      list-style: none;
+    }
 
     .nav-links a {
-        font-size:8px;
-        letter-spacing:1px;
+      text-decoration: none;
+      color: var(--brown-soft);
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      padding: 6px 4px;
+      transition: color 0.25s ease;
     }
 
-    .hero {min-height:75vh;}
-
-    section.content {padding:85px 20px;}
-
-    .animal-grid {gap:12px;}
-
-    .animal-card {padding:15px 8px;}
-
-    .animal-picture {height:105px;}
-
-    .animal-card h3 {font-size:20px;}
-
-    .flower-item {width:85px;}
-}
-
-@media(prefers-reduced-motion:reduce) {
-    *,*::before,*::after {
-        animation:none!important;
-        transition:none!important;
-        scroll-behavior:auto!important;
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--brown);
+      outline: none;
     }
 
-    .reveal {
-        opacity:1;
-        transform:none;
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-}
 
-</style>
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-hairline);
+      background: var(--cream);
+      color: var(--brown);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .icon-btn:hover,
+    .icon-btn:focus-visible {
+      background: var(--paper);
+      border-color: var(--wood);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .icon-btn[aria-pressed="true"] {
+      background: rgba(120, 134, 107, 0.16);
+      border-color: var(--green);
+      color: var(--green-deep);
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-pill {
+        padding: 8px 14px;
+      }
+    }
+
+    /* Layout Containers */
+    main {
+      position: relative;
+      z-index: 20;
+    }
+
+    section {
+      position: relative;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: clamp(64px, 10vw, 118px) 22px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 44px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.76rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 10px;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      color: var(--brown);
+      line-height: 1.16;
+    }
+
+    h1 {
+      font-size: clamp(2.9rem, 7vw, 4.9rem);
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-size: clamp(2.1rem, 4.8vw, 3.3rem);
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      font-size: clamp(1rem, 2.2vw, 1.12rem);
+      color: var(--brown-soft);
+      line-height: 1.75;
+    }
+
+    /* Editorial Divider */
+    .botanical-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 auto;
+      max-width: 320px;
+      opacity: 0.72;
+    }
+
+    .botanical-divider::before,
+    .botanical-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--wood-light), transparent);
+    }
+
+    /* Primary Storybook Button */
+    .btn-storybook {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 14px 32px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--wood);
+      background: linear-gradient(180deg, #F7F3EB 0%, #EAE1D3 100%);
+      color: var(--brown);
+      font-family: var(--font-sans);
+      font-size: 0.84rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow:
+        0 8px 22px rgba(81, 69, 56, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .btn-storybook:hover,
+    .btn-storybook:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(81, 69, 56, 0.13);
+      outline: none;
+    }
+
+    /* 1. Hero Section */
+    .hero {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 48px;
+      padding-bottom: 96px;
+    }
+
+    .hero-frame {
+      position: relative;
+      max-width: 720px;
+      padding: clamp(36px, 6vw, 64px) clamp(24px, 5vw, 56px);
+      border-radius: 32px;
+      background: rgba(242, 235, 221, 0.62);
+      border: 1px solid var(--border-hairline);
+      box-shadow: var(--shadow-card);
+    }
+
+    .hero-monogram {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      background: rgba(245, 241, 233, 0.9);
+      border: 1px solid var(--border-hairline);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--wood);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      margin-bottom: 22px;
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-serif);
+      font-size: clamp(1.25rem, 2.8vw, 1.6rem);
+      line-height: 1.65;
+      color: var(--brown-soft);
+      white-space: pre-line;
+      margin-bottom: 34px;
+    }
+
+    .hero-hint {
+      margin-top: 22px;
+      font-size: 0.82rem;
+      color: var(--taupe);
+    }
+
+    /* 2. Introduction Section */
+    .intro-card {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: clamp(34px, 5vw, 56px);
+      background: var(--cream);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      position: relative;
+    }
+
+    .intro-card::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(161, 138, 112, 0.18);
+      border-radius: 16px;
+      pointer-events: none;
+    }
+
+    .intro-body {
+      font-family: var(--font-serif);
+      font-size: clamp(1.24rem, 2.5vw, 1.52rem);
+      line-height: 1.75;
+      color: var(--brown-soft);
+      white-space: pre-line;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .intro-signature {
+      margin-top: 26px;
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+    }
+
+    /* 3. Living Animal World & Habitat */
+    .habitat-stage {
+      background: var(--cream);
+      border: 1px solid var(--border-hairline);
+      border-radius: 28px;
+      padding: clamp(20px, 3.5vw, 34px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .pond-wrapper {
+      position: relative;
+      width: 100%;
+      height: clamp(290px, 42vw, 390px);
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(120, 134, 107, 0.32);
+      background: linear-gradient(180deg, #E5ECE6 0%, #D3E1DC 38%, #BDD1CB 100%);
+      box-shadow: inset 0 4px 20px rgba(81, 69, 56, 0.08);
+    }
+
+    #pond-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .pond-caption {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .pond-tag {
+      background: rgba(245, 241, 233, 0.88);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-pill);
+      padding: 5px 13px;
+      font-size: 0.78rem;
+      color: var(--brown-soft);
+    }
+
+    /* Resident Directory / Whistle Bar */
+    .resident-bar {
+      margin-top: 24px;
+    }
+
+    .resident-bar-label {
+      font-size: 0.82rem;
+      color: var(--taupe);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .resident-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .resident-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-hairline);
+      background: var(--ivory);
+      color: var(--brown);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .resident-chip:hover,
+    .resident-chip:focus-visible {
+      background: var(--paper);
+      border-color: var(--wood);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .resident-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .resident-chip.special {
+      border-color: rgba(197, 142, 145, 0.55);
+      background: rgba(245, 241, 233, 0.95);
+    }
+
+    /* 4. Botanical Garden */
+    .garden-stage {
+      position: relative;
+      background: linear-gradient(180deg, #F3EDE2 0%, #EAE3D5 100%);
+      border: 1px solid var(--border-hairline);
+      border-radius: 28px;
+      padding: clamp(20px, 3.5vw, 32px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .garden-canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: clamp(320px, 46vw, 430px);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(120, 134, 107, 0.26);
+      background: linear-gradient(180deg, #F7F3EB 0%, #EFE8DA 68%, #DFE5D5 100%);
+    }
+
+    #garden-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .garden-note-box {
+      margin-top: 18px;
+      min-height: 62px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: rgba(245, 241, 233, 0.88);
+      border: 1px solid var(--border-hairline);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .garden-message {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.18rem;
+      color: var(--brown);
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .garden-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-subtle {
+      min-height: 40px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-hairline);
+      background: var(--cream);
+      color: var(--brown);
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-subtle:hover,
+    .btn-subtle:focus-visible {
+      background: var(--paper);
+      border-color: var(--green);
+      outline: none;
+    }
+
+    /* 5. Memories Section */
+    .memories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    @media (max-width: 720px) {
+      .memories-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .memory-card {
+      position: relative;
+      background: var(--cream);
+      border: 1px solid var(--border-hairline);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .memory-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(81, 69, 56, 0.1);
+    }
+
+    .memory-photo-slot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 14px;
+      border: 1px dashed rgba(161, 138, 112, 0.48);
+      background: linear-gradient(145deg, #F6F2EA 0%, #EAE2D3 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .memory-photo-slot:hover {
+      border-color: var(--wood);
+    }
+
+    .memory-photo-slot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .memory-photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--taupe);
+      font-size: 0.82rem;
+    }
+
+    .memory-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .memory-date {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      font-weight: 500;
+    }
+
+    .memory-card h3 {
+      font-size: 1.55rem;
+    }
+
+    .memory-text {
+      font-size: 0.95rem;
+      color: var(--brown-soft);
+      line-height: 1.65;
+    }
+
+    .memory-footnote {
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--taupe);
+    }
+
+    .memory-edit-btn {
+      align-self: flex-start;
+      background: transparent;
+      border: none;
+      color: var(--wood);
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+
+    /* 6. Surprise Section */
+    .surprise-box {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+      padding: clamp(38px, 6vw, 64px) clamp(24px, 5vw, 48px);
+      background: linear-gradient(180deg, #F3ECE0 0%, #EAE1D2 100%);
+      border: 1px solid var(--border-hairline);
+      border-radius: 30px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .letter-reveal {
+      margin-top: 32px;
+      padding: clamp(26px, 4.5vw, 42px);
+      background: var(--ivory);
+      border: 1px solid rgba(161, 138, 112, 0.36);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(81, 69, 56, 0.08);
+      text-align: left;
+      display: none;
+      animation: letterUnfold 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .letter-reveal.open {
+      display: block;
+    }
+
+    @keyframes letterUnfold {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .letter-salutation {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--pink);
+      margin-bottom: 14px;
+    }
+
+    .letter-content {
+      font-family: var(--font-serif);
+      font-size: clamp(1.2rem, 2.5vw, 1.42rem);
+      line-height: 1.8;
+      color: var(--brown);
+      white-space: pre-line;
+    }
+
+    .letter-actions {
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-hairline);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* 7. Footer */
+    footer {
+      position: relative;
+      z-index: 20;
+      text-align: center;
+      padding: 64px 20px 88px;
+      border-top: 1px solid var(--border-hairline);
+      background: rgba(238, 231, 220, 0.55);
+    }
+
+    .footer-line-1 {
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    .footer-line-2 {
+      font-size: 0.76rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+
+    /* Discreet Floating Keepsake Studio Drawer */
+    .studio-fab {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 110;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--border-hairline);
+      background: rgba(245, 241, 233, 0.92);
+      backdrop-filter: blur(8px);
+      color: var(--brown);
+      box-shadow: 0 8px 24px rgba(81, 69, 56, 0.12);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .studio-fab:hover {
+      transform: scale(1.06);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(81, 69, 56, 0.35);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 500px;
+      max-height: 86vh;
+      overflow-y: auto;
+      background: var(--ivory);
+      border: 1px solid var(--border-hairline);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 22px 50px rgba(81, 69, 56, 0.2);
+    }
+
+    .modal-card h3 {
+      font-size: 1.65rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-card p {
+      font-size: 0.88rem;
+      color: var(--brown-soft);
+      margin-bottom: 16px;
+    }
+
+    .field-group {
+      margin-bottom: 14px;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--brown);
+      margin-bottom: 5px;
+    }
+
+    .field-group input,
+    .field-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-hairline);
+      background: var(--cream);
+      color: var(--brown);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+    }
+
+    .field-group textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      .animal-bubble,
+      .letter-reveal {
+        animation: none;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- SVG ANIMAL COLLECTION -->
-
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
-
-<defs>
-
-<!-- CAT -->
-
-<symbol id="cat" viewBox="0 0 160 140">
-
-<g class="float">
-
-<path class="tail" d="M115 105 Q155 115 145 75 Q140 60 130 75"
-stroke="#b9997b" stroke-width="13" fill="none" stroke-linecap="round"/>
-
-<ellipse cx="83" cy="108" rx="47" ry="25" fill="#cbb59e"/>
-
-<circle cx="78" cy="67" r="39" fill="#d7c2aa"/>
-
-<path d="M47 45 L43 7 L72 34Z" fill="#d7c2aa"/>
-<path d="M91 34 L120 7 L112 49Z" fill="#d7c2aa"/>
-
-<path d="M51 36 L48 17 L65 35Z" fill="#bd8984"/>
-<path d="M99 36 L114 17 L108 39Z" fill="#bd8984"/>
-
-<g class="blink">
-<ellipse cx="64" cy="67" rx="4" ry="6" fill="#514538"/>
-<ellipse cx="94" cy="67" rx="4" ry="6" fill="#514538"/>
-</g>
-
-<path d="M75 80 Q80 85 85 80" stroke="#a46e6e" stroke-width="2" fill="none"/>
-<path d="M80 85 Q70 96 64 88 M80 85 Q90 96 96 88"
-stroke="#625044" stroke-width="1.5" fill="none"/>
-
-<path d="M47 79 L22 73 M47 88 L23 91 M111 79 L136 73 M111 88 L136 91"
-stroke="#8b7663" stroke-width="1.3"/>
-
-</g>
-</symbol>
-
-<!-- WHITE CAT -->
-
-<symbol id="whitecat" viewBox="0 0 160 140">
-
-<g class="float delay1">
-
-<path class="tail" d="M115 108 Q150 110 145 77"
-stroke="#e6dfd2" stroke-width="13" fill="none" stroke-linecap="round"/>
-
-<ellipse cx="82" cy="108" rx="47" ry="25" fill="#eee8dd"/>
-<circle cx="78" cy="67" r="39" fill="#f2eee5"/>
-
-<path d="M47 44 L43 7 L72 34Z" fill="#eee8dd"/>
-<path d="M91 34 L120 7 L112 49Z" fill="#eee8dd"/>
-
-<path d="M51 36 L48 17 L65 35Z" fill="#dba5a3"/>
-<path d="M99 36 L114 17 L108 39Z" fill="#dba5a3"/>
-
-<g class="blink">
-<ellipse cx="64" cy="67" rx="4" ry="6" fill="#78866b"/>
-<ellipse cx="94" cy="67" rx="4" ry="6" fill="#78866b"/>
-</g>
-
-<path d="M75 80 Q80 85 85 80" stroke="#a46e6e" stroke-width="2" fill="none"/>
-
-</g>
-</symbol>
-
-<!-- ORANGE CAT -->
-
-<symbol id="orangecat" viewBox="0 0 160 140">
-
-<g class="float delay2">
-
-<path class="tail" d="M115 108 Q155 110 145 75"
-stroke="#c88d54" stroke-width="13" fill="none" stroke-linecap="round"/>
-
-<ellipse cx="82" cy="108" rx="47" ry="25" fill="#d9a56d"/>
-<circle cx="78" cy="67" r="39" fill="#e6b77f"/>
-
-<path d="M47 44 L43 7 L72 34Z" fill="#e6b77f"/>
-<path d="M91 34 L120 7 L112 49Z" fill="#e6b77f"/>
-
-<path d="M51 36 L48 17 L65 35Z" fill="#bd8984"/>
-<path d="M99 36 L114 17 L108 39Z" fill="#bd8984"/>
-
-<g class="blink">
-<ellipse cx="64" cy="67" rx="4" ry="6" fill="#514538"/>
-<ellipse cx="94" cy="67" rx="4" ry="6" fill="#514538"/>
-</g>
-
-<path d="M75 80 Q80 85 85 80" stroke="#a46e6e" stroke-width="2" fill="none"/>
-
-</g>
-</symbol>
-
-<!-- DOG -->
-
-<symbol id="dog" viewBox="0 0 160 140">
-
-<g class="float delay1">
-
-<path class="tail" d="M116 103 Q150 90 143 70"
-stroke="#a77a57" stroke-width="12" fill="none" stroke-linecap="round"/>
-
-<ellipse cx="80" cy="107" rx="45" ry="25" fill="#c69b72"/>
-
-<circle cx="80" cy="65" r="38" fill="#d9b18b"/>
-
-<path d="M48 43 Q10 25 25 82 Q40 103 55 79Z" fill="#a77a57"/>
-<path d="M112 43 Q150 25 135 82 Q120 103 105 79Z" fill="#a77a57"/>
-
-<g class="blink">
-<circle cx="65" cy="64" r="4" fill="#514538"/>
-<circle cx="95" cy="64" r="4" fill="#514538"/>
-</g>
-
-<ellipse cx="80" cy="83" rx="18" ry="13" fill="#f0ddc7"/>
-<ellipse cx="80" cy="79" rx="6" ry="5" fill="#514538"/>
-
-<path d="M80 84 Q70 96 64 87 M80 84 Q90 96 96 87"
-stroke="#514538" stroke-width="2" fill="none"/>
-
-</g>
-</symbol>
-
-<!-- CAPYBARA -->
-
-<symbol id="capy" viewBox="0 0 160 140">
-
-<g class="float delay3">
-
-<ellipse cx="80" cy="102" rx="52" ry="29" fill="#a77d5d"/>
-
-<ellipse cx="80" cy="70" rx="43" ry="34" fill="#b78d6d"/>
-
-<ellipse cx="45" cy="48" rx="11" ry="14" fill="#b78d6d"/>
-<ellipse cx="113" cy="48" rx="11" ry="14" fill="#b78d6d"/>
-
-<ellipse cx="80" cy="85" rx="29" ry="18" fill="#c8a184"/>
-
-<g class="blink">
-<circle cx="64" cy="65" r="4" fill="#42372f"/>
-<circle cx="96" cy="65" r="4" fill="#42372f"/>
-</g>
-
-<ellipse cx="80" cy="82" rx="6" ry="5" fill="#514538"/>
-
-<path d="M72 90 Q80 95 88 90" stroke="#514538" stroke-width="1.5" fill="none"/>
-
-</g>
-</symbol>
-
-<!-- SEAL -->
-
-<symbol id="seal" viewBox="0 0 160 140">
-
-<g class="swim">
-
-<ellipse cx="80" cy="82" rx="51" ry="33" fill="#aaaeb0"/>
-
-<ellipse cx="80" cy="61" rx="36" ry="32" fill="#c4c7c5"/>
-
-<path d="M53 104 Q25 128 15 106 Q29 95 53 104Z" fill="#a5a9a9"/>
-<path d="M107 104 Q135 128 145 106 Q131 95 107 104Z" fill="#a5a9a9"/>
-
-<g class="blink">
-<circle cx="65" cy="58" r="3.5" fill="#514538"/>
-<circle cx="95" cy="58" r="3.5" fill="#514538"/>
-</g>
-
-<ellipse cx="80" cy="75" rx="13" ry="10" fill="#e2ddd5"/>
-
-<circle cx="75" cy="72" r="3" fill="#514538"/>
-<circle cx="85" cy="72" r="3" fill="#514538"/>
-
-<path d="M80 79 Q72 90 65 82 M80 79 Q88 90 95 82"
-stroke="#514538" stroke-width="1.5" fill="none"/>
-
-<path d="M63 81 L45 77 M63 87 L45 90 M97 81 L115 77 M97 87 L115 90"
-stroke="#7f8584" stroke-width="1"/>
-
-</g>
-</symbol>
-
-<!-- SEA OTTER -->
-
-<symbol id="otter" viewBox="0 0 160 140">
-
-<g class="float delay2">
-
-<ellipse cx="80" cy="96" rx="38" ry="28" fill="#a77d5d"/>
-
-<circle cx="80" cy="55" r="35" fill="#a77d5d"/>
-
-<circle cx="51" cy="33" r="12" fill="#a77d5d"/>
-<circle cx="109" cy="33" r="12" fill="#a77d5d"/>
-
-<circle cx="51" cy="33" r="6" fill="#d8b49a"/>
-<circle cx="109" cy="33" r="6" fill="#d8b49a"/>
-
-<ellipse cx="80" cy="69" rx="25" ry="19" fill="#e1c3a5"/>
-
-<g class="blink">
-<circle cx="65" cy="51" r="4" fill="#42372f"/>
-<circle cx="95" cy="51" r="4" fill="#42372f"/>
-</g>
-
-<ellipse cx="80" cy="66" rx="6" ry="4" fill="#514538"/>
-
-<path d="M80 70 Q72 79 66 74 M80 70 Q88 79 94 74"
-stroke="#514538" stroke-width="1.5" fill="none"/>
-
-</g>
-</symbol>
-
-</defs>
-</svg>
-
-<!-- NAVIGATION -->
-
-<nav>
-
-<div class="logo">Kittenkeeps.</div>
-
-<div class="nav-links">
-<a href="#story">OUR STORY</a>
-<a href="#animals">ANIMALS</a>
-<a href="#garden">GARDEN</a>
-<a href="#memories">MEMORIES</a>
-</div>
-
-</nav>
-
-<!-- HERO -->
-
-<header class="hero">
-
-<div class="hero-flower one">✿</div>
-<div class="hero-flower two">❀</div>
-
-<div class="eyebrow">A LITTLE WORLD, MADE FOR TANHA</div>
-
-<h1>For my<br><em>Tanha.</em></h1>
-
-<p class="subtitle">
-Some things deserve a place of their own.<br>
-This little place is one of them.<br>
-I love you.
-</p>
-
-<a href="#story" class="button">COME INSIDE →</a>
-
-</header>
-
-<!-- STORY -->
-
-<section class="content reveal" id="story">
-
-<div class="section-label">A LITTLE INTRODUCTION</div>
-
-<h2>A place for us.</h2>
-
-<p class="description">
-Among all the places in this world,
-I wanted to create one that feels a little
-more like home.
-
-A place for memories, little moments,
-photographs and everything that words
-sometimes cannot explain.
-</p>
-
-</section>
-
-<!-- ANIMAL WORLD -->
-
-<section class="animal-world reveal" id="animals">
-
-<div class="section-label">MEET OUR LITTLE FRIENDS</div>
-
-<h2 class="world-heading">Welcome to their world.</h2>
-
-<p class="world-intro">
-They have been waiting to meet you.
-Every little friend has something to say.
-Tap any of them.
-</p>
-
-<div class="animal-grid">
-
-<!-- CATS -->
-
-<button class="animal-card" data-animal="cat" data-name="Mochi" data-greeting="Hi Tanha! I'm Mochi. Can I stay here forever?">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#cat"/></svg>
-<h3>Mochi</h3>
-<p>THE SLEEPY KITTEN</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<button class="animal-card" data-animal="cat" data-name="Snowy" data-greeting="Hello Tanha! Sending you a tiny kitty hug!">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#whitecat"/></svg>
-<h3>Snowy</h3>
-<p>THE LITTLE CLOUD</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<button class="animal-card" data-animal="cat" data-name="Pumpkin" data-greeting="Meow! Hi Tanha! I brought you a flower.">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#orangecat"/></svg>
-<h3>Pumpkin</h3>
-<p>THE LITTLE TROUBLEMAKER</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<button class="animal-card" data-animal="cat" data-name="Miso" data-greeting="Psst! Tanha, you're my favourite human.">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#cat"/></svg>
-<h3>Miso</h3>
-<p>THE CURIOUS ONE</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<!-- DOGS -->
-
-<button class="animal-card" data-animal="dog" data-name="Biscuit" data-greeting="Woof woof! Hello Tanha! I'm so happy to see you!">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#dog"/></svg>
-<h3>Biscuit</h3>
-<p>THE HAPPY PUPPY</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<button class="animal-card" data-animal="dog" data-name="Teddy" data-greeting="Hi Tanha! Can I have a little belly rub?">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#dog"/></svg>
-<h3>Teddy</h3>
-<p>THE CUDDLY ONE</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<!-- CAPYBARAS -->
-
-<button class="animal-card" data-animal="capy" data-name="Coco" data-greeting="Hello Tanha. I'm Coco. Don't worry, everything is okay.">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#capy"/></svg>
-<h3>Coco</h3>
-<p>THE CALM CAPYBARA</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<button class="animal-card" data-animal="capy" data-name="Mochaccino" data-greeting="Hi Tanha! Let's just relax and enjoy the flowers.">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#capy"/></svg>
-<h3>Mochaccino</h3>
-<p>THE RELAXED ONE</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<!-- SEALS -->
-
-<button class="animal-card" data-animal="seal" data-name="Pebble" data-greeting="Hello Tanha! Sending you a little ocean kiss!">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#seal"/></svg>
-<h3>Pebble</h3>
-<p>THE LITTLE SEAL</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<button class="animal-card" data-animal="seal" data-name="Bubbles" data-greeting="Hi Tanha! Splash splash! I hope you're having a lovely day!">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#seal"/></svg>
-<h3>Bubbles</h3>
-<p>THE OCEAN BABY</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<!-- OTTERS -->
-
-<button class="animal-card" data-animal="otter" data-name="Oliver" data-greeting="Hi Tanha! I brought you a little seashell!">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#otter"/></svg>
-<h3>Oliver</h3>
-<p>THE SEA OTTER</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-<button class="animal-card" data-animal="otter" data-name="Olive" data-greeting="Hello Tanha! Let's float together and watch the clouds.">
-<svg class="animal-picture" viewBox="0 0 160 140"><use href="#otter"/></svg>
-<h3>Olive</h3>
-<p>THE LITTLE FLOATING OTTER</p>
-<div class="tap">TAP TO SAY HI</div>
-</button>
-
-</div>
-
-<div class="greeting-area" id="greeting" aria-live="polite">
-<small>THE LITTLE FRIENDS ARE WAITING</small>
-Choose an animal to meet.
-</div>
-
-</section>
-
-<!-- GARDEN -->
-
-<section class="garden reveal" id="garden">
-
-<div class="section-label">A LITTLE BOTANICAL CORNER</div>
-
-<h2>The flower garden.</h2>
-
-<p class="description">
-A few flowers for someone who makes
-ordinary things feel beautiful.
-</p>
-
-<div class="flower-row">
-
-<div class="flower-item" onclick="flowerGreeting('A tulip for you, Tanha. A little reminder that beautiful things bloom in their own time.')">
-
-<svg viewBox="0 0 100 150">
-<path d="M50 65 Q40 110 50 145" stroke="#78866b" stroke-width="3" fill="none"/>
-<path d="M49 112 Q10 90 20 120 Q38 135 49 112Z" fill="#849477"/>
-<g class="flower-head">
-<path d="M50 70 Q20 45 30 18 Q43 20 50 43 Q57 20 70 18 Q80 45 50 70Z" fill="#c58e91"/>
-<path d="M50 70 Q36 40 50 12 Q65 40 50 70Z" fill="#d8a4a1"/>
-</g>
-</svg>
-
-<p>Tulip</p>
-</div>
-
-<div class="flower-item" onclick="flowerGreeting('A little wildflower, because the loveliest things are sometimes beautifully unexpected.')">
-
-<svg viewBox="0 0 100 150">
-<path d="M50 65 L50 145" stroke="#78866b" stroke-width="3"/>
-<path d="M50 115 Q80 90 85 120 Q68 135 50 115Z" fill="#849477"/>
-<g class="flower-head">
-<circle cx="50" cy="40" r="12" fill="#d8b879"/>
-<g fill="#d8a4a1">
-<ellipse cx="50" cy="20" rx="9" ry="16"/>
-<ellipse cx="50" cy="60" rx="9" ry="16"/>
-<ellipse cx="30" cy="40" rx="16" ry="9"/>
-<ellipse cx="70" cy="40" rx="16" ry="9"/>
-</g>
-<circle cx="50" cy="40" r="8" fill="#d8b879"/>
-</g>
-</svg>
-
-<p>Wildflower</p>
-</div>
-
-<div class="flower-item" onclick="flowerGreeting('A tiny daisy for my favourite person. Keep blooming, little one.')">
-
-<svg viewBox="0 0 100 150">
-<path d="M50 65 L50 145" stroke="#78866b" stroke-width="3"/>
-<path d="M50 115 Q15 95 20 125 Q38 138 50 115Z" fill="#849477"/>
-<g class="flower-head">
-<g fill="#f0e9d9">
-<ellipse cx="50" cy="20" rx="8" ry="17"/>
-<ellipse cx="50" cy="60" rx="8" ry="17"/>
-<ellipse cx="30" cy="40" rx="17" ry="8"/>
-<ellipse cx="70" cy="40" rx="17" ry="8"/>
-<ellipse cx="36" cy="26" rx="8" ry="15" transform="rotate(-45 36 26)"/>
-<ellipse cx="64" cy="26" rx="8" ry="15" transform="rotate(45 64 26)"/>
-</g>
-<circle cx="50" cy="40" r="10" fill="#d8b879"/>
-</g>
-</svg>
-
-<p>Daisy</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- MEMORIES -->
-
-<section class="content reveal" id="memories">
-
-<div class="section-label">COLLECTED MOMENTS</div>
-
-<h2>Little pieces of us.</h2>
-
-<p class="description">
-A thousand little things, worth remembering.
-</p>
-
-<div class="memories">
-
-<button class="memory-card" onclick="openMemory('Our beginning','May 24, 2024. The day our story began. A little date that became a big part of my life.')">
-<h3>Our beginning</h3>
-<p>Where our story started.</p>
-</button>
-
-<button class="memory-card" onclick="openMemory('Little moments','The ordinary days, the conversations, the hugs and everything that made them special.')">
-<h3>Little moments</h3>
-<p>The ordinary days that became special.</p>
-</button>
-
-<button class="memory-card" onclick="openMemory('Yours forever','Some memories never need a photograph. They stay somewhere inside us.')">
-<h3>Yours forever</h3>
-<p>Things I never want to forget.</p>
-</button>
-
-</div>
-
-</section>
-
-<!-- SURPRISE -->
-
-<section class="content reveal" id="surprise">
-
-<div class="section-label">A LITTLE SOMETHING</div>
-
-<h2>Just for you.</h2>
-
-<p class="description">
-The animals have a little message for you.
-Would you like to hear it?
-</p>
-
-<button class="button" onclick="showSurprise()">
-OPEN YOUR SURPRISE
-</button>
-
-<div class="surprise-box" id="surpriseBox">
-If I could keep one little corner
-of this enormous world just for us,
-it would look something like this.
-
-<br><br>
-
-A little garden, a sleepy kitten,
-a thousand flowers and you.
-
-<br><br>
-
-I hope this little world
-always makes you smile.
-
-<br><br>
-
-— Yours.
-</div>
-
-</section>
-
-<footer>
-MADE WITH LOVE · JUST FOR YOU, MY BABY
-<br><br>
-KITENKEEPS · EST. 2024
-</footer>
-
-<button class="top-button" id="topButton" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
-
-<button class="sound-button" id="soundButton" onclick="toggleSound()">♫ SOUND: OFF</button>
-
-<!-- MODAL -->
-
-<div class="modal" id="memoryModal" onclick="closeMemory(event)">
-
-<div class="modal-content">
-
-<button class="close" onclick="closeMemory()">×</button>
-
-<div class="section-label">A LITTLE MEMORY</div>
-
-<h2 id="modalTitle"></h2>
-
-<p id="modalText"></p>
-
-</div>
-
-</div>
-
-<script>
-
-/* SOUND SYSTEM */
-
-let soundEnabled = false;
-let audioContext = null;
-
-function toggleSound() {
-
-    soundEnabled = !soundEnabled;
-
-    document.getElementById('soundButton').textContent =
-        soundEnabled ? '♫ SOUND: ON' : '♫ SOUND: OFF';
-
-    if (soundEnabled) {
-        initAudio();
-        speak("Hello Tanha! Welcome to your little world.");
-    } else {
-        if ('speechSynthesis' in window) {
-            speechSynthesis.cancel();
+  <!-- Ambient Petals & Butterflies Layer -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Living Roaming Animals Layer (Cats, Dogs, Capybaras across the entire page) -->
+  <canvas id="world-canvas" aria-label="Interactive animals roaming across Kittenkeeps"></canvas>
+
+  <!-- Floating Animal Speech Bubbles -->
+  <div id="speech-layer" aria-live="polite"></div>
+
+  <!-- Navigation -->
+  <header class="site-nav">
+    <nav class="nav-pill" data-perch="nav" aria-label="Primary Navigation">
+      <a href="#top" class="brand-mark">
+        <span class="brand-badge" aria-hidden="true">TNN</span>
+        <span>Kittenkeeps</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#our-place">Our Place</a></li>
+        <li><a href="#their-world">Their World</a></li>
+        <li><a href="#garden">Flower Garden</a></li>
+        <li><a href="#memories">Memories</a></li>
+        <li><a href="#surprise">For You</a></li>
+      </ul>
+
+      <div class="nav-controls">
+        <button id="toggle-voice" class="icon-btn" type="button" aria-pressed="true" title="Toggle spoken animal greetings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <span id="voice-label">Voice On</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- 1. HERO SECTION -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-frame" data-safe-text="true">
+        <div class="hero-monogram">
+          <span>Tanish</span>
+          <span aria-hidden="true">·</span>
+          <span>Est. May 24, 2024</span>
+        </div>
+
+        <h1 id="hero-heading">For my Tanha.</h1>
+
+        <p class="hero-subtitle">Some things deserve a place of their own.
+This little place is one of them.
+I love you.</p>
+
+        <a href="#our-place" class="btn-storybook" data-perch="button">
+          <span>COME INSIDE</span>
+        </a>
+
+        <p class="hero-hint">Tap any kitten, puppy, capybara, otter, seal, or flower along the way.</p>
+      </div>
+    </section>
+
+    <div class="botanical-divider" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78866B" stroke-width="1.4">
+        <path d="M12 21V9M12 9C12 5 8 3 6 6C4 9 8 12 12 9ZM12 9C12 5 16 3 18 6C20 9 16 12 12 9Z"/>
+      </svg>
+    </div>
+
+    <!-- 2. INTRODUCTION SECTION -->
+    <section id="our-place" aria-labelledby="intro-heading">
+      <div class="intro-card" data-safe-text="true">
+        <span class="eyebrow">A Quiet Sanctuary</span>
+        <h2 id="intro-heading">A place for us.</h2>
+        <p class="intro-body">Among all the places in this world, I wanted to create one that feels a little more like home.
+
+A place for memories, little moments, photographs and everything that words sometimes cannot explain.</p>
+        <p class="intro-signature">Dedicated to Tanha Naween Nawar · My Kitten</p>
+      </div>
+    </section>
+
+    <!-- 3. LIVING ANIMAL WORLD -->
+    <section id="their-world" aria-labelledby="world-heading">
+      <div class="section-header" data-safe-text="true">
+        <span class="eyebrow">Fourteen Little Companions</span>
+        <h2 id="world-heading">Welcome to their world.</h2>
+        <p class="section-subtitle">They have been waiting to meet you. While Payesh, Melow, Mochi, Snowy, Pumpkin, Miso, Biscuit, Teddy, Coco, and Mochaccino wander freely across the whole page, Oliver, Olive, Pebble, and Bubbles love the quiet pond below.</p>
+      </div>
+
+      <div class="habitat-stage">
+        <div class="pond-wrapper">
+          <canvas id="pond-canvas" aria-label="Interactive driftwood pond with sea otters Oliver and Olive and seals Pebble and Bubbles"></canvas>
+          <div class="pond-caption">
+            <span class="pond-tag">Driftwood Lily Pond · Tap Oliver, Olive, Pebble, Bubbles, or ripple the water</span>
+            <span class="pond-tag" id="pond-status">Oliver &amp; Olive are floating peacefully</span>
+          </div>
+        </div>
+
+        <div class="resident-bar">
+          <p class="resident-bar-label">Call a friend over to say hello to Tanha:</p>
+          <div class="resident-chips" id="resident-chips" role="group" aria-label="Call an animal"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. BOTANICAL GARDEN -->
+    <section id="garden" aria-labelledby="garden-heading">
+      <div class="section-header" data-safe-text="true">
+        <span class="eyebrow">Tulips, Daisies &amp; Wildflowers</span>
+        <h2 id="garden-heading">The flower garden.</h2>
+        <p class="section-subtitle">A few flowers for someone who makes ordinary things feel beautiful. Touch any blossom to help it open, or brush across the meadow to send a soft breeze.</p>
+      </div>
+
+      <div class="garden-stage">
+        <div class="garden-canvas-wrap">
+          <canvas id="garden-canvas" aria-label="Interactive tulip and wildflower garden"></canvas>
+        </div>
+
+        <div class="garden-note-box">
+          <p class="garden-message" id="garden-message">“A tulip for you, Tanha. A little reminder that beautiful things bloom in their own time.”</p>
+          <div class="garden-actions">
+            <button type="button" class="btn-subtle" id="plant-tulip-btn">+ Plant a Tulip</button>
+            <button type="button" class="btn-subtle" id="breeze-btn">Send a Gentle Breeze</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. MEMORIES SECTION -->
+    <section id="memories" aria-labelledby="memories-heading">
+      <div class="section-header" data-safe-text="true">
+        <span class="eyebrow">Chapters Held Close</span>
+        <h2 id="memories-heading">Little pieces of us.</h2>
+        <p class="section-subtitle">Moments worth keeping safe. Tap any frame to add a favorite photograph or update a memory note.</p>
+      </div>
+
+      <div class="memories-grid" id="memories-grid"></div>
+    </section>
+
+    <!-- 6. SURPRISE SECTION -->
+    <section id="surprise" aria-labelledby="surprise-heading">
+      <div class="surprise-box" data-safe-text="true">
+        <span class="eyebrow">A Note Kept Safe</span>
+        <h2 id="surprise-heading">Just for you.</h2>
+        <p class="section-subtitle" style="margin-bottom: 28px;">Whenever you need a quiet reminder of how deeply you are loved.</p>
+
+        <button type="button" class="btn-storybook" id="open-surprise-btn" data-perch="button">
+          <span>OPEN YOUR SURPRISE</span>
+        </button>
+
+        <div class="letter-reveal" id="letter-reveal" role="region" aria-label="Personal letter for Tanha">
+          <p class="letter-salutation">My dearest Tanha,</p>
+          <div class="letter-content" id="letter-content">If I could keep one little corner of this enormous world just for us, it would look something like this.
+
+A little garden, a sleepy kitten, a thousand flowers and you.
+
+I hope this little world always makes you smile.
+
+— Yours.</div>
+          <div class="letter-actions">
+            <button type="button" class="btn-subtle" id="edit-letter-btn">Edit Letter</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 7. FOOTER -->
+  <footer data-safe-text="true">
+    <p class="footer-line-1">MADE WITH LOVE · JUST FOR YOU, MY BABY</p>
+    <p class="footer-line-2">KITTENKEEPS · EST. 2024</p>
+  </footer>
+
+  <!-- Discreet Keepsake Studio Button -->
+  <button type="button" class="studio-fab" id="open-studio-btn" title="Keepsake Settings & Optional Real Audio" aria-label="Open Keepsake Settings">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 20h9"></path>
+      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+    </svg>
+  </button>
+
+  <!-- Modal for Editing Memory / Letter / Optional Audio Files -->
+  <div class="modal-backdrop" id="editor-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <h3 id="modal-title">Customize Keepsake</h3>
+      <p id="modal-desc">Changes are saved locally in your browser.</p>
+      <div id="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn-subtle" id="modal-cancel">Close</button>
+        <button type="button" class="btn-storybook" style="min-height: 40px; padding: 8px 20px;" id="modal-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="photo-file-input" accept="image/*" hidden />
+
+  <script>
+    (() => {
+      "use strict";
+
+      /* =========================================================================
+         1. STORAGE & PERSONALIZED STATE
+      ========================================================================= */
+      const STORAGE_KEY = "kittenkeeps_tanha_v1";
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const DEFAULT_MEMORIES = [
+        {
+          id: "beginning",
+          title: "Our beginning.",
+          date: "May 24, 2024",
+          text: "The day our story began—the start of a quiet, warm little world that has felt like home ever since.",
+          footnote: "",
+          photo: ""
+        },
+        {
+          id: "moments",
+          title: "Little moments.",
+          date: "September 22, 2024",
+          text: "Our first kiss and our first hug—a memory held close, alongside our first time meeting in person.",
+          footnote: "First in-person meeting noted around September 23, 2024 (tap Edit to confirm exact date).",
+          photo: ""
+        },
+        {
+          id: "movie",
+          title: "Our first movie.",
+          date: "Before Sunrise",
+          text: "Wandering through Vienna in conversation—the very first movie we shared together.",
+          footnote: "",
+          photo: ""
+        },
+        {
+          id: "remembering",
+          title: "A day worth remembering.",
+          date: "October 11, 2024",
+          text: "A particularly beautiful day—remembered especially because we got to hug twice.",
+          footnote: "",
+          photo: ""
         }
-    }
-}
+      ];
 
-function initAudio() {
+      const DEFAULT_LETTER = `If I could keep one little corner of this enormous world just for us, it would look something like this.
 
-    if (!audioContext) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
+A little garden, a sleepy kitten, a thousand flowers and you.
 
-        if (AudioContext) {
-            audioContext = new AudioContext();
+I hope this little world always makes you smile.
+
+— Yours.`;
+
+      let appState = {
+        voiceEnabled: true,
+        voiceRate: 0.96,
+        voicePitch: 1.08,
+        memories: JSON.parse(JSON.stringify(DEFAULT_MEMORIES)),
+        letter: DEFAULT_LETTER,
+        customTulips: []
+      };
+
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (saved) {
+          appState = {
+            ...appState,
+            ...saved,
+            memories: Array.isArray(saved.memories) && saved.memories.length ? saved.memories : appState.memories
+          };
         }
-    }
+      } catch (_) {}
 
-    if (audioContext && audioContext.state === 'suspended') {
-        audioContext.resume();
-    }
-}
+      function persistState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        } catch (_) {}
+      }
 
-/* SIMPLE ORIGINAL SOUND EFFECTS */
+      /* =========================================================================
+         2. AUDIO & SPOKEN GREETINGS ENGINE
+            - Speaks warm greetings via Web Speech API (optional, toggleable).
+            - Also supports real audio files if placed in ./sounds/<species>.mp3
+              or attached locally in the Studio drawer, without ever faking beeps.
+      ========================================================================= */
+      const customAudioUrls = {
+        cat: null,
+        dog: null,
+        capybara: null,
+        seal: null,
+        otter: null
+      };
 
-function playTone(frequency, duration, type='sine') {
+      const repoAudioAvailability = {
+        cat: null,
+        dog: null,
+        capybara: null,
+        seal: null,
+        otter: null
+      };
 
-    if (!soundEnabled || !audioContext) return;
+      let activeAudioEl = null;
 
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
+      function tryPlaySpeciesRecording(species) {
+        const localUrl = customAudioUrls[species];
+        const candidateUrl = localUrl || `./sounds/${species}.mp3`;
+        if (!localUrl && repoAudioAvailability[species] === false) {
+          return false;
+        }
+        try {
+          if (activeAudioEl) {
+            activeAudioEl.pause();
+            activeAudioEl.currentTime = 0;
+          }
+          const audio = new Audio(candidateUrl);
+          audio.volume = 0.65;
+          audio.addEventListener("canplaythrough", () => {
+            repoAudioAvailability[species] = true;
+          }, { once: true });
+          audio.addEventListener("error", () => {
+            if (!localUrl) repoAudioAvailability[species] = false;
+          }, { once: true });
+          const playPromise = audio.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(() => {});
+          }
+          activeAudioEl = audio;
+          return true;
+        } catch (_) {
+          return false;
+        }
+      }
 
-    oscillator.type = type;
-    oscillator.frequency.value = frequency;
+      let preferredVoice = null;
+      function loadVoices() {
+        if (!("speechSynthesis" in window)) return;
+        const voices = window.speechSynthesis.getVoices();
+        if (!voices.length) return;
+        preferredVoice =
+          voices.find(v => /en/i.test(v.lang) && /(Google UK English Female|Samantha|Victoria|Karen|Moira|Jenny|Aria|Natural)/i.test(v.name)) ||
+          voices.find(v => /en/i.test(v.lang) && /female/i.test(v.name)) ||
+          voices.find(v => /en/i.test(v.lang)) ||
+          voices[0];
+      }
 
-    gain.gain.setValueAtTime(.001, audioContext.currentTime);
+      if ("speechSynthesis" in window) {
+        loadVoices();
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+      }
 
-    gain.gain.exponentialRampToValueAtTime(
-        .08,
-        audioContext.currentTime + .03
-    );
+      function speakGreeting(text, pitchOffset = 0) {
+        if (!appState.voiceEnabled || !("speechSynthesis" in window)) return;
+        try {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(text);
+          if (preferredVoice) utter.voice = preferredVoice;
+          utter.rate = appState.voiceRate;
+          utter.pitch = Math.min(1.35, Math.max(0.8, appState.voicePitch + pitchOffset));
+          utter.volume = 0.85;
+          window.speechSynthesis.speak(utter);
+        } catch (_) {}
+      }
 
-    gain.gain.exponentialRampToValueAtTime(
-        .001,
-        audioContext.currentTime + duration
-    );
+      const voiceToggleBtn = document.getElementById("toggle-voice");
+      const voiceLabel = document.getElementById("voice-label");
+      function updateVoiceUI() {
+        voiceToggleBtn.setAttribute("aria-pressed", String(appState.voiceEnabled));
+        voiceLabel.textContent = appState.voiceEnabled ? "Voice On" : "Voice Off";
+      }
+      updateVoiceUI();
 
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
+      voiceToggleBtn.addEventListener("click", () => {
+        appState.voiceEnabled = !appState.voiceEnabled;
+        if (!appState.voiceEnabled && "speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+        persistState();
+        updateVoiceUI();
+      });
 
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + duration + .05);
-}
+      /* =========================================================================
+         3. RENDER MEMORIES & SURPRISE LETTER
+      ========================================================================= */
+      const memoriesGrid = document.getElementById("memories-grid");
+      const photoFileInput = document.getElementById("photo-file-input");
+      let pendingPhotoMemoryId = null;
 
-function animalSound(type) {
+      function renderMemories() {
+        memoriesGrid.innerHTML = "";
+        appState.memories.forEach((mem) => {
+          const card = document.createElement("article");
+          card.className = "memory-card";
+          card.setAttribute("data-perch", "card");
+          card.setAttribute("data-safe-text", "true");
 
-    if (!soundEnabled) return;
+          const photoSlot = document.createElement("div");
+          photoSlot.className = "memory-photo-slot";
+          photoSlot.setAttribute("role", "button");
+          photoSlot.setAttribute("tabindex", "0");
+          photoSlot.setAttribute("aria-label", `Add or change photograph for ${mem.title}`);
 
-    if (type === 'cat') {
-        playTone(750,.12);
-        setTimeout(() => playTone(950,.18),150);
-    }
+          if (mem.photo) {
+            const img = document.createElement("img");
+            img.src = mem.photo;
+            img.alt = mem.title;
+            photoSlot.appendChild(img);
+          } else {
+            photoSlot.innerHTML = `
+              <div class="memory-photo-placeholder">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#938476" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <span>Tap to keep a photograph here</span>
+              </div>
+            `;
+          }
 
-    if (type === 'dog') {
-        playTone(260,.15,'triangle');
-        setTimeout(() => playTone(320,.15,'triangle'),200);
-    }
+          const triggerPhotoUpload = () => {
+            pendingPhotoMemoryId = mem.id;
+            photoFileInput.value = "";
+            photoFileInput.click();
+          };
+          photoSlot.addEventListener("click", triggerPhotoUpload);
+          photoSlot.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              triggerPhotoUpload();
+            }
+          });
 
-    if (type === 'capy') {
-        playTone(380,.2,'sine');
-        setTimeout(() => playTone(450,.2,'sine'),220);
-    }
+          const meta = document.createElement("div");
+          meta.className = "memory-meta";
+          meta.innerHTML = `<span class="memory-date">${escapeHtml(mem.date)}</span>`;
 
-    if (type === 'seal') {
-        playTone(520,.2,'triangle');
-        setTimeout(() => playTone(650,.25,'triangle'),200);
-    }
+          const title = document.createElement("h3");
+          title.textContent = mem.title;
 
-    if (type === 'otter') {
-        playTone(850,.1);
-        setTimeout(() => playTone(1100,.15),130);
-    }
-}
+          const body = document.createElement("p");
+          body.className = "memory-text";
+          body.textContent = mem.text;
 
-/* SPOKEN GREETINGS */
+          card.appendChild(photoSlot);
+          card.appendChild(meta);
+          card.appendChild(title);
+          card.appendChild(body);
 
-function speak(message) {
+          if (mem.footnote) {
+            const foot = document.createElement("p");
+            foot.className = "memory-footnote";
+            foot.textContent = mem.footnote;
+            card.appendChild(foot);
+          }
 
-    if (!soundEnabled || !('speechSynthesis' in window)) return;
+          const editBtn = document.createElement("button");
+          editBtn.type = "button";
+          editBtn.className = "memory-edit-btn";
+          editBtn.textContent = "Edit memory";
+          editBtn.addEventListener("click", () => openMemoryEditor(mem.id));
+          card.appendChild(editBtn);
 
-    speechSynthesis.cancel();
+          memoriesGrid.appendChild(card);
+        });
+      }
 
-    const utterance = new SpeechSynthesisUtterance(message);
+      photoFileInput.addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file || !pendingPhotoMemoryId) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          const mem = appState.memories.find(m => m.id === pendingPhotoMemoryId);
+          if (mem && typeof reader.result === "string") {
+            mem.photo = reader.result;
+            persistState();
+            renderMemories();
+            refreshLayoutZones();
+          }
+        };
+        reader.readAsDataURL(file);
+      });
 
-    utterance.lang = 'en-US';
-    utterance.rate = .88;
-    utterance.pitch = 1.15;
-    utterance.volume = .9;
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
 
-    speechSynthesis.speak(utterance);
-}
+      renderMemories();
 
-/* ANIMAL INTERACTIONS */
+      // Surprise Letter
+      const openSurpriseBtn = document.getElementById("open-surprise-btn");
+      const letterReveal = document.getElementById("letter-reveal");
+      const letterContentEl = document.getElementById("letter-content");
+      letterContentEl.textContent = appState.letter;
 
-document.querySelectorAll('.animal-card').forEach(card => {
+      openSurpriseBtn.addEventListener("click", () => {
+        const isOpen = letterReveal.classList.toggle("open");
+        openSurpriseBtn.querySelector("span").textContent = isOpen ? "CLOSE LETTER" : "OPEN YOUR SURPRISE";
+        if (isOpen) {
+          spawnPetalBurst(window.innerWidth * 0.5, openSurpriseBtn.getBoundingClientRect().top, 16);
+          speakGreeting("If I could keep one little corner of this enormous world just for us, it would look something like this.", 0.04);
+        }
+        setTimeout(refreshLayoutZones, 120);
+      });
 
-    card.addEventListener('click', () => {
+      /* =========================================================================
+         4. MODAL EDITOR (MEMORIES, LETTER, OPTIONAL AUDIO FILES)
+      ========================================================================= */
+      const modalBackdrop = document.getElementById("editor-modal");
+      const modalTitle = document.getElementById("modal-title");
+      const modalDesc = document.getElementById("modal-desc");
+      const modalBody = document.getElementById("modal-body");
+      const modalSave = document.getElementById("modal-save");
+      const modalCancel = document.getElementById("modal-cancel");
+      let activeSaveHandler = null;
 
-        const name = card.dataset.name;
-        const greeting = card.dataset.greeting;
-        const type = card.dataset.animal;
+      function closeModal() {
+        modalBackdrop.classList.remove("open");
+        activeSaveHandler = null;
+      }
+      modalCancel.addEventListener("click", closeModal);
+      modalBackdrop.addEventListener("click", (e) => {
+        if (e.target === modalBackdrop) closeModal();
+      });
 
-        const greetingArea = document.getElementById('greeting');
+      function openMemoryEditor(memId) {
+        const mem = appState.memories.find(m => m.id === memId);
+        if (!mem) return;
+        modalTitle.textContent = `Edit "${mem.title}"`;
+        modalDesc.textContent = "Update the date, story, or remove the attached photo.";
+        modalBody.innerHTML = `
+          <div class="field-group">
+            <label for="edit-mem-title">Title</label>
+            <input id="edit-mem-title" type="text" value="${escapeHtml(mem.title)}" />
+          </div>
+          <div class="field-group">
+            <label for="edit-mem-date">Date or Label</label>
+            <input id="edit-mem-date" type="text" value="${escapeHtml(mem.date)}" />
+          </div>
+          <div class="field-group">
+            <label for="edit-mem-text">Memory Note</label>
+            <textarea id="edit-mem-text">${escapeHtml(mem.text)}</textarea>
+          </div>
+          <div class="field-group">
+            <label for="edit-mem-foot">Optional Sub-note</label>
+            <input id="edit-mem-foot" type="text" value="${escapeHtml(mem.footnote || "")}" />
+          </div>
+          ${mem.photo ? `<button type="button" class="btn-subtle" id="remove-mem-photo">Remove Attached Photo</button>` : ""}
+        `;
 
-        greetingArea.innerHTML =
-            '<small>' + name.toUpperCase() + ' SAYS</small>' +
-            greeting;
+        const removeBtn = document.getElementById("remove-mem-photo");
+        if (removeBtn) {
+          removeBtn.addEventListener("click", () => {
+            mem.photo = "";
+            persistState();
+            renderMemories();
+            closeModal();
+          });
+        }
 
-        animalSound(type);
-        speak(greeting);
+        activeSaveHandler = () => {
+          mem.title = document.getElementById("edit-mem-title").value.trim() || mem.title;
+          mem.date = document.getElementById("edit-mem-date").value.trim() || mem.date;
+          mem.text = document.getElementById("edit-mem-text").value.trim() || mem.text;
+          mem.footnote = document.getElementById("edit-mem-foot").value.trim();
+          persistState();
+          renderMemories();
+          refreshLayoutZones();
+          closeModal();
+        };
+        modalBackdrop.classList.add("open");
+      }
 
-    });
+      document.getElementById("edit-letter-btn").addEventListener("click", () => {
+        modalTitle.textContent = "Edit Your Letter to Tanha";
+        modalDesc.textContent = "Write whatever your heart wants her to read.";
+        modalBody.innerHTML = `
+          <div class="field-group">
+            <label for="edit-letter-textarea">Letter Message</label>
+            <textarea id="edit-letter-textarea" style="min-height: 170px;">${escapeHtml(appState.letter)}</textarea>
+          </div>
+        `;
+        activeSaveHandler = () => {
+          const val = document.getElementById("edit-letter-textarea").value.trim();
+          if (val) {
+            appState.letter = val;
+            letterContentEl.textContent = val;
+            persistState();
+          }
+          closeModal();
+        };
+        modalBackdrop.classList.add("open");
+      });
 
-});
-
-/* FLOWER INTERACTION */
-
-function flowerGreeting(message) {
-
-    const greetingArea = document.getElementById('greeting');
-
-    greetingArea.innerHTML =
-        '<small>A FLOWER FOR TANHA</small>' + message;
-
-    playTone(700,.25);
-    setTimeout(() => playTone(900,.25),200);
-
-    speak(message);
-}
-
-/* MEMORY MODAL */
-
-function openMemory(title,message) {
-
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalText').textContent = message;
-
-    document.getElementById('memoryModal').classList.add('show');
-
-}
-
-function closeMemory(event) {
-
-    if (
-        !event ||
-        event.target.id === 'memoryModal' ||
-        event.target.classList.contains('close')
-    ) {
-        document.getElementById('memoryModal').classList.remove('show');
-    }
-
-}
-
-document.addEventListener('keydown', event => {
-
-    if (event.key === 'Escape') {
-        document.getElementById('memoryModal').classList.remove('show');
-    }
-
-});
-
-/* SURPRISE */
-
-function showSurprise() {
-
-    const box = document.getElementById('surpriseBox');
-
-    box.classList.toggle('show');
-
-    if (box.classList.contains('show')) {
-
-        box.scrollIntoView({
-            behavior:'smooth',
-            block:'center'
+      document.getElementById("open-studio-btn").addEventListener("click", () => {
+        modalTitle.textContent = "Kittenkeeps Studio";
+        modalDesc.textContent = "Optional real animal audio files & voice preferences. If you add sounds/cat.mp3, dog.mp3, capybara.mp3, seal.mp3, or otter.mp3 to your GitHub repo, Kittenkeeps plays them automatically—or you can attach local audio files below.";
+        modalBody.innerHTML = `
+          <div class="field-group">
+            <label for="voice-pitch-range">Spoken Greeting Warmth / Pitch (${appState.voicePitch.toFixed(2)})</label>
+            <input id="voice-pitch-range" type="range" min="0.85" max="1.25" step="0.02" value="${appState.voicePitch}" />
+          </div>
+          <div class="field-group">
+            <label>Attach Local Real Animal Recordings (Optional, Session Only)</label>
+            <div style="display:grid; gap:8px; margin-top:6px;">
+              <label style="font-weight:400;">Cat Audio: <input type="file" accept="audio/*" data-species-audio="cat" /></label>
+              <label style="font-weight:400;">Dog Audio: <input type="file" accept="audio/*" data-species-audio="dog" /></label>
+              <label style="font-weight:400;">Capybara Audio: <input type="file" accept="audio/*" data-species-audio="capybara" /></label>
+              <label style="font-weight:400;">Seal Audio: <input type="file" accept="audio/*" data-species-audio="seal" /></label>
+              <label style="font-weight:400;">Sea Otter Audio: <input type="file" accept="audio/*" data-species-audio="otter" /></label>
+            </div>
+          </div>
+        `;
+        modalBody.querySelectorAll("input[data-species-audio]").forEach((inp) => {
+          inp.addEventListener("change", (ev) => {
+            const f = ev.target.files && ev.target.files[0];
+            if (f) {
+              const sp = ev.target.getAttribute("data-species-audio");
+              customAudioUrls[sp] = URL.createObjectURL(f);
+            }
+          });
         });
 
-        speak("A little message for you, Tanha. You make this world more beautiful.");
+        activeSaveHandler = () => {
+          const pRange = document.getElementById("voice-pitch-range");
+          if (pRange) appState.voicePitch = parseFloat(pRange.value) || 1.08;
+          persistState();
+          closeModal();
+        };
+        modalBackdrop.classList.add("open");
+      });
 
-    }
+      modalSave.addEventListener("click", () => {
+        if (activeSaveHandler) activeSaveHandler();
+      });
 
-}
+      /* =========================================================================
+         5. STORYBOOK CHARACTER ILLUSTRATION ENGINE
+            High-craft layered watercolor/gouache organic Bezier art with
+            articulated limbs, spline tails, blinking eyes, ear twitches,
+            breathing ribcages, and props (shells, tulips, yuzu).
+      ========================================================================= */
+      function drawStorybookCat(ctx, a, time) {
+        const s = a.scale || 1;
+        const breathe = Math.sin(time * 2.4 + a.seed) * 1.4;
+        const isSleeping = a.state === "SLEEPING";
+        const isSitting = a.state === "SITTING" || a.state === "PERCHED" || a.state === "GROOMING";
+        const isPeeking = a.state === "PEEKING";
+        const isStretching = a.state === "STRETCHING";
+        const walkCycle = (a.state === "WALKING" || a.state === "RUNNING")
+          ? Math.sin(time * (a.state === "RUNNING" ? 15 : 8.5) + a.seed)
+          : 0;
 
-/* SCROLL REVEAL */
+        ctx.save();
+        ctx.translate(a.x, a.y);
 
-const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-            entry.target.classList.add('visible');
-
-            observer.unobserve(entry.target);
-
+        // Soft ground contact shadow
+        if (!isPeeking) {
+          ctx.save();
+          ctx.fillStyle = "rgba(81, 69, 56, 0.13)";
+          ctx.beginPath();
+          ctx.ellipse(0, 18 * s, (isSleeping ? 28 : 22) * s, 5.5 * s, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
         }
 
-    });
+        ctx.scale(a.facing * s, s);
 
-},{threshold:.12});
+        if (isPeeking) {
+          // Peeking paws + upper face over heading/nav edge
+          drawCatHead(ctx, a, time, 0, -4, false, false);
+          // Two little front paws resting on the ledge
+          [-10, 10].forEach((px, idx) => {
+            const pawGrad = ctx.createRadialGradient(px, 11, 1, px, 12, 7);
+            pawGrad.addColorStop(0, a.palette.light);
+            pawGrad.addColorStop(1, a.palette.mid);
+            ctx.fillStyle = pawGrad;
+            ctx.beginPath();
+            ctx.ellipse(px, 12 + Math.sin(time * 3 + idx) * 0.7, 5.5, 4.2, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "rgba(81, 69, 56, 0.22)";
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
+          });
+          ctx.restore();
+          return;
+        }
 
-document.querySelectorAll('.reveal').forEach(element => {
-    observer.observe(element);
-});
+        // Multi-segment smooth spline tail
+        const tailWag = isSleeping
+          ? Math.sin(time * 1.3 + a.seed) * 3
+          : Math.sin(time * (a.state === "PLAYING" ? 6.5 : 3.1) + a.seed) * 11;
+        ctx.save();
+        ctx.lineCap = "round";
+        ctx.lineWidth = a.fluffy ? 7.5 : 5.8;
+        const tailGrad = ctx.createLinearGradient(-16, 4, -36, -16);
+        tailGrad.addColorStop(0, a.palette.mid);
+        tailGrad.addColorStop(1, a.palette.accent);
+        ctx.strokeStyle = tailGrad;
+        ctx.beginPath();
+        if (isSleeping) {
+          ctx.moveTo(-14, 12);
+          ctx.bezierCurveTo(-24, 16, -12, 22, 8 + tailWag * 0.3, 19);
+        } else {
+          ctx.moveTo(-15, 5);
+          ctx.bezierCurveTo(-27, 2 + tailWag * 0.3, -34, -12 + tailWag, -24, -20 + tailWag * 0.7);
+        }
+        ctx.stroke();
+        ctx.restore();
 
-/* BACK TO TOP */
+        // Back legs
+        if (!isSleeping) {
+          [-10, -4].forEach((lx, i) => {
+            const stride = isSitting ? 0 : walkCycle * (i === 0 ? 5.5 : -5.5);
+            ctx.fillStyle = a.palette.dark;
+            ctx.beginPath();
+            ctx.roundRect(lx + stride - 3.5, isSitting ? 6 : 5, 7, isSitting ? 12 : 14, 3.5);
+            ctx.fill();
+          });
+        }
 
-const topButton = document.getElementById('topButton');
+        // Torso with organic gouache gradient
+        const bodyRx = isSleeping ? 23 : (isStretching ? 24 : (isSitting ? 15.5 : 19));
+        const bodyRy = isSleeping ? 12.5 : (isStretching ? 10.5 : (isSitting ? 15.5 : 12.5 + breathe * 0.35));
+        const bodyY = isSleeping ? 8 : (isSitting ? 3 : 3 - Math.abs(walkCycle) * 1.2);
+        const bodyGrad = ctx.createRadialGradient(-2, bodyY - 4, 3, 0, bodyY, bodyRx * 1.15);
+        bodyGrad.addColorStop(0, a.palette.light);
+        bodyGrad.addColorStop(0.68, a.palette.mid);
+        bodyGrad.addColorStop(1, a.palette.dark);
 
-window.addEventListener('scroll', () => {
+        ctx.fillStyle = bodyGrad;
+        ctx.beginPath();
+        ctx.ellipse(-2, bodyY, bodyRx, bodyRy, isStretching ? -0.14 : (isSitting ? -0.22 : 0), 0, Math.PI * 2);
+        ctx.fill();
 
-    topButton.classList.toggle('show',window.scrollY > 400);
+        // Tabby stripes for Melow, Pumpkin, Miso
+        if (a.tabby) {
+          ctx.save();
+          ctx.strokeStyle = a.palette.stripe;
+          ctx.lineWidth = 2;
+          ctx.lineCap = "round";
+          [-7, -1, 5].forEach((sx) => {
+            ctx.beginPath();
+            ctx.moveTo(sx, bodyY - bodyRy * 0.85);
+            ctx.quadraticCurveTo(sx - 1.5, bodyY - bodyRy * 0.25, sx + 1, bodyY - bodyRy * 0.05);
+            ctx.stroke();
+          });
+          ctx.restore();
+        }
 
-});
+        // Fluffy chest ruff for Payesh & Snowy
+        if (a.fluffy && !isSleeping) {
+          ctx.fillStyle = a.palette.light;
+          ctx.beginPath();
+          ctx.ellipse(10, bodyY + 1, 8.5, 9.5, 0.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
 
-/* FALLING PETALS */
+        // Front legs (or dangling paws when perched on a button!)
+        if (!isSleeping) {
+          [6, 12].forEach((lx, i) => {
+            const stride = isSitting ? 0 : walkCycle * (i === 0 ? -5.5 : 5.5);
+            const legGrad = ctx.createLinearGradient(lx, 4, lx, 20);
+            legGrad.addColorStop(0, a.palette.mid);
+            legGrad.addColorStop(1, a.palette.light);
+            ctx.fillStyle = legGrad;
+            ctx.beginPath();
+            ctx.roundRect(lx + stride - 3.3, isSitting ? 6 : 6, 6.6, a.dangling ? 16 : 13, 3.3);
+            ctx.fill();
+          });
+        }
 
-const reducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-).matches;
+        // Head
+        const headX = isSleeping ? 14 : (isSitting ? 9 : 14);
+        const headY = isSleeping ? 7 : (isStretching ? 4 : (isSitting ? -10 : -7 - Math.abs(walkCycle) * 1.1));
+        drawCatHead(ctx, a, time, headX, headY, isSleeping, a.state === "GROOMING");
 
-if (!reducedMotion) {
+        ctx.restore();
+      }
 
-    setInterval(() => {
+      function drawCatHead(ctx, a, time, hx, hy, isSleeping, isGrooming) {
+        ctx.save();
+        const tilt = isGrooming ? Math.sin(time * 7) * 0.14 : Math.sin(time * 1.5 + a.seed) * 0.04;
+        ctx.translate(hx, hy);
+        ctx.rotate(tilt);
 
-        const petal = document.createElement('div');
+        const earTwitch = Math.sin(time * 4.2 + a.seed * 3) > 0.96 ? 0.14 : 0;
 
-        petal.className = 'petal';
+        // Left & Right Ears
+        [
+          { x: -8, y: -11, rot: -0.28 - earTwitch },
+          { x: 7, y: -11, rot: 0.28 + earTwitch }
+        ].forEach((ear) => {
+          ctx.save();
+          ctx.translate(ear.x, ear.y);
+          ctx.rotate(ear.rot);
+          ctx.fillStyle = a.palette.accent;
+          ctx.beginPath();
+          ctx.moveTo(-6, 5);
+          ctx.quadraticCurveTo(-1, -10, 0, -10);
+          ctx.quadraticCurveTo(2, -10, 6, 5);
+          ctx.closePath();
+          ctx.fill();
 
-        petal.style.left = Math.random() * 100 + 'vw';
+          // Inner ear warm pink
+          ctx.fillStyle = "#E6B8B7";
+          ctx.beginPath();
+          ctx.moveTo(-3.2, 3);
+          ctx.quadraticCurveTo(0, -6, 0, -6);
+          ctx.quadraticCurveTo(0, -6, 3.2, 3);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        });
 
-        petal.style.animationDuration =
-            (7 + Math.random() * 6) + 's';
+        // Head shape with soft cheek fluff
+        const headGrad = ctx.createRadialGradient(-2, -3, 2, 0, 0, 15);
+        headGrad.addColorStop(0, a.palette.light);
+        headGrad.addColorStop(0.75, a.palette.mid);
+        headGrad.addColorStop(1, a.palette.dark);
+        ctx.fillStyle = headGrad;
 
-        petal.style.opacity =
-            Math.random() * .4 + .2;
+        ctx.beginPath();
+        ctx.moveTo(-12.5, -2);
+        ctx.bezierCurveTo(-13, -11, -6, -14, 0, -14);
+        ctx.bezierCurveTo(6, -14, 13, -11, 12.5, -2);
+        ctx.bezierCurveTo(14.5, 3, 11, 10.5, 0, 10.5);
+        ctx.bezierCurveTo(-11, 10.5, -14.5, 3, -12.5, -2);
+        ctx.fill();
 
-        document.body.appendChild(petal);
+        // Forehead tabby M-markings
+        if (a.tabby) {
+          ctx.strokeStyle = a.palette.stripe;
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.moveTo(-4, -9.5);
+          ctx.lineTo(-2, -7);
+          ctx.lineTo(0, -9);
+          ctx.lineTo(2, -7);
+          ctx.lineTo(4, -9.5);
+          ctx.stroke();
+        }
 
-        setTimeout(() => petal.remove(),14000);
+        // Eyes (blinking or peacefully closed)
+        const blinkPhase = (time * 0.45 + a.seed) % 1;
+        const blinking = isSleeping || blinkPhase > 0.94 || a.state === "REACTING";
 
-    },1400);
+        [-4.8, 5.2].forEach((ex) => {
+          if (blinking) {
+            ctx.strokeStyle = "#514538";
+            ctx.lineWidth = 1.5;
+            ctx.lineCap = "round";
+            ctx.beginPath();
+            if (a.state === "REACTING") {
+              // Happy arched eyes ^ ^
+              ctx.arc(ex, 0.5, 2.7, Math.PI * 1.15, Math.PI * 1.85);
+            } else {
+              // Peaceful sleepy curve
+              ctx.arc(ex, -1.2, 2.7, Math.PI * 0.15, Math.PI * 0.85);
+            }
+            ctx.stroke();
+          } else {
+            // Expressive iris + pupil + catchlight
+            ctx.fillStyle = a.eyeColor;
+            ctx.beginPath();
+            ctx.ellipse(ex, -0.5, 2.7, 3.1, 0, 0, Math.PI * 2);
+            ctx.fill();
 
-}
+            ctx.fillStyle = "#2E251E";
+            ctx.beginPath();
+            ctx.ellipse(ex + 0.3, -0.5, 1.45, 2.2, 0, 0, Math.PI * 2);
+            ctx.fill();
 
-</script>
+            ctx.fillStyle = "#FFFFFF";
+            ctx.beginPath();
+            ctx.arc(ex - 0.7, -1.6, 0.95, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        });
 
+        // Rosy cheeks
+        ctx.fillStyle = "rgba(197, 142, 145, 0.32)";
+        ctx.beginPath();
+        ctx.ellipse(-7.5, 3, 2.6, 1.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(8, 3, 2.6, 1.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Tiny pink nose & gentle mouth
+        ctx.fillStyle = "#D68E92";
+        ctx.beginPath();
+        ctx.moveTo(-1.7, 2.4);
+        ctx.lineTo(2.1, 2.4);
+        ctx.lineTo(0.2, 4.3);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = "#6B5C4C";
+        ctx.lineWidth = 1.1;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(0.2, 4.3);
+        ctx.quadraticCurveTo(-1.8, 6.2, -3.5, 5.2);
+        ctx.moveTo(0.2, 4.3);
+        ctx.quadraticCurveTo(2.2, 6.2, 3.9, 5.2);
+        ctx.stroke();
+
+        // Delicate whiskers
+        ctx.strokeStyle = "rgba(81, 69, 56, 0.35)";
+        ctx.lineWidth = 0.85;
+        [-1, 1].forEach((dir) => {
+          ctx.beginPath();
+          ctx.moveTo(dir * 7, 2.5);
+          ctx.lineTo(dir * 16, 1.2);
+          ctx.moveTo(dir * 7, 4.2);
+          ctx.lineTo(dir * 16, 4.8);
+          ctx.stroke();
+        });
+
+        ctx.restore();
+      }
+
+      function drawStorybookDog(ctx, a, time) {
+        const s = a.scale || 1;
+        const isSitting = a.state === "SITTING" || a.state === "PERCHED";
+        const isRunning = a.state === "RUNNING";
+        const walkCycle = (a.state === "WALKING" || isRunning)
+          ? Math.sin(time * (isRunning ? 16 : 9.5) + a.seed)
+          : 0;
+        const wagSpeed = (a.state === "REACTING" || a.state === "PLAYING" || isRunning) ? 18 : 8;
+        const tailAngle = Math.sin(time * wagSpeed + a.seed) * 0.55;
+
+        ctx.save();
+        ctx.translate(a.x, a.y);
+
+        // Contact shadow
+        ctx.fillStyle = "rgba(81, 69, 56, 0.13)";
+        ctx.beginPath();
+        ctx.ellipse(0, 19 * s, 23 * s, 5.5 * s, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.scale(a.facing * s, s);
+
+        // Happy wagging tail
+        ctx.save();
+        ctx.translate(-16, 2);
+        ctx.rotate(-0.5 + tailAngle);
+        ctx.strokeStyle = a.palette.dark;
+        ctx.lineWidth = 6.5;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(-8, -9, -4, -17);
+        ctx.stroke();
+        ctx.restore();
+
+        // Back legs
+        [-11, -5].forEach((lx, i) => {
+          const stride = isSitting ? 0 : walkCycle * (i === 0 ? 6 : -6);
+          ctx.fillStyle = a.palette.dark;
+          ctx.beginPath();
+          ctx.roundRect(lx + stride - 3.8, 6, 7.6, isSitting ? 11 : 14, 3.8);
+          ctx.fill();
+        });
+
+        // Plump puppy body
+        const bodyY = 3 - Math.abs(walkCycle) * 1.4;
+        const bodyGrad = ctx.createRadialGradient(0, bodyY - 4, 3, 0, bodyY, 22);
+        bodyGrad.addColorStop(0, a.palette.light);
+        bodyGrad.addColorStop(0.7, a.palette.mid);
+        bodyGrad.addColorStop(1, a.palette.dark);
+        ctx.fillStyle = bodyGrad;
+        ctx.beginPath();
+        ctx.ellipse(-1, bodyY, isSitting ? 16.5 : 20, isSitting ? 15 : 13, isSitting ? -0.25 : 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Botanical green ribbon collar
+        ctx.strokeStyle = "#78866B";
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.moveTo(8, bodyY - 9);
+        ctx.quadraticCurveTo(13, bodyY - 1, 10, bodyY + 8);
+        ctx.stroke();
+
+        // Front legs
+        [6, 12].forEach((lx, i) => {
+          const stride = isSitting ? 0 : walkCycle * (i === 0 ? -6 : 6);
+          ctx.fillStyle = a.palette.mid;
+          ctx.beginPath();
+          ctx.roundRect(lx + stride - 3.6, 6, 7.2, 14, 3.6);
+          ctx.fill();
+        });
+
+        // Puppy Head
+        const hx = isSitting ? 10 : 14;
+        const hy = (isSitting ? -11 : -8) - Math.abs(walkCycle) * 1.4;
+        ctx.save();
+        ctx.translate(hx, hy);
+
+        // Head dome
+        const headGrad = ctx.createRadialGradient(-2, -3, 2, 0, 0, 15);
+        headGrad.addColorStop(0, a.palette.light);
+        headGrad.addColorStop(0.75, a.palette.mid);
+        headGrad.addColorStop(1, a.palette.dark);
+        ctx.fillStyle = headGrad;
+        ctx.beginPath();
+        ctx.arc(0, -1, 13.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Soft snout
+        ctx.fillStyle = a.palette.light;
+        ctx.beginPath();
+        ctx.ellipse(6.5, 3.5, 7.5, 5.8, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Floppy ear
+        const earBounce = Math.abs(walkCycle) * 0.18 + (a.state === "REACTING" ? 0.14 : 0);
+        ctx.save();
+        ctx.translate(-5, -7);
+        ctx.rotate(0.22 + earBounce);
+        ctx.fillStyle = a.palette.dark;
+        ctx.beginPath();
+        ctx.ellipse(-2, 8, 5.5, 10.5, 0.15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Happy puppy eyes
+        [-1.5, 6.5].forEach((ex) => {
+          ctx.fillStyle = "#33261D";
+          ctx.beginPath();
+          ctx.arc(ex, -2.5, 2.4, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#FFFFFF";
+          ctx.beginPath();
+          ctx.arc(ex - 0.6, -3.3, 0.85, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Wet dark nose
+        ctx.fillStyle = "#3A2C23";
+        ctx.beginPath();
+        ctx.ellipse(11.5, 2.2, 2.7, 2.1, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Little pink happy tongue when excited or running
+        if (isRunning || a.state === "REACTING" || a.state === "PLAYING") {
+          ctx.fillStyle = "#D98A90";
+          ctx.beginPath();
+          ctx.ellipse(9.5, 8.2, 2.4, 3.2, 0.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
+        ctx.restore();
+      }
+
+      function drawStorybookCapybara(ctx, a, time) {
+        const s = a.scale || 1;
+        const isRelaxing = a.state === "SITTING" || a.state === "SLEEPING" || a.state === "EATING";
+        const walkCycle = a.state === "WALKING" ? Math.sin(time * 5.2 + a.seed) : 0;
+
+        ctx.save();
+        ctx.translate(a.x, a.y);
+
+        // Contact shadow
+        ctx.fillStyle = "rgba(81, 69, 56, 0.14)";
+        ctx.beginPath();
+        ctx.ellipse(0, 21 * s, 32 * s, 6.5 * s, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.scale(a.facing * s, s);
+
+        // Sturdy little legs
+        if (!isRelaxing) {
+          [-16, -9, 8, 15].forEach((lx, i) => {
+            const stride = walkCycle * (i % 2 === 0 ? 3.5 : -3.5);
+            ctx.fillStyle = a.palette.dark;
+            ctx.beginPath();
+            ctx.roundRect(lx + stride - 3.5, 9, 7, 12, 3.2);
+            ctx.fill();
+          });
+        }
+
+        // Plump, noble barrel body
+        const bodyY = isRelaxing ? 8 : 4 - Math.abs(walkCycle) * 0.7;
+        const bodyGrad = ctx.createRadialGradient(-2, bodyY - 6, 4, 0, bodyY, 32);
+        bodyGrad.addColorStop(0, a.palette.light);
+        bodyGrad.addColorStop(0.65, a.palette.mid);
+        bodyGrad.addColorStop(1, a.palette.dark);
+        ctx.fillStyle = bodyGrad;
+        ctx.beginPath();
+        ctx.ellipse(-2, bodyY, 28, isRelaxing ? 14.5 : 16, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Iconic gentle rectangular-oval Capybara head
+        const hx = 21;
+        const hy = isRelaxing ? -2 : -5 - Math.abs(walkCycle) * 0.7;
+        ctx.save();
+        ctx.translate(hx, hy);
+
+        // Tiny rounded ear tucked back
+        ctx.fillStyle = a.palette.dark;
+        ctx.beginPath();
+        ctx.arc(-6, -9, 3.8, 0, Math.PI * 2);
+        ctx.fill();
+
+        const headGrad = ctx.createLinearGradient(-10, -10, 14, 10);
+        headGrad.addColorStop(0, a.palette.light);
+        headGrad.addColorStop(0.6, a.palette.mid);
+        headGrad.addColorStop(1, a.palette.dark);
+        ctx.fillStyle = headGrad;
+        ctx.beginPath();
+        ctx.roundRect(-11, -10, 24, 18.5, [9, 10, 8, 8]);
+        ctx.fill();
+
+        // Calm half-closed serene eye
+        ctx.strokeStyle = "#3B2E24";
+        ctx.lineWidth = 1.8;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(-1, -3.5);
+        ctx.lineTo(4.5, -3.5);
+        ctx.stroke();
+
+        // Cute nostril & calm mouth
+        ctx.fillStyle = "#3B2E24";
+        ctx.beginPath();
+        ctx.arc(10.5, -1.5, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = "#4A3B30";
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(12, 3.5);
+        ctx.quadraticCurveTo(8, 5, 5, 3.8);
+        ctx.stroke();
+
+        // Coco wears a tiny pink tulip or yuzu on head when relaxing!
+        if (a.hasBlossom) {
+          ctx.fillStyle = "#78866B";
+          ctx.fillRect(-1.5, -15, 2.2, 5);
+          ctx.fillStyle = "#C58E91";
+          ctx.beginPath();
+          ctx.ellipse(-0.4, -17, 3.6, 4.6, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
+        ctx.restore();
+      }
+
+      /* =========================================================================
+         6. LIVING ANIMAL ECOSYSTEM (ROAMING ACROSS ENTIRE PAGE + UI PERCHING)
+      ========================================================================= */
+      const worldCanvas = document.getElementById("world-canvas");
+      const worldCtx = worldCanvas.getContext("2d");
+      const speechLayer = document.getElementById("speech-layer");
+      const residentChipsEl = document.getElementById("resident-chips");
+
+      const LAND_ANIMALS = [
+        {
+          id: "payesh",
+          name: "Payesh",
+          species: "cat",
+          special: true,
+          chipColor: "#FAF7F2",
+          scale: 1.08,
+          fluffy: true,
+          tabby: false,
+          eyeColor: "#9A744C",
+          palette: { light: "#FFFFFF", mid: "#F6F1E7", dark: "#E4DACB", accent: "#EDE4D5", stripe: "#D8CCB9" },
+          greetings: [
+            "Hi Tanha! I'm Payesh. I saved the softest spot on the page just for you.",
+            "Purr... welcome home, Kitten. May I curl up right beside you?",
+            "Hello Tanha! Melow was just chasing petals, so I came to say hi first."
+          ]
+        },
+        {
+          id: "melow",
+          name: "Melow",
+          species: "cat",
+          special: true,
+          chipColor: "#E09A56",
+          scale: 1.06,
+          fluffy: false,
+          tabby: true,
+          eyeColor: "#6E8B5B",
+          palette: { light: "#F7C894", mid: "#E59A54", dark: "#C87936", accent: "#D5843E", stripe: "#A85D22" },
+          greetings: [
+            "Meow! Tanha, look! I almost caught that butterfly!",
+            "Hi Tanha! I'm Melow. Have you seen Payesh? We're exploring your whole website!",
+            "Mrrp! I jumped onto the buttons just to get a better view of you!"
+          ]
+        },
+        {
+          id: "mochi",
+          name: "Mochi",
+          species: "cat",
+          special: false,
+          chipColor: "#EADBC5",
+          scale: 0.96,
+          fluffy: true,
+          tabby: false,
+          eyeColor: "#7E6752",
+          palette: { light: "#FAF4EA", mid: "#EDE0CC", dark: "#D6C2A8", accent: "#B89D82", stripe: "#A78B71" },
+          greetings: [
+            "Hi Tanha! I'm Mochi. Can I stay here forever?",
+            "Yawn... hello Tanha. Everything is so warm and cozy here.",
+            "Purr... gentle pets are my favorite thing in the world."
+          ]
+        },
+        {
+          id: "snowy",
+          name: "Snowy",
+          species: "cat",
+          special: false,
+          chipColor: "#F4EFE6",
+          scale: 0.95,
+          fluffy: true,
+          tabby: false,
+          eyeColor: "#8A7A68",
+          palette: { light: "#FFFFFF", mid: "#F3EFE8", dark: "#DFD8CC", accent: "#EBE5DA", stripe: "#CFC6B8" },
+          greetings: [
+            "Meow! I'm Snowy! Look at all the tulips blooming for you, Tanha!",
+            "Hello Tanha! I was following a falling petal and found you.",
+            "Chirp! Everything here smells like flowers and sunshine."
+          ]
+        },
+        {
+          id: "pumpkin",
+          name: "Pumpkin",
+          species: "cat",
+          special: false,
+          chipColor: "#D98245",
+          scale: 1.02,
+          fluffy: false,
+          tabby: true,
+          eyeColor: "#B38A3E",
+          palette: { light: "#F5BE88", mid: "#DC8243", dark: "#B86228", accent: "#C97033", stripe: "#944917" },
+          greetings: [
+            "Mrrrow! I'm Pumpkin! Want to race me to the flower garden, Tanha?",
+            "Hi Tanha! I'm keeping watch over all your favorite memories.",
+            "Meow! You found me! That deserves at least two head scratches."
+          ]
+        },
+        {
+          id: "miso",
+          name: "Miso",
+          species: "cat",
+          special: false,
+          chipColor: "#B69B7E",
+          scale: 1.0,
+          fluffy: false,
+          tabby: true,
+          eyeColor: "#6B5642",
+          palette: { light: "#DFCBB4", mid: "#BC9F82", dark: "#977B60", accent: "#A88B6F", stripe: "#765C44" },
+          greetings: [
+            "Hello Tanha. I'm Miso. I was just admiring how peaceful this place is.",
+            "Mrrp! Welcome back, Tanha. We missed you!",
+            "Purr... I love sitting quietly beside your memory cards."
+          ]
+        },
+        {
+          id: "biscuit",
+          name: "Biscuit",
+          species: "dog",
+          special: false,
+          chipColor: "#CFA063",
+          scale: 1.04,
+          palette: { light: "#F2D5A7", mid: "#D4A364", dark: "#AD7C41" },
+          greetings: [
+            "Woof woof! Hello Tanha! I'm Biscuit, and I'm so happy to see you!",
+            "Yip! Tail wagging at maximum speed because you're here, Tanha!",
+            "Woof! Shall we go say hello to Payesh and Coco together?"
+          ]
+        },
+        {
+          id: "teddy",
+          name: "Teddy",
+          species: "dog",
+          special: false,
+          chipColor: "#E3CFB2",
+          scale: 1.0,
+          palette: { light: "#F7EDE0", mid: "#E2CEB1", dark: "#BFA584" },
+          greetings: [
+            "Ruff! Hi Tanha, I'm Teddy. I brought you my best happy wiggle.",
+            "Woof! Sitting right here waiting for your next visit, Tanha.",
+            "Yip yip! Everything feels brighter when you open this page."
+          ]
+        },
+        {
+          id: "coco",
+          name: "Coco",
+          species: "capybara",
+          special: false,
+          chipColor: "#9E7E63",
+          scale: 1.08,
+          hasBlossom: true,
+          palette: { light: "#C7AA8E", mid: "#9E7E63", dark: "#785C45" },
+          greetings: [
+            "Hello Tanha. I'm Coco. Don't worry, everything is okay.",
+            "Chirp... take a deep breath, Tanha. There is no rush anywhere in this world.",
+            "Squeak! Even a little tulip decided to rest on my head today."
+          ]
+        },
+        {
+          id: "mochaccino",
+          name: "Mochaccino",
+          species: "capybara",
+          special: false,
+          chipColor: "#8C6F58",
+          scale: 1.03,
+          hasBlossom: false,
+          palette: { light: "#B89A7F", mid: "#8E7057", dark: "#6B503B" },
+          greetings: [
+            "Whistle-chirp! Hi Tanha, I'm Mochaccino. Coco and I are guarding the tulips.",
+            "Hello Tanha! Would you like to sit in the garden with us for a little while?",
+            "Squeak-purr! Being peaceful is our favorite hobby."
+          ]
+        }
+      ];
+
+      let safeRects = [];
+      let perchTargets = [];
+      let docHeight = 3200;
+      let docWidth = window.innerWidth;
+
+      function refreshLayoutZones() {
+        docWidth = document.documentElement.clientWidth;
+        docHeight = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight
+        );
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        worldCanvas.width = docWidth * dpr;
+        worldCanvas.height = docHeight * dpr;
+        worldCanvas.style.width = docWidth + "px";
+        worldCanvas.style.height = docHeight + "px";
+        worldCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        safeRects = Array.from(document.querySelectorAll("[data-safe-text='true']")).map((el) => {
+          const r = el.getBoundingClientRect();
+          return {
+            left: r.left - 16,
+            right: r.right + 16,
+            top: r.top + scrollY - 12,
+            bottom: r.bottom + scrollY + 12
+          };
+        });
+
+        perchTargets = [];
+        document.querySelectorAll("[data-perch]").forEach((el) => {
+          const r = el.getBoundingClientRect();
+          const kind = el.getAttribute("data-perch");
+          if (r.width > 40 && r.height > 20) {
+            perchTargets.push({
+              kind,
+              x: r.left + r.width * (0.25 + Math.random() * 0.5),
+              y: r.top + scrollY - 12,
+              left: r.left,
+              right: r.right,
+              top: r.top + scrollY,
+              bottom: r.bottom + scrollY
+            });
+          }
+        });
+      }
+
+      // Initialize runtime agents
+      const agents = LAND_ANIMALS.map((cfg, idx) => {
+        const startY = 180 + (idx * 290) % Math.max(1200, docHeight - 240);
+        const startX = (idx % 2 === 0 ? 0.16 : 0.84) * Math.max(340, window.innerWidth);
+        return {
+          ...cfg,
+          x: startX,
+          y: startY,
+          vx: 0,
+          vy: 0,
+          targetX: startX + (idx % 2 === 0 ? 120 : -120),
+          targetY: startY + 40,
+          facing: idx % 2 === 0 ? 1 : -1,
+          state: idx % 3 === 0 ? "SLEEPING" : "WALKING",
+          stateTimer: 3 + idx * 1.1,
+          seed: idx * 1.73 + 0.4,
+          dangling: false,
+          partnerId: null,
+          activeBubbleEl: null,
+          bubbleTimeout: null
+        };
+      });
+
+      function showSpeechBubble(agent, customText) {
+        const text = customText || agent.greetings[Math.floor(Math.random() * agent.greetings.length)];
+        if (agent.activeBubbleEl) {
+          agent.activeBubbleEl.remove();
+          clearTimeout(agent.bubbleTimeout);
+        }
+        const bubble = document.createElement("div");
+        bubble.className = "animal-bubble";
+        bubble.style.left = Math.min(docWidth - 135, Math.max(135, agent.x)) + "px";
+        bubble.style.top = Math.max(68, agent.y - 28) + "px";
+        bubble.innerHTML = `<span class="bubble-name">${escapeHtml(agent.name)}</span>${escapeHtml(text)}`;
+        speechLayer.appendChild(bubble);
+        agent.activeBubbleEl = bubble;
+
+        agent.bubbleTimeout = setTimeout(() => {
+          if (agent.activeBubbleEl === bubble) {
+            bubble.remove();
+            agent.activeBubbleEl = null;
+          }
+        }, 5200);
+
+        return text;
+      }
+
+      function interactWithAgent(agent) {
+        agent.state = "REACTING";
+        agent.stateTimer = 2.6;
+        agent.dangling = false;
+        const spokenText = showSpeechBubble(agent);
+        tryPlaySpeciesRecording(agent.species);
+        speakGreeting(spokenText, agent.species === "cat" ? 0.08 : (agent.species === "capybara" ? -0.06 : 0.04));
+        spawnPetalBurst(agent.x, agent.y - 12, 6);
+      }
+
+      function pickNewWaypoint(a) {
+        const margin = 44;
+        const maxX = Math.max(200, docWidth - margin);
+        const minY = 95;
+        const maxY = Math.max(600, docHeight - 90);
+
+        // Occasional UI perching or peeking for cats & energetic puppies!
+        if ((a.species === "cat" || a.id === "biscuit") && perchTargets.length && Math.random() < 0.28) {
+          const target = perchTargets[Math.floor(Math.random() * perchTargets.length)];
+          a.targetX = target.left + 24 + Math.random() * Math.max(10, target.right - target.left - 48);
+          a.targetY = target.top - 10;
+          a.pendingPerch = target.kind;
+          a.state = a.id === "melow" || a.id === "biscuit" ? "RUNNING" : "WALKING";
+          a.stateTimer = 8;
+          return;
+        }
+
+        // Social interaction: Payesh & Melow seek each other out!
+        if ((a.id === "payesh" || a.id === "melow") && Math.random() < 0.26) {
+          const buddy = agents.find(other => other.id === (a.id === "payesh" ? "melow" : "payesh"));
+          if (buddy) {
+            a.targetX = Math.min(maxX, Math.max(margin, buddy.x + (buddy.x > a.x ? -38 : 38)));
+            a.targetY = buddy.y;
+            a.state = a.id === "melow" ? "RUNNING" : "WALKING";
+            a.stateTimer = 7;
+            return;
+          }
+        }
+
+        // Capybaras prefer the serene Garden & Animal World middle zones
+        if (a.species === "capybara") {
+          const gardenEl = document.getElementById("garden");
+          const worldEl = document.getElementById("their-world");
+          const scrollY = window.scrollY || window.pageYOffset;
+          const zoneTop = worldEl ? worldEl.getBoundingClientRect().top + scrollY : minY;
+          const zoneBottom = gardenEl ? gardenEl.getBoundingClientRect().bottom + scrollY : maxY;
+          a.targetX = margin + Math.random() * (maxX - margin);
+          a.targetY = zoneTop + 40 + Math.random() * Math.max(160, zoneBottom - zoneTop - 80);
+          a.state = "WALKING";
+          a.stateTimer = 6 + Math.random() * 5;
+          return;
+        }
+
+        // General organic roaming avoiding center of text blocks
+        for (let attempt = 0; attempt < 8; attempt++) {
+          const sideBias = Math.random() < 0.55;
+          const tx = sideBias
+            ? (Math.random() < 0.5 ? margin + Math.random() * Math.max(60, docWidth * 0.2) : docWidth - margin - Math.random() * Math.max(60, docWidth * 0.2))
+            : margin + Math.random() * (maxX - margin);
+          const ty = minY + Math.random() * (maxY - minY);
+          const insideText = safeRects.some(r => tx > r.left + 20 && tx < r.right - 20 && ty > r.top + 20 && ty < r.bottom - 20);
+          if (!insideText || attempt === 7) {
+            a.targetX = tx;
+            a.targetY = ty;
+            break;
+          }
+        }
+
+        a.pendingPerch = null;
+        a.state = (a.species === "dog" || a.id === "melow" || a.id === "pumpkin") && Math.random() < 0.35
+          ? "RUNNING"
+          : "WALKING";
+        a.stateTimer = 5 + Math.random() * 6;
+      }
+
+      function updateAgents(dt, time) {
+        agents.forEach((a) => {
+          a.stateTimer -= dt;
+
+          // Keep bubble anchored above animal as it moves
+          if (a.activeBubbleEl) {
+            a.activeBubbleEl.style.left = Math.min(docWidth - 135, Math.max(135, a.x)) + "px";
+            a.activeBubbleEl.style.top = Math.max(68, a.y - 28) + "px";
+          }
+
+          if (a.state === "WALKING" || a.state === "RUNNING") {
+            const dx = a.targetX - a.x;
+            const dy = a.targetY - a.y;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < 10 || a.stateTimer <= 0) {
+              if (a.pendingPerch) {
+                if (a.pendingPerch === "nav" || (a.species === "cat" && Math.random() < 0.45)) {
+                  a.state = "PEEKING";
+                  a.dangling = false;
+                } else {
+                  a.state = "PERCHED";
+                  a.dangling = a.species === "cat" && Math.random() < 0.5;
+                }
+                a.stateTimer = 5 + Math.random() * 5;
+                a.pendingPerch = null;
+              } else {
+                const roll = Math.random();
+                if (a.species === "cat") {
+                  a.state = roll < 0.32 ? "SLEEPING" : (roll < 0.56 ? "SITTING" : (roll < 0.76 ? "GROOMING" : "STRETCHING"));
+                } else if (a.species === "dog") {
+                  a.state = roll < 0.55 ? "SITTING" : "PLAYING";
+                } else {
+                  a.state = roll < 0.65 ? "SITTING" : "EATING";
+                }
+                a.stateTimer = 3.2 + Math.random() * 5.5;
+              }
+            } else {
+              const baseSpeed = a.species === "capybara" ? 24 : (a.state === "RUNNING" ? 86 : 44);
+              const speed = prefersReducedMotion ? baseSpeed * 0.35 : baseSpeed;
+              a.x += (dx / dist) * speed * dt;
+              a.y += (dy / dist) * speed * dt;
+              if (Math.abs(dx) > 2) a.facing = dx >= 0 ? 1 : -1;
+            }
+          } else {
+            // Stationary / perched / sleeping states
+            if (a.stateTimer <= 0) {
+              a.dangling = false;
+              pickNewWaypoint(a);
+            }
+          }
+
+          // Clamp within document bounds so no animal ever disappears off-screen
+          a.x = Math.max(36, Math.min(docWidth - 36, a.x));
+          a.y = Math.max(76, Math.min(docHeight - 40, a.y));
+        });
+      }
+
+      function renderWorldCanvas(time) {
+        worldCtx.clearRect(0, 0, docWidth, docHeight);
+        // Sort by Y coordinate for natural depth layering
+        const sorted = [...agents].sort((a, b) => a.y - b.y);
+        sorted.forEach((a) => {
+          if (a.species === "cat") drawStorybookCat(worldCtx, a, time);
+          else if (a.species === "dog") drawStorybookDog(worldCtx, a, time);
+          else if (a.species === "capybara") drawStorybookCapybara(worldCtx, a, time);
+        });
+      }
+
+      // Dynamic pointer-events on worldCanvas so buttons & links are NEVER blocked!
+      function findHitLandAnimal(pageX, pageY) {
+        const hitRadius = 38;
+        for (let i = agents.length - 1; i >= 0; i--) {
+          const a = agents[i];
+          if (Math.hypot(pageX - a.x, pageY - a.y) <= hitRadius) {
+            return a;
+          }
+        }
+        return null;
+      }
+
+      window.addEventListener("pointermove", (e) => {
+        const hit = findHitLandAnimal(e.pageX, e.pageY);
+        worldCanvas.style.pointerEvents = hit ? "auto" : "none";
+        worldCanvas.style.cursor = hit ? "pointer" : "default";
+      }, { passive: true });
+
+      worldCanvas.addEventListener("pointerdown", (e) => {
+        const hit = findHitLandAnimal(e.pageX, e.pageY);
+        if (hit) {
+          e.preventDefault();
+          e.stopPropagation();
+          interactWithAgent(hit);
+        }
+      });
+
+      // Fallback touch tap detection on mobile devices where pointermove doesn't precede tap
+      document.addEventListener("touchstart", (e) => {
+        if (!e.touches || !e.touches.length) return;
+        const t = e.touches[0];
+        const hit = findHitLandAnimal(t.pageX, t.pageY);
+        if (hit) {
+          interactWithAgent(hit);
+        }
+      }, { passive: true });
+
+      /* =========================================================================
+         7. DRIFTWOOD LILY POND (SEA OTTERS OLIVER & OLIVE + SEALS PEBBLE & BUBBLES)
+      ========================================================================= */
+      const pondCanvas = document.getElementById("pond-canvas");
+      const pondCtx = pondCanvas.getContext("2d");
+      const pondStatusEl = document.getElementById("pond-status");
+      let pondW = 800;
+      let pondH = 340;
+      let ripples = [];
+
+      const AQUATIC_ANIMALS = [
+        {
+          id: "oliver",
+          name: "Oliver",
+          species: "otter",
+          chipColor: "#8C6244",
+          x: 0.34,
+          y: 0.54,
+          vx: 14,
+          vy: 6,
+          facing: 1,
+          state: "FLOATING",
+          stateTimer: 6,
+          seed: 0.8,
+          prop: "shell",
+          greetings: [
+            "Chirp-squeak! Hi Tanha, I'm Oliver! Look at the pearlescent shell I found for you.",
+            "Squeak! Olive and I were just floating on our backs watching the clouds.",
+            "Happy otter chirp! Everything is calmer when you're here, Tanha."
+          ]
+        },
+        {
+          id: "olive",
+          name: "Olive",
+          species: "otter",
+          chipColor: "#A97B56",
+          x: 0.44,
+          y: 0.56,
+          vx: -12,
+          vy: 5,
+          facing: -1,
+          state: "FLOATING",
+          stateTimer: 7,
+          seed: 2.1,
+          prop: "tulip",
+          greetings: [
+            "Soft chirp! Hello Tanha, I'm Olive. I kept a tiny pink tulip safe while floating.",
+            "Squeak! Oliver and I love holding paws so we don't drift apart.",
+            "Hi Tanha! The pond water is so gentle today."
+          ]
+        },
+        {
+          id: "pebble",
+          name: "Pebble",
+          species: "seal",
+          chipColor: "#9BA3A0",
+          x: 0.68,
+          y: 0.38,
+          vx: -28,
+          vy: 14,
+          facing: -1,
+          state: "SWIMMING",
+          stateTimer: 5,
+          seed: 3.4,
+          spotted: true,
+          greetings: [
+            "Arf-chirp! Hello Tanha! I'm Pebble. Watch me glide across the lily pond!",
+            "Soft seal call! Bubbles and I love doing splash loops together.",
+            "Hi Tanha! Flipper claps just for you!"
+          ]
+        },
+        {
+          id: "bubbles",
+          name: "Bubbles",
+          species: "seal",
+          chipColor: "#B7BFBC",
+          x: 0.78,
+          y: 0.68,
+          vx: -34,
+          vy: -16,
+          facing: -1,
+          state: "PLAYING",
+          stateTimer: 4.5,
+          seed: 4.9,
+          spotted: false,
+          greetings: [
+            "Yip-chirp! I'm Bubbles! Look how fast I can roll in the water, Tanha!",
+            "Splash! Hi Tanha! Pebble and I were waiting for you to visit the pond.",
+            "Happy seal squeak! Sending you a whole pond full of good luck."
+          ]
+        }
+      ];
+
+      function resizePond() {
+        const rect = pondCanvas.parentElement.getBoundingClientRect();
+        pondW = Math.max(280, rect.width);
+        pondH = Math.max(260, rect.height);
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        pondCanvas.width = pondW * dpr;
+        pondCanvas.height = pondH * dpr;
+        pondCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function addPondRipple(x, y) {
+        ripples.push({ x, y, r: 6, alpha: 0.55 });
+        if (ripples.length > 18) ripples.shift();
+      }
+
+      function drawSeaOtter(ctx, o, px, py, time) {
+        const bob = Math.sin(time * 2.2 + o.seed) * 3.5;
+        const roll = o.state === "ROLLING" ? Math.sin(time * 6) * 0.35 : Math.sin(time * 1.4 + o.seed) * 0.08;
+        ctx.save();
+        ctx.translate(px, py + bob);
+        ctx.rotate(roll);
+        ctx.scale(o.facing, 1);
+
+        // Waterline shadow halo
+        ctx.fillStyle = "rgba(94, 122, 115, 0.24)";
+        ctx.beginPath();
+        ctx.ellipse(0, 7, 34, 10, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Gently kicking hind flippers
+        const kick = Math.sin(time * 4.5 + o.seed) * 3;
+        ctx.fillStyle = "#5B3E2B";
+        ctx.beginPath();
+        ctx.ellipse(-28, 2 + kick, 9, 4.5, -0.25, 0, Math.PI * 2);
+        ctx.ellipse(-26, -3 - kick, 8.5, 4, 0.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Plush floating otter torso
+        const furGrad = ctx.createLinearGradient(0, -12, 0, 12);
+        furGrad.addColorStop(0, o.id === "oliver" ? "#9C704E" : "#B38560");
+        furGrad.addColorStop(1, "#6C4A31");
+        ctx.fillStyle = furGrad;
+        ctx.beginPath();
+        ctx.ellipse(-2, 1, 24, 12.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Creamy chest patch
+        ctx.fillStyle = "#DFC9B0";
+        ctx.beginPath();
+        ctx.ellipse(3, -3, 13, 7.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Round creamy-tan otter head
+        ctx.fillStyle = "#E8D7C3";
+        ctx.beginPath();
+        ctx.arc(20, -4, 10.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Cute rounded ears
+        ctx.fillStyle = "#7D583C";
+        ctx.beginPath();
+        ctx.arc(15, -13, 3.2, 0, Math.PI * 2);
+        ctx.arc(24, -12.5, 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Eyes & button nose
+        ctx.fillStyle = "#2E2219";
+        ctx.beginPath();
+        ctx.arc(18, -6, 1.8, 0, Math.PI * 2);
+        ctx.arc(24, -5.5, 1.8, 0, Math.PI * 2);
+        ctx.ellipse(21.5, -2.5, 2.3, 1.7, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Little front paws holding a pearlescent shell or pink tulip!
+        const pawLift = o.state === "REACTING" ? -4 : 0;
+        ctx.fillStyle = "#7D583C";
+        ctx.beginPath();
+        ctx.arc(3, -7 + pawLift, 3.6, 0, Math.PI * 2);
+        ctx.arc(9, -7 + pawLift, 3.6, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (o.prop === "shell") {
+          ctx.fillStyle = "#F7EFE5";
+          ctx.strokeStyle = "#C8B69E";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(6, -10 + pawLift, 5, Math.PI, 0);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        } else {
+          ctx.fillStyle = "#78866B";
+          ctx.fillRect(5.2, -13 + pawLift, 1.8, 6);
+          ctx.fillStyle = "#C58E91";
+          ctx.beginPath();
+          ctx.ellipse(6.1, -15 + pawLift, 3.2, 4.2, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+
+      function drawSeal(ctx, sObj, px, py, time) {
+        const swimWave = Math.sin(time * 4.2 + sObj.seed) * 4;
+        const rollAngle = sObj.state === "PLAYING" ? Math.sin(time * 5 + sObj.seed) * 0.25 : 0;
+        ctx.save();
+        ctx.translate(px, py + swimWave * 0.5);
+        ctx.rotate(rollAngle);
+        ctx.scale(sObj.facing, 1);
+
+        // Water shadow
+        ctx.fillStyle = "rgba(94, 122, 115, 0.24)";
+        ctx.beginPath();
+        ctx.ellipse(0, 9, 32, 9, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Tail flippers undulating
+        const tailFlip = Math.sin(time * 6 + sObj.seed) * 4;
+        ctx.fillStyle = "#7C8683";
+        ctx.beginPath();
+        ctx.moveTo(-24, 1);
+        ctx.lineTo(-36, -6 + tailFlip);
+        ctx.lineTo(-33, 2);
+        ctx.lineTo(-36, 9 + tailFlip);
+        ctx.closePath();
+        ctx.fill();
+
+        // Streamlined chubby seal body
+        const bodyGrad = ctx.createRadialGradient(4, -5, 4, 0, 0, 30);
+        bodyGrad.addColorStop(0, sObj.spotted ? "#CFD6D3" : "#E3E8E6");
+        bodyGrad.addColorStop(0.7, sObj.spotted ? "#A6B0AD" : "#BCC4C1");
+        bodyGrad.addColorStop(1, "#7F8986");
+        ctx.fillStyle = bodyGrad;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 26, 13.5, -0.06, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Harbor seal spots for Pebble
+        if (sObj.spotted) {
+          ctx.fillStyle = "rgba(92, 102, 99, 0.35)";
+          [[-8, -4], [-2, 3], [5, -5], [-13, 2]].forEach(([sx, sy]) => {
+            ctx.beginPath();
+            ctx.arc(sx, sy, 2, 0, Math.PI * 2);
+            ctx.fill();
+          });
+        }
+
+        // Seal head
+        ctx.fillStyle = sObj.spotted ? "#BDC6C3" : "#D4DCDA";
+        ctx.beginPath();
+        ctx.arc(21, -5, 10.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Side flipper (claps when reacting!)
+        const clap = sObj.state === "REACTING" ? Math.sin(time * 16) * 0.5 : 0;
+        ctx.save();
+        ctx.translate(6, 5);
+        ctx.rotate(0.3 + clap);
+        ctx.fillStyle = "#8B9592";
+        ctx.beginPath();
+        ctx.ellipse(0, 5, 4.5, 8.5, 0.3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Glossy dark seal eyes & whiskers
+        ctx.fillStyle = "#262B2A";
+        ctx.beginPath();
+        ctx.arc(20, -7, 2.4, 0, Math.PI * 2);
+        ctx.arc(26.5, -6.5, 2.2, 0, Math.PI * 2);
+        ctx.ellipse(29, -3.2, 2, 1.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#FFFFFF";
+        ctx.beginPath();
+        ctx.arc(19.3, -7.8, 0.85, 0, Math.PI * 2);
+        ctx.arc(25.8, -7.3, 0.8, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      function updateAndDrawPond(dt, time) {
+        pondCtx.clearRect(0, 0, pondW, pondH);
+
+        // Soft sunlit water caustics
+        pondCtx.save();
+        pondCtx.strokeStyle = "rgba(255, 255, 255, 0.26)";
+        pondCtx.lineWidth = 1.5;
+        for (let i = 0; i < 6; i++) {
+          const wy = (pondH * 0.2) + i * (pondH * 0.13);
+          const shift = Math.sin(time * 0.9 + i) * 18;
+          pondCtx.beginPath();
+          pondCtx.moveTo(40 + shift, wy);
+          pondCtx.quadraticCurveTo(pondW * 0.5, wy + Math.sin(time + i) * 8, pondW - 40 - shift, wy);
+          pondCtx.stroke();
+        }
+        pondCtx.restore();
+
+        // Decorative lily pads
+        const pads = [
+          { x: pondW * 0.16, y: pondH * 0.32, r: 22, flower: true },
+          { x: pondW * 0.84, y: pondH * 0.28, r: 19, flower: false },
+          { x: pondW * 0.22, y: pondH * 0.76, r: 24, flower: false },
+          { x: pondW * 0.86, y: pondH * 0.74, r: 20, flower: true }
+        ];
+        pads.forEach((p, idx) => {
+          const sway = Math.sin(time * 1.4 + idx) * 2.5;
+          pondCtx.save();
+          pondCtx.translate(p.x + sway, p.y);
+          pondCtx.fillStyle = "#879977";
+          pondCtx.beginPath();
+          pondCtx.moveTo(0, 0);
+          pondCtx.arc(0, 0, p.r, 0.25, Math.PI * 2 - 0.25);
+          pondCtx.closePath();
+          pondCtx.fill();
+          if (p.flower) {
+            pondCtx.fillStyle = "#E4B8BA";
+            for (let k = 0; k < 5; k++) {
+              pondCtx.save();
+              pondCtx.rotate((k * Math.PI * 2) / 5 + time * 0.15);
+              pondCtx.beginPath();
+              pondCtx.ellipse(0, -5, 3, 6, 0, 0, Math.PI * 2);
+              pondCtx.fill();
+              pondCtx.restore();
+            }
+            pondCtx.fillStyle = "#F5E1A4";
+            pondCtx.beginPath();
+            pondCtx.arc(0, 0, 2.5, 0, Math.PI * 2);
+            pondCtx.fill();
+          }
+          pondCtx.restore();
+        });
+
+        // Ripples
+        for (let i = ripples.length - 1; i >= 0; i--) {
+          const rp = ripples[i];
+          rp.r += 32 * dt;
+          rp.alpha -= 0.34 * dt;
+          if (rp.alpha <= 0) {
+            ripples.splice(i, 1);
+            continue;
+          }
+          pondCtx.strokeStyle = `rgba(255, 255, 255, ${rp.alpha.toFixed(3)})`;
+          pondCtx.lineWidth = 1.4;
+          pondCtx.beginPath();
+          pondCtx.ellipse(rp.x, rp.y, rp.r, rp.r * 0.48, 0, 0, Math.PI * 2);
+          pondCtx.stroke();
+        }
+
+        // Update aquatic creatures
+        const oliver = AQUATIC_ANIMALS[0];
+        const olive = AQUATIC_ANIMALS[1];
+
+        AQUATIC_ANIMALS.forEach((aq) => {
+          aq.stateTimer -= dt;
+          if (aq.stateTimer <= 0) {
+            if (aq.species === "otter") {
+              aq.state = aq.state === "FLOATING" ? (Math.random() < 0.4 ? "ROLLING" : "SWIMMING") : "FLOATING";
+              aq.stateTimer = 4.5 + Math.random() * 5;
+            } else {
+              aq.state = aq.state === "SWIMMING" ? "PLAYING" : "SWIMMING";
+              aq.stateTimer = 4 + Math.random() * 4.5;
+            }
+          }
+
+          // Oliver & Olive gently gravitate together to hold paws while floating!
+          if (aq.id === "olive" && oliver.state === "FLOATING" && olive.state === "FLOATING") {
+            const desiredX = Math.min(0.84, oliver.x + 0.085);
+            const desiredY = oliver.y + 0.015;
+            aq.x += (desiredX - aq.x) * 0.6 * dt;
+            aq.y += (desiredY - aq.y) * 0.6 * dt;
+            aq.facing = -1;
+            oliver.facing = 1;
+          } else {
+            const speedMult = prefersReducedMotion ? 0.3 : (aq.state === "FLOATING" ? 0.28 : 0.85);
+            aq.x += (aq.vx * speedMult * dt) / pondW;
+            aq.y += (aq.vy * speedMult * dt) / pondH;
+
+            if (aq.x < 0.14) { aq.x = 0.14; aq.vx = Math.abs(aq.vx); }
+            if (aq.x > 0.86) { aq.x = 0.86; aq.vx = -Math.abs(aq.vx); }
+            if (aq.y < 0.24) { aq.y = 0.24; aq.vy = Math.abs(aq.vy); }
+            if (aq.y > 0.78) { aq.y = 0.78; aq.vy = -Math.abs(aq.vy); }
+            aq.facing = aq.vx >= 0 ? 1 : -1;
+          }
+
+          if (Math.random() < 0.03) {
+            addPondRipple(aq.x * pondW, aq.y * pondH + 6);
+          }
+
+          const px = aq.x * pondW;
+          const py = aq.y * pondH;
+          if (aq.species === "otter") drawSeaOtter(pondCtx, aq, px, py, time);
+          else drawSeal(pondCtx, aq, px, py, time);
+        });
+
+        // Draw paw-holding connection when Oliver & Olive are floating side-by-side
+        const distOtters = Math.hypot((oliver.x - olive.x) * pondW, (oliver.y - olive.y) * pondH);
+        if (distOtters < 86 && oliver.state === "FLOATING" && olive.state === "FLOATING") {
+          pondStatusEl.textContent = "Oliver & Olive are holding paws in the water";
+        } else {
+          pondStatusEl.textContent = "Pebble & Bubbles are splashing near the lily pads";
+        }
+      }
+
+      function triggerAquaticInteraction(aq) {
+        aq.state = "REACTING";
+        aq.stateTimer = 2.8;
+        const px = aq.x * pondW;
+        const py = aq.y * pondH;
+        addPondRipple(px, py);
+        setTimeout(() => addPondRipple(px, py), 180);
+
+        const rect = pondCanvas.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const proxy = {
+          name: aq.name,
+          x: rect.left + px,
+          y: rect.top + scrollY + py - 10,
+          greetings: aq.greetings,
+          activeBubbleEl: null,
+          bubbleTimeout: null
+        };
+        const msg = showSpeechBubble(proxy);
+        tryPlaySpeciesRecording(aq.species);
+        speakGreeting(msg, 0.1);
+      }
+
+      pondCanvas.addEventListener("pointerdown", (e) => {
+        const rect = pondCanvas.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+        addPondRipple(cx, cy);
+
+        let closest = null;
+        let minDist = 48;
+        AQUATIC_ANIMALS.forEach((aq) => {
+          const d = Math.hypot(cx - aq.x * pondW, cy - aq.y * pondH);
+          if (d < minDist) {
+            minDist = d;
+            closest = aq;
+          }
+        });
+        if (closest) {
+          triggerAquaticInteraction(closest);
+        }
+      });
+
+      /* =========================================================================
+         8. RESIDENT WHISTLE CHIPS (CALL ANY OF THE 14 ANIMALS)
+      ========================================================================= */
+      function buildResidentChips() {
+        residentChipsEl.innerHTML = "";
+        const allResidents = [
+          ...agents.map(a => ({ id: a.id, name: a.name, color: a.chipColor, special: a.special, habitat: "land", ref: a })),
+          ...AQUATIC_ANIMALS.map(aq => ({ id: aq.id, name: aq.name, color: aq.chipColor, special: false, habitat: "pond", ref: aq }))
+        ];
+
+        allResidents.forEach((res) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "resident-chip" + (res.special ? " special" : "");
+          btn.innerHTML = `<span class="resident-dot" style="background:${res.color}; border:1px solid rgba(81,69,56,0.28);"></span><span>${escapeHtml(res.name)}</span>`;
+          btn.addEventListener("click", () => {
+            if (res.habitat === "land") {
+              const a = res.ref;
+              const scrollY = window.scrollY || window.pageYOffset;
+              a.targetX = Math.min(docWidth - 60, Math.max(60, window.innerWidth * (0.2 + Math.random() * 0.6)));
+              a.targetY = scrollY + Math.min(window.innerHeight * 0.65, 340);
+              a.state = "RUNNING";
+              a.stateTimer = 4;
+              interactWithAgent(a);
+            } else {
+              pondCanvas.scrollIntoView({ behavior: "smooth", block: "center" });
+              triggerAquaticInteraction(res.ref);
+            }
+          });
+          residentChipsEl.appendChild(btn);
+        });
+      }
+      buildResidentChips();
+
+      /* =========================================================================
+         9. INTERACTIVE BOTANICAL GARDEN (TULIPS, DAISIES, WILDFLOWERS & WIND)
+      ========================================================================= */
+      const gardenCanvas = document.getElementById("garden-canvas");
+      const gardenCtx = gardenCanvas.getContext("2d");
+      const gardenMsgEl = document.getElementById("garden-message");
+      let gardenW = 800;
+      let gardenH = 380;
+      let windImpulse = 0;
+
+      const FLOWER_MESSAGES = {
+        tulip: [
+          "A tulip for you, Tanha. A little reminder that beautiful things bloom in their own time.",
+          "A soft blush tulip for my favorite person—planted with all my love.",
+          "Every tulip in this little garden turns toward you, Tanha."
+        ],
+        daisy: [
+          "A tiny daisy for my favourite person. Keep blooming, little one.",
+          "Simple, bright, and quietly lovely—just like every afternoon spent with you.",
+          "A meadow daisy whispering that you are deeply cherished, Tanha."
+        ],
+        wildflower: [
+          "A little wildflower, because the loveliest things are sometimes beautifully unexpected.",
+          "Grown wild and free in your own quiet corner of the internet.",
+          "A soft botanical wish for peaceful days and gentle smiles, Kitten."
+        ]
+      };
+
+      const GARDEN_FLOWERS = [
+        { x: 0.10, h: 0.44, type: "tulip", color: "#C58E91", bloom: 0.45, seed: 0.4 },
+        { x: 0.18, h: 0.32, type: "daisy", color: "#FAF6EE", bloom: 0.6, seed: 1.1 },
+        { x: 0.27, h: 0.50, type: "tulip", color: "#D69E9F", bloom: 0.5, seed: 1.9 },
+        { x: 0.36, h: 0.36, type: "wildflower", color: "#B8A6C9", bloom: 0.55, seed: 2.5 },
+        { x: 0.45, h: 0.48, type: "tulip", color: "#C58E91", bloom: 0.7, seed: 3.1 },
+        { x: 0.54, h: 0.34, type: "daisy", color: "#FAF6EE", bloom: 0.5, seed: 3.8 },
+        { x: 0.63, h: 0.52, type: "tulip", color: "#DFB09C", bloom: 0.45, seed: 4.4 },
+        { x: 0.72, h: 0.38, type: "wildflower", color: "#9FB296", bloom: 0.6, seed: 5.0 },
+        { x: 0.81, h: 0.47, type: "tulip", color: "#C58E91", bloom: 0.55, seed: 5.7 },
+        { x: 0.90, h: 0.33, type: "daisy", color: "#FAF6EE", bloom: 0.5, seed: 6.3 }
+      ];
+
+      appState.customTulips.forEach((ct) => GARDEN_FLOWERS.push(ct));
+
+      function resizeGarden() {
+        const rect = gardenCanvas.parentElement.getBoundingClientRect();
+        gardenW = Math.max(280, rect.width);
+        gardenH = Math.max(280, rect.height);
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        gardenCanvas.width = gardenW * dpr;
+        gardenCanvas.height = gardenH * dpr;
+        gardenCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function drawFlower(ctx, fl, time) {
+        const baseX = fl.x * gardenW;
+        const baseY = gardenH - 18;
+        const stemH = fl.h * gardenH;
+        const sway = (Math.sin(time * 1.5 + fl.seed) * 10 + windImpulse * 26) * (fl.h * 1.8);
+        const topX = baseX + sway;
+        const topY = baseY - stemH;
+
+        // Smooth decay toward resting bloom
+        if (fl.bloom > 0.55) {
+          fl.bloom = Math.max(0.55, fl.bloom - 0.003);
+        }
+
+        // Curved botanical stem
+        ctx.strokeStyle = "#6C7D5E";
+        ctx.lineWidth = 3.2;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(baseX, baseY);
+        ctx.quadraticCurveTo(baseX + sway * 0.35, baseY - stemH * 0.52, topX, topY);
+        ctx.stroke();
+
+        // Botanical leaves along stem
+        ctx.fillStyle = "#78866B";
+        ctx.beginPath();
+        ctx.ellipse(baseX + sway * 0.25 - 10, baseY - stemH * 0.32, 13, 5, -0.55, 0, Math.PI * 2);
+        ctx.ellipse(baseX + sway * 0.45 + 10, baseY - stemH * 0.48, 12, 4.5, 0.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Blossom head
+        ctx.save();
+        ctx.translate(topX, topY);
+        ctx.rotate(sway * 0.012);
+        const openScale = 0.85 + fl.bloom * 0.42;
+        ctx.scale(openScale, openScale);
+
+        if (fl.type === "tulip") {
+          const spread = (fl.bloom - 0.3) * 0.42;
+          // Left outer petal
+          ctx.save();
+          ctx.rotate(-spread);
+          ctx.fillStyle = fl.color;
+          ctx.beginPath();
+          ctx.ellipse(-5, -8, 7.5, 14, -0.15, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+
+          // Right outer petal
+          ctx.save();
+          ctx.rotate(spread);
+          ctx.fillStyle = fl.color;
+          ctx.beginPath();
+          ctx.ellipse(5, -8, 7.5, 14, 0.15, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+
+          // Center petal with soft highlight
+          const grad = ctx.createLinearGradient(0, -22, 0, 4);
+          grad.addColorStop(0, "#E3B4B6");
+          grad.addColorStop(1, fl.color);
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.ellipse(0, -9, 8.2, 15.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (fl.type === "daisy") {
+          const petals = 10;
+          ctx.fillStyle = "#FAF6EE";
+          for (let i = 0; i < petals; i++) {
+            ctx.save();
+            ctx.rotate((i * Math.PI * 2) / petals);
+            ctx.beginPath();
+            ctx.ellipse(0, -11, 3.6, 8.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          }
+          ctx.fillStyle = "#DFB76C";
+          ctx.beginPath();
+          ctx.arc(0, 0, 5.2, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          const petals = 6;
+          ctx.fillStyle = fl.color;
+          for (let i = 0; i < petals; i++) {
+            ctx.save();
+            ctx.rotate((i * Math.PI * 2) / petals);
+            ctx.beginPath();
+            ctx.ellipse(0, -9, 4.5, 7.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          }
+          ctx.fillStyle = "#F5E7C6";
+          ctx.beginPath();
+          ctx.arc(0, 0, 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+
+      function renderGarden(dt, time) {
+        gardenCtx.clearRect(0, 0, gardenW, gardenH);
+        windImpulse *= Math.pow(0.25, dt);
+
+        // Soft mossy meadow ground curve
+        gardenCtx.fillStyle = "#D5DEC9";
+        gardenCtx.beginPath();
+        gardenCtx.moveTo(0, gardenH - 26);
+        gardenCtx.quadraticCurveTo(gardenW * 0.5, gardenH - 42, gardenW, gardenH - 24);
+        gardenCtx.lineTo(gardenW, gardenH);
+        gardenCtx.lineTo(0, gardenH);
+        gardenCtx.closePath();
+        gardenCtx.fill();
+
+        // Delicate grass blades
+        gardenCtx.strokeStyle = "rgba(120, 134, 107, 0.55)";
+        gardenCtx.lineWidth = 1.6;
+        for (let gx = 16; gx < gardenW - 12; gx += 22) {
+          const gSway = Math.sin(time * 1.8 + gx * 0.05) * 4 + windImpulse * 12;
+          gardenCtx.beginPath();
+          gardenCtx.moveTo(gx, gardenH - 14);
+          gardenCtx.quadraticCurveTo(gx + gSway * 0.5, gardenH - 26, gx + gSway, gardenH - 34);
+          gardenCtx.stroke();
+        }
+
+        GARDEN_FLOWERS.forEach((fl) => drawFlower(gardenCtx, fl, time));
+      }
+
+      gardenCanvas.addEventListener("pointermove", () => {
+        windImpulse = Math.min(1.0, windImpulse + 0.06);
+      }, { passive: true });
+
+      gardenCanvas.addEventListener("pointerdown", (e) => {
+        const rect = gardenCanvas.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+
+        let chosen = GARDEN_FLOWERS[0];
+        let bestDist = Infinity;
+        GARDEN_FLOWERS.forEach((fl) => {
+          const fx = fl.x * gardenW;
+          const fy = gardenH - 18 - fl.h * gardenH;
+          const d = Math.hypot(cx - fx, cy - fy);
+          if (d < bestDist) {
+            bestDist = d;
+            chosen = fl;
+          }
+        });
+
+        chosen.bloom = 1.25;
+        windImpulse = 0.65;
+        const pool = FLOWER_MESSAGES[chosen.type] || FLOWER_MESSAGES.tulip;
+        const msg = pool[Math.floor(Math.random() * pool.length)];
+        gardenMsgEl.textContent = `“${msg}”`;
+        spawnPetalBurst(e.clientX, e.clientY, 10);
+      });
+
+      document.getElementById("breeze-btn").addEventListener("click", () => {
+        windImpulse = 1.2;
+        const rect = gardenCanvas.getBoundingClientRect();
+        spawnPetalBurst(rect.left + rect.width * 0.3, rect.top + rect.height * 0.4, 14);
+      });
+
+      document.getElementById("plant-tulip-btn").addEventListener("click", () => {
+        const colors = ["#C58E91", "#D89B9E", "#DFB19A", "#CFA0A3"];
+        const newTulip = {
+          x: 0.14 + Math.random() * 0.72,
+          h: 0.38 + Math.random() * 0.16,
+          type: "tulip",
+          color: colors[Math.floor(Math.random() * colors.length)],
+          bloom: 1.2,
+          seed: Math.random() * 6.28
+        };
+        GARDEN_FLOWERS.push(newTulip);
+        appState.customTulips.push(newTulip);
+        persistState();
+        gardenMsgEl.textContent = "“A brand-new tulip planted just for Tanha—may it always remind you how loved you are.”";
+      });
+
+      /* =========================================================================
+         10. AMBIENT BUTTERFLIES & FALLING PETALS
+      ========================================================================= */
+      const ambientCanvas = document.getElementById("ambient-canvas");
+      const ambientCtx = ambientCanvas.getContext("2d");
+      let ambW = window.innerWidth;
+      let ambH = window.innerHeight;
+
+      const petals = [];
+      const butterflies = [
+        { x: 0.25, y: 0.3, vx: 22, vy: 8, color: "#DFB7B9", seed: 0.5 },
+        { x: 0.75, y: 0.55, vx: -18, vy: -9, color: "#E8D5A7", seed: 2.4 }
+      ];
+
+      function resizeAmbient() {
+        ambW = window.innerWidth;
+        ambH = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        ambientCanvas.width = ambW * dpr;
+        ambientCanvas.height = ambH * dpr;
+        ambientCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function spawnPetalBurst(clientX, clientY, count = 8) {
+        if (prefersReducedMotion) return;
+        for (let i = 0; i < count; i++) {
+          if (petals.length > 42) petals.shift();
+          petals.push({
+            x: clientX + (Math.random() - 0.5) * 24,
+            y: clientY + (Math.random() - 0.5) * 16,
+            vx: (Math.random() - 0.5) * 44,
+            vy: 18 + Math.random() * 32,
+            rot: Math.random() * Math.PI * 2,
+            vrot: (Math.random() - 0.5) * 3,
+            size: 4 + Math.random() * 3.5,
+            alpha: 0.85
+          });
+        }
+      }
+
+      function renderAmbient(dt, time) {
+        ambientCtx.clearRect(0, 0, ambW, ambH);
+        if (prefersReducedMotion) return;
+
+        // Occasional gentle drifting petal from top
+        if (petals.length < 12 && Math.random() < 0.035) {
+          petals.push({
+            x: Math.random() * ambW,
+            y: -10,
+            vx: (Math.random() - 0.5) * 20,
+            vy: 18 + Math.random() * 18,
+            rot: Math.random() * Math.PI * 2,
+            vrot: (Math.random() - 0.5) * 2,
+            size: 4.5 + Math.random() * 2.5,
+            alpha: 0.65
+          });
+        }
+
+        for (let i = petals.length - 1; i >= 0; i--) {
+          const p = petals[i];
+          p.x += (p.vx + Math.sin(time * 1.6 + i) * 12) * dt;
+          p.y += p.vy * dt;
+          p.rot += p.vrot * dt;
+          if (p.y > ambH + 20) {
+            petals.splice(i, 1);
+            continue;
+          }
+          ambientCtx.save();
+          ambientCtx.translate(p.x, p.y);
+          ambientCtx.rotate(p.rot);
+          ambientCtx.fillStyle = `rgba(197, 142, 145, ${p.alpha})`;
+          ambientCtx.beginPath();
+          ambientCtx.ellipse(0, 0, p.size, p.size * 0.58, 0, 0, Math.PI * 2);
+          ambientCtx.fill();
+          ambientCtx.restore();
+        }
+
+        // Delicate fluttering butterflies
+        butterflies.forEach((b) => {
+          b.x += (b.vx * dt) / ambW;
+          b.y += ((b.vy + Math.sin(time * 2.6 + b.seed) * 18) * dt) / ambH;
+          if (b.x < 0.06) { b.x = 0.06; b.vx = Math.abs(b.vx); }
+          if (b.x > 0.94) { b.x = 0.94; b.vx = -Math.abs(b.vx); }
+          if (b.y < 0.12) { b.y = 0.12; b.vy = Math.abs(b.vy); }
+          if (b.y > 0.86) { b.y = 0.86; b.vy = -Math.abs(b.vy); }
+
+          const bx = b.x * ambW;
+          const by = b.y * ambH;
+          const flap = 0.35 + Math.abs(Math.sin(time * 11 + b.seed)) * 0.65;
+
+          ambientCtx.save();
+          ambientCtx.translate(bx, by);
+          ambientCtx.fillStyle = b.color;
+          ambientCtx.strokeStyle = "rgba(81, 69, 56, 0.25)";
+          ambientCtx.lineWidth = 0.8;
+
+          ambientCtx.beginPath();
+          ambientCtx.ellipse(-3 * flap, -2, 6 * flap, 4.5, -0.35, 0, Math.PI * 2);
+          ambientCtx.ellipse(3 * flap, -2, 6 * flap, 4.5, 0.35, 0, Math.PI * 2);
+          ambientCtx.fill();
+          ambientCtx.stroke();
+          ambientCtx.restore();
+        });
+      }
+
+      /* =========================================================================
+         11. MAIN ANIMATION LOOP & RESPONSIVE LIFECYCLE
+      ========================================================================= */
+      function handleAllResizes() {
+        resizeAmbient();
+        resizePond();
+        resizeGarden();
+        refreshLayoutZones();
+      }
+
+      window.addEventListener("resize", handleAllResizes, { passive: true });
+      window.addEventListener("load", handleAllResizes);
+      handleAllResizes();
+      setTimeout(handleAllResizes, 400);
+
+      let lastTimestamp = performance.now();
+      let isPageVisible = true;
+
+      document.addEventListener("visibilitychange", () => {
+        isPageVisible = !document.hidden;
+        if (isPageVisible) lastTimestamp = performance.now();
+      });
+
+      function tick(now) {
+        requestAnimationFrame(tick);
+        if (!isPageVisible) return;
+
+        const dt = Math.min(0.05, (now - lastTimestamp) / 1000);
+        lastTimestamp = now;
+        const time = now / 1000;
+
+        updateAgents(dt, time);
+        renderWorldCanvas(time);
+        updateAndDrawPond(dt, time);
+        renderGarden(dt, time);
+        renderAmbient(dt, time);
+      }
+
+      requestAnimationFrame(tick);
+    })();
+  </script>
 </body>
 </html>
-```
