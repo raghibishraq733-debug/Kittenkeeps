@@ -1488,17 +1488,7 @@
         animation: none;
       }
     }
-
-    .daily-game-card{background:var(--paper);border:1px solid rgba(81,69,56,.15);border-radius:22px;padding:clamp(18px,3vw,30px);box-shadow:0 12px 35px rgba(81,69,56,.06)}
-    .daily-game-top,.care-reward{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between;color:var(--brown)}
-    .care-task-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0}
-    .care-task{background:rgba(255,255,255,.55);border:1px solid rgba(81,69,56,.12);border-radius:17px;padding:18px;display:flex;flex-direction:column;align-items:flex-start;gap:9px}
-    .care-task h3{margin:0;color:var(--brown)}.care-task p{margin:0;color:var(--brown-soft);font-size:.92rem;line-height:1.5}
-    .care-task strong{font-size:.82rem;color:var(--green-deep)}.care-emoji{font-size:1.8rem}
-    .care-reward{justify-content:flex-start;padding-top:16px;border-top:1px solid rgba(81,69,56,.15);font-size:.9rem}
-    .care-divider{opacity:.4}.care-task button{margin-top:4px}
-    @media(max-width:700px){.care-task-grid{grid-template-columns:1fr}.care-reward{gap:8px}}
-\n  </style>
+  </style>
 </head>
 <body>
 
@@ -1539,6 +1529,14 @@
           <span>Mwah!</span>
         </button>
 
+        <button id="toggle-voice" class="icon-btn" type="button" aria-pressed="true" title="Toggle spoken animal greetings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <span id="voice-label">Voice On</span>
+        </button>
       </div>
     </nav>
   </header>
@@ -1652,24 +1650,6 @@ A place for memories, little moments, photographs and everything that words some
             <button type="button" class="btn-subtle" id="home-mwah-btn">Give a Mwah</button>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- DAILY CARE GAME -->
-    <section id="daily-care" aria-labelledby="daily-care-heading">
-      <div class="section-header">
-        <p class="eyebrow">OUR LITTLE DAILY ROUTINE</p>
-        <h2 id="daily-care-heading">Care for Our Little World</h2>
-        <p>Keep the home tidy, the garden blooming, and every little friend happy. Your tasks refresh each day.</p>
-      </div>
-      <div class="daily-game-card">
-        <div class="daily-game-top"><span>♡ Daily care checklist</span><strong id="care-progress">0 / 3 completed</strong></div>
-        <div class="care-task-grid">
-          <article class="care-task"><span class="care-emoji">🧹</span><h3>Clean our home</h3><p>Pick up every little poop to make the home sparkle.</p><strong id="care-clean-status">Not done yet</strong><button class="btn-subtle" id="game-clean-btn" type="button">Clean the home</button></article>
-          <article class="care-task"><span class="care-emoji">🌱</span><h3>Water the garden</h3><p>Give the trees and flowers a refreshing drink.</p><strong id="care-water-status">Not done yet</strong><button class="btn-subtle" id="game-water-btn" type="button">Water everything</button></article>
-          <article class="care-task"><span class="care-emoji">🐾</span><h3>Feed our animals</h3><p>Make sure all our furry friends have a full tummy.</p><strong id="care-feed-status">Not done yet</strong><button class="btn-subtle" id="game-feed-btn" type="button">Serve their food</button></article>
-        </div>
-        <div class="care-reward"><span>✨ Daily care streak</span><strong id="care-streak">0 days</strong><span class="care-divider">·</span><span>Total kisses sent</span><strong id="kiss-count">0</strong></div>
       </div>
     </section>
 
@@ -2004,10 +1984,11 @@ I hope this little world always makes you smile, babu. Mwah!
 — Yours.`;
 
       let appState = {
+        voiceEnabled: true,
+        voiceRate: 0.96,
+        voicePitch: 1.08,
         eveningMode: false,
         hugCount: 1,
-        kissCount: 0,
-        dailyCare: { date: new Date().toLocaleDateString("en-CA"), clean: false, water: false, feed: false, streak: 0 },
         memories: JSON.parse(JSON.stringify(DEFAULT_MEMORIES)),
         movies: JSON.parse(JSON.stringify(DEFAULT_MOVIES)),
         dailyLetters: JSON.parse(JSON.stringify(DEFAULT_DAILY_LETTERS)),
@@ -2113,43 +2094,102 @@ I hope this little world always makes you smile, babu. Mwah!
       });
 
       /* =========================================================================
-         2. MP3 AUDIO ENGINE — no speech synthesis
+         2. AUDIO & SPOKEN GREETINGS ENGINE
       ========================================================================= */
-      const customAudioUrls = { cat: null, dog: null, capybara: null, seal: null, otter: null };
-      const repoAudioAvailability = { cat: null, dog: null, capybara: null, seal: null, otter: null };
-      let activeAudioEl = null;
-      const soundFiles = {
-        kiss: "./sounds/kiss.mp3",
-        clean: "./sounds/clean.mp3",
-        water: "./sounds/water.mp3",
-        feed: "./sounds/feed.mp3",
-        reward: "./sounds/reward.mp3",
-        interaction: "./sounds/interaction.mp3"
+      const customAudioUrls = {
+        cat: null,
+        dog: null,
+        capybara: null,
+        seal: null,
+        otter: null
       };
-      function playSound(name, volume = 0.65) {
-        try {
-          if (activeAudioEl) { activeAudioEl.pause(); activeAudioEl.currentTime = 0; }
-          const audio = new Audio(soundFiles[name] || soundFiles.interaction);
-          audio.volume = volume;
-          activeAudioEl = audio;
-          audio.play().catch(() => {});
-        } catch (_) {}
-      }
+
+      const repoAudioAvailability = {
+        cat: null,
+        dog: null,
+        capybara: null,
+        seal: null,
+        otter: null
+      };
+
+      let activeAudioEl = null;
+
       function tryPlaySpeciesRecording(species) {
-        const candidateUrl = customAudioUrls[species] || `./sounds/${species}.mp3`;
-        if (!customAudioUrls[species] && repoAudioAvailability[species] === false) return false;
+        const localUrl = customAudioUrls[species];
+        const candidateUrl = localUrl || `./sounds/${species}.mp3`;
+        if (!localUrl && repoAudioAvailability[species] === false) {
+          return false;
+        }
         try {
-          if (activeAudioEl) { activeAudioEl.pause(); activeAudioEl.currentTime = 0; }
+          if (activeAudioEl) {
+            activeAudioEl.pause();
+            activeAudioEl.currentTime = 0;
+          }
           const audio = new Audio(candidateUrl);
           audio.volume = 0.65;
-          audio.addEventListener("canplaythrough", () => { repoAudioAvailability[species] = true; }, { once: true });
-          audio.addEventListener("error", () => { if (!customAudioUrls[species]) repoAudioAvailability[species] = false; }, { once: true });
-          audio.play().catch(() => {});
+          audio.addEventListener("canplaythrough", () => {
+            repoAudioAvailability[species] = true;
+          }, { once: true });
+          audio.addEventListener("error", () => {
+            if (!localUrl) repoAudioAvailability[species] = false;
+          }, { once: true });
+          const playPromise = audio.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(() => {});
+          }
           activeAudioEl = audio;
           return true;
-        } catch (_) { return false; }
+        } catch (_) {
+          return false;
+        }
       }
-      function speakGreeting() { playSound("interaction", 0.45); }
+
+      let preferredVoice = null;
+      function loadVoices() {
+        if (!("speechSynthesis" in window)) return;
+        const voices = window.speechSynthesis.getVoices();
+        if (!voices.length) return;
+        preferredVoice =
+          voices.find(v => /en/i.test(v.lang) && /(Google UK English Female|Samantha|Victoria|Karen|Moira|Jenny|Aria|Natural)/i.test(v.name)) ||
+          voices.find(v => /en/i.test(v.lang) && /female/i.test(v.name)) ||
+          voices.find(v => /en/i.test(v.lang)) ||
+          voices[0];
+      }
+
+      if ("speechSynthesis" in window) {
+        loadVoices();
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+      }
+
+      function speakGreeting(text, pitchOffset = 0) {
+        if (!appState.voiceEnabled || !("speechSynthesis" in window)) return;
+        try {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(text);
+          if (preferredVoice) utter.voice = preferredVoice;
+          utter.rate = appState.voiceRate;
+          utter.pitch = Math.min(1.35, Math.max(0.8, appState.voicePitch + pitchOffset));
+          utter.volume = 0.85;
+          window.speechSynthesis.speak(utter);
+        } catch (_) {}
+      }
+
+      const voiceToggleBtn = document.getElementById("toggle-voice");
+      const voiceLabel = document.getElementById("voice-label");
+      function updateVoiceUI() {
+        voiceToggleBtn.setAttribute("aria-pressed", String(appState.voiceEnabled));
+        voiceLabel.textContent = appState.voiceEnabled ? "Voice On" : "Voice Off";
+      }
+      updateVoiceUI();
+
+      voiceToggleBtn.addEventListener("click", () => {
+        appState.voiceEnabled = !appState.voiceEnabled;
+        if (!appState.voiceEnabled && "speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+        persistState();
+        updateVoiceUI();
+      });
 
       /* =========================================================================
          2B. LITTLE SECRETS UNLOCK & RENDER ENGINE
@@ -3091,8 +3131,12 @@ I hope this little world always makes you smile, babu. Mwah!
 
       document.getElementById("open-studio-btn").addEventListener("click", () => {
         modalTitle.textContent = "Kittenkeeps Studio";
-        modalDesc.textContent = "Add optional animal MP3 recordings. Place cat.mp3, dog.mp3, capybara.mp3, seal.mp3, and otter.mp3 in the sounds folder, or attach local recordings below.";
+        modalDesc.textContent = "Optional real animal audio files & voice preferences. If you add sounds/cat.mp3, dog.mp3, capybara.mp3, seal.mp3, or otter.mp3 to your GitHub repo, Kittenkeeps plays them automatically—or you can attach local audio files below.";
         modalBody.innerHTML = `
+          <div class="field-group">
+            <label for="voice-pitch-range">Spoken Greeting Warmth / Pitch (${appState.voicePitch.toFixed(2)})</label>
+            <input id="voice-pitch-range" type="range" min="0.85" max="1.25" step="0.02" value="${appState.voicePitch}" />
+          </div>
           <div class="field-group">
             <label>Attach Local Real Animal Recordings (Optional, Session Only)</label>
             <div style="display:grid; gap:8px; margin-top:6px;">
@@ -3115,6 +3159,8 @@ I hope this little world always makes you smile, babu. Mwah!
         });
 
         activeSaveHandler = () => {
+          const pRange = document.getElementById("voice-pitch-range");
+          if (pRange) appState.voicePitch = parseFloat(pRange.value) || 1.08;
           persistState();
           closeModal();
         };
@@ -5003,7 +5049,12 @@ I hope this little world always makes you smile, babu. Mwah!
         }
       }
 
-
+      document.getElementById("send-mwah-btn").addEventListener("click", (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        spawnMwahBurst(r.left + r.width * 0.5, r.bottom + 24, 8);
+        spawnPetalBurst(r.left + r.width * 0.5, r.bottom + 24, 10);
+        speakGreeting("Mwah! Love you so much, my baby chumopakhi.", 0.08);
+      });
 
       function drawLittleHeart(ctx, x, y, size, alpha) {
         ctx.save();
