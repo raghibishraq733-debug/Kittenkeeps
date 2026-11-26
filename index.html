@@ -4,129 +4,217 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kittenkeeps | A Little World</title>
+<title>Kittenkeeps — A Little World</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background: #f7f4ed;
-    color: #493d32;
+    background: #f5f1e9;
+    color: #514538;
     font-family: 'DM Sans', sans-serif;
 }
 
+/* Navigation */
+
 nav {
-    padding: 28px 8%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 28px 8%;
 }
 
 .logo {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
-    letter-spacing: 2px;
+    font-size: 27px;
+    letter-spacing: 1px;
 }
 
-nav span {
-    font-size: 12px;
+nav a {
+    text-decoration: none;
+    color: #786b5e;
+    font-size: 11px;
     letter-spacing: 2px;
-    color: #9a8877;
+    margin-left: 25px;
 }
+
+/* Hero */
 
 .hero {
-    min-height: 80vh;
+    min-height: 82vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 40px 20px;
+    padding: 50px 20px;
 }
 
 .eyebrow {
-    font-size: 11px;
-    letter-spacing: 4px;
     text-transform: uppercase;
-    color: #a28c76;
-    margin-bottom: 30px;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: #a18a70;
+    margin-bottom: 35px;
 }
 
 h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(55px, 10vw, 100px);
-    font-weight: 400;
-    line-height: 1.05;
+    font-size: clamp(65px, 11vw, 115px);
+    line-height: 0.95;
+    font-weight: 300;
 }
 
 h1 em {
-    color: #9b8068;
+    color: #9a8067;
     font-weight: 400;
 }
 
 .subtitle {
-    margin-top: 25px;
-    font-size: 14px;
-    color: #897c70;
+    margin-top: 35px;
+    font-size: 12px;
+    line-height: 2.2;
+    color: #8e8072;
     letter-spacing: 1px;
-    line-height: 2;
 }
 
 .button {
+    display: inline-block;
     margin-top: 40px;
-    padding: 15px 32px;
-    border: 1px solid #a28c76;
-    color: #6e5847;
+    padding: 16px 35px;
+    border: 1px solid #a18a70;
     text-decoration: none;
-    font-size: 11px;
+    color: #705c49;
+    font-size: 10px;
     letter-spacing: 2px;
     transition: 0.3s;
 }
 
 .button:hover {
-    background: #6e5847;
-    color: white;
+    background: #705c49;
+    color: #fff;
 }
 
-.divider {
-    width: 45px;
-    height: 1px;
-    background: #c5b5a3;
-    margin: 0 auto;
-}
+/* Sections */
 
-.message {
-    padding: 100px 20px;
+section.content {
+    padding: 110px 20px;
     text-align: center;
 }
 
-.message h2 {
+.section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #a18a70;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 45px;
+    font-size: 52px;
     font-weight: 400;
     margin-bottom: 25px;
 }
 
-.message p {
-    max-width: 450px;
+.description {
+    max-width: 480px;
     margin: auto;
-    font-size: 14px;
-    line-height: 2.2;
-    color: #897c70;
+    font-size: 13px;
+    line-height: 2.3;
+    color: #897b6e;
 }
 
-footer {
-    text-align: center;
-    padding: 35px;
+/* Memory cards */
+
+.memories {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 55px;
+}
+
+.memory-card {
+    width: 230px;
+    padding: 35px 20px;
+    border: 1px solid #ded4c6;
+    transition: 0.3s;
+}
+
+.memory-card:hover {
+    transform: translateY(-6px);
+}
+
+.memory-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.memory-card p {
     font-size: 11px;
-    color: #a28c76;
-    letter-spacing: 2px;
+    color: #938476;
+    line-height: 1.8;
+}
+
+/* Footer */
+
+footer {
+    padding: 45px 20px;
+    text-align: center;
+    border-top: 1px solid #e4dbcf;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #a18a70;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    nav {
+        padding: 22px 6%;
+    }
+
+    nav a {
+        margin-left: 12px;
+        font-size: 9px;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .hero {
+        min-height: 75vh;
+    }
+
+    h2 {
+        font-size: 42px;
+    }
+
+    section.content {
+        padding: 80px 20px;
+    }
+
+    .memory-card {
+        width: 100%;
+        max-width: 300px;
+    }
+
 }
 
 </style>
@@ -136,12 +224,20 @@ footer {
 
 <nav>
     <div class="logo">Kittenkeeps.</div>
-    <span>EST. 2024</span>
+
+    <div>
+        <a href="#story">OUR STORY</a>
+        <a href="#memories">MEMORIES</a>
+    </div>
 </nav>
 
-<section class="hero">
+<!-- Welcome -->
 
-    <div class="eyebrow">A little corner of the internet</div>
+<div class="hero">
+
+    <div class="eyebrow">
+        A little corner of the internet
+    </div>
 
     <h1>
         For my<br>
@@ -150,31 +246,70 @@ footer {
 
     <p class="subtitle">
         Some things deserve a place of their own.<br>
-        This little place is one of them.
+        This little place is one of them.I love you,Tanha.
     </p>
 
-    <a href="#message" class="button">ENTER OUR LITTLE WORLD →</a>
+    <a href="#story" class="button">
+        COME INSIDE →
+    </a>
 
-</section>
+</div>
 
-<div class="divider"></div>
+<!-- Our Story -->
 
-<section class="message" id="message">
+<section class="content" id="story">
+
+    <div class="section-label">A little introduction</div>
 
     <h2>A place for us.</h2>
 
-    <p>
+    <p class="description">
         Among all the places in this world,
         I wanted to create one that feels a little
-        more like home. A place for memories,
-        little moments, photographs and everything
-        that words sometimes cannot explain.
+        more like home.
+
+        A place for memories, little moments,
+        photographs and everything that words
+        sometimes cannot explain.
     </p>
+
+</section>
+
+<!-- Memories -->
+
+<section class="content" id="memories">
+
+    <div class="section-label">Collected moments</div>
+
+    <h2>Little pieces of us.</h2>
+
+    <p class="description">
+        A thousand little things, worth remembering.
+    </p>
+
+    <div class="memories">
+
+        <div class="memory-card">
+            <h3>Our beginning</h3>
+            <p>Where our story started.</p>
+        </div>
+
+        <div class="memory-card">
+            <h3>Little moments</h3>
+            <p>The ordinary days that became special.</p>
+        </div>
+
+        <div class="memory-card">
+            <h3>YOURS FOREVER</h3>
+            <p>Things I never want to forget.</p>
+        </div>
+
+    </div>
 
 </section>
 
 <footer>
-    MADE WITH LOVE · JUST FOR YOU
+    MADE WITH LOVE · JUST FOR YOU MY BABY
 </footer>
 
 </body>
